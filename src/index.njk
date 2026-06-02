@@ -9,6 +9,11 @@ layout: base.njk
     Every claim links to a court filing, government report, or primary investigation.<br>
     No anonymous allegations. Read the sources. Verify everything.
   </div>
+  <nav class="quick-nav">
+    <a href="#sources">About</a>
+    <a href="#contact">Suggest</a>
+    <a href="#footer">Author</a>
+  </nav>
 </header>
 
 <div class="filters" id="filters">
@@ -146,7 +151,7 @@ layout: base.njk
   {% endif %}
 </section>
 
-<footer>
+<footer id="footer">
   <strong>{{ site.title | upper }}</strong> — an open ledger of documented corporate &amp; political harm.<br>
   Compiled from public court filings, government reports and investigative journalism.
   <div class="disclaim">
@@ -154,5 +159,6 @@ layout: base.njk
     information, organizing and the law — not a call for harm against any person. The people speak
     openly, in daylight, with the record in hand. That is the point.
   </div>
-  Verify everything. Cite your sources. Share freely.
+  Verify everything. Cite your sources. Share freely.<br>
+  Built by <a href="https://github.com/ReCire" target="_blank" rel="noopener">Eric Sienknecht</a>.
 </footer>

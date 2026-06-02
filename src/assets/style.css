@@ -42,6 +42,19 @@ h1 {
   color: var(--faint); margin-top: 30px; text-transform: uppercase; line-height: 1.9;
 }
 
+/* ---- Quick nav ---- */
+.quick-nav {
+  margin-top: 20px;
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+}
+.quick-nav a {
+  color: var(--red); text-decoration: none;
+  border-bottom: 1px solid transparent;
+  margin-right: 18px; padding-bottom: 2px;
+}
+.quick-nav a:hover { border-bottom-color: var(--red); }
+
 /* ---- Filter bar ---- */
 .filters {
   position: sticky; top: 0; z-index: 20;
@@ -174,6 +187,8 @@ footer {
   letter-spacing: 0.05em; line-height: 1.9; color: var(--faint);
 }
 footer strong { color: var(--ink); }
+footer a { color: var(--red); text-decoration: none; border-bottom: 1px solid var(--red); }
+footer a:hover { background: var(--red); color: var(--paper); }
 footer .disclaim {
   border: 1px solid var(--line); padding: 18px 20px; margin: 24px 0;
   text-transform: none; line-height: 1.7;
