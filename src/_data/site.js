@@ -8,7 +8,7 @@ module.exports = {
   // Web3Forms access key. Get a free key at https://web3forms.com (just enter
   // your email, no account). Paste it here to activate the contact form.
   // Leave empty ("") and the form shows a disabled placeholder instead.
-  web3formsKey: "",
+  web3formsKey: "9ea19de6-7d26-46ed-8286-64a9df07aa1b",
 
   // Cloudflare Turnstile site key (optional, free). Leave "" to use honeypot only.
   turnstileSiteKey: "",
