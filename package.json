@@ -5,10 +5,13 @@
   "scripts": {
     "build": "eleventy",
     "serve": "eleventy --serve",
-    "start": "eleventy --serve"
+    "start": "eleventy --serve",
+    "archive": "node scripts/archive-sources.js"
   },
   "license": "MIT",
   "devDependencies": {
-    "@11ty/eleventy": "^3.0.0"
+    "@11ty/eleventy": "^3.0.0",
+    "gray-matter": "^4.0.3",
+    "js-yaml": "^4.1.0"
   }
 }

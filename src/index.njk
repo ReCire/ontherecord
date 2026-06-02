@@ -71,10 +71,11 @@ layout: base.njk
         {% if entry.data.sources and entry.data.sources.length %}
         <div class="sources">
           {% for src in entry.data.sources %}
-          <span class="src"><span class="label{% if src.video %} vid{% endif %}">{% if src.video %}▶ VIDEO{% else %}SRC{% endif %}</span><a href="{{ src.url }}" target="_blank" rel="noopener">{{ src.label }}</a></span>
+          <span class="src"><span class="label{% if src.video %} vid{% endif %}">{% if src.video %}▶ VIDEO{% else %}SRC{% endif %}</span><a href="{{ src.url }}" target="_blank" rel="noopener">{{ src.label }}</a>{% if src.archive_url %} <span class="src-sep">·</span> <a class="archive-link" href="{{ src.archive_url }}" target="_blank" rel="noopener" title="Permanent snapshot — Wayback Machine">archived</a>{% endif %}</span>
           {% endfor %}
         </div>
         {% endif %}
+        {% if entry.data.last_verified %}<div class="verified">Sources last verified {{ entry.data.last_verified }}</div>{% endif %}
       </article>
     {%- endif -%}
   {% endfor %}

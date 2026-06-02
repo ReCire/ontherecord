@@ -4,12 +4,14 @@ section: machine
 region: us
 status: settlement
 date: 2025-09-05
-tag: "Settlement · $1.5B"
+tag: Settlement · $1.5B
 sources:
-  - label: "Norton Rose Fulbright — AI copyright cases update"
+  - label: Norton Rose Fulbright — AI copyright cases update
     url: https://www.nortonrosefulbright.com/en/knowledge/publications/ce8eaa5f/ai-in-litigation-series-an-update-on-ai-copyright-cases-in-2026
-  - label: "TechCrunch — new authors' suit & the ruling explained"
+  - label: TechCrunch — new authors' suit & the ruling explained
     url: https://techcrunch.com/2025/12/23/john-carreyrou-and-other-authors-bring-new-lawsuit-against-six-major-ai-companies/
+    archive_url: https://web.archive.org/web/20260215032707/https://techcrunch.com/2025/12/23/john-carreyrou-and-other-authors-bring-new-lawsuit-against-six-major-ai-companies/
+last_verified: 2026-06-02
 ---
 In a class action brought by authors, a California judge ruled in June 2025 that training AI on books can be fair use — but that downloading pirated copies is not, finding Anthropic may have downloaded as many as 7 million books from pirate sites. The case settled for $1.5 billion, an estimated ~$3,000 per work, covering nearly half a million authors. Some authors objected that the deal doesn't hold AI firms accountable for the act of training on the stolen material itself.
 

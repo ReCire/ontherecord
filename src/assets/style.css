@@ -148,6 +148,17 @@ h2 {
 .sources .label { color: var(--faint); text-transform: uppercase; margin-right: 6px; }
 .sources .label.vid { color: var(--red); font-weight: 700; }
 .sources span.src { display: block; margin-top: 4px; }
+.sources .src-sep { color: var(--faint); margin: 0 2px; border: none; }
+.sources a.archive-link {
+  color: var(--faint); border-bottom: 1px dotted var(--faint);
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.sources a.archive-link:hover { background: var(--ink); color: var(--paper); border-bottom-color: var(--ink); }
+.verified {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint);
+  margin-top: 10px;
+}
 
 .pullquote {
   font-family: 'JetBrains Mono', monospace; font-weight: 700;
