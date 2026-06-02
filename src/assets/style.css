@@ -47,10 +47,32 @@ h1 {
   position: sticky; top: 0; z-index: 20;
   background: var(--paper);
   border-bottom: 1px solid var(--line);
-  padding: 18px 0 14px; margin-bottom: 40px;
+  padding: 10px 0; margin-bottom: 40px;
 }
+.filter-bar-head {
+  display: flex; align-items: center; gap: 16px;
+}
+.filter-toggle {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  background: transparent; color: var(--ink);
+  border: 1px solid var(--ink); padding: 4px 10px;
+  cursor: pointer; display: flex; align-items: center; gap: 6px;
+  transition: all .12s; white-space: nowrap;
+}
+.filter-toggle:hover { background: var(--ink); color: var(--paper); }
+.filter-toggle[aria-expanded="true"] { background: var(--ink); color: var(--paper); }
+.filter-toggle-arrow {
+  display: inline-block; transition: transform .2s;
+  font-style: normal; font-size: 13px;
+}
+.filter-toggle[aria-expanded="true"] .filter-toggle-arrow { transform: rotate(180deg); }
+
+.filter-body { padding-top: 14px; }
+.filter-body[hidden] { display: none; }
+
 .filter-group { margin-bottom: 10px; }
-.filter-group:last-child { margin-bottom: 0; }
+.filter-group:last-child { margin-bottom: 4px; }
 .filter-label {
   font-family: 'JetBrains Mono', monospace; font-size: 10px;
   letter-spacing: 0.2em; text-transform: uppercase; color: var(--faint);
@@ -67,10 +89,11 @@ h1 {
 .chip.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 .filter-meta {
   font-family: 'JetBrains Mono', monospace; font-size: 11px;
-  color: var(--faint); margin-top: 6px;
+  color: var(--faint);
 }
 .filter-meta a { color: var(--red); text-decoration: none; border-bottom: 1px solid transparent; }
 .filter-meta a:hover { border-bottom-color: var(--red); }
+.filter-meta.inline-meta { margin-top: 0; }
 
 /* ---- Sections & entries ---- */
 section { margin-bottom: 64px; scroll-margin-top: 120px; }

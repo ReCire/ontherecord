@@ -73,6 +73,35 @@
 
   apply(); // initialize count
 
+  // ---- Collapsible filter panel -------------------------------------------
+  var toggleBtn = document.getElementById("filter-toggle");
+  var filterBody = document.getElementById("filter-body");
+  var activeHint = document.getElementById("active-hint");
+
+  function updateHint() {
+    if (!activeHint) return;
+    var total = active.section.size + active.region.size + active.status.size;
+    activeHint.textContent = total > 0 ? " · " + total + " active" : "";
+  }
+
+  if (toggleBtn && filterBody) {
+    toggleBtn.addEventListener("click", function () {
+      var open = filterBody.hasAttribute("hidden");
+      if (open) {
+        filterBody.removeAttribute("hidden");
+        toggleBtn.setAttribute("aria-expanded", "true");
+      } else {
+        filterBody.setAttribute("hidden", "");
+        toggleBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
+
+  // Patch apply() to also update the hint
+  var _originalApply = apply;
+  apply = function () { _originalApply(); updateHint(); };
+  apply(); // re-run with hint
+
   // ---- Contact form (AJAX, so no page redirect) ---------------------------
   var form = document.getElementById("suggest-form");
   if (form) {

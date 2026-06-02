@@ -12,26 +12,34 @@ layout: base.njk
 </header>
 
 <div class="filters" id="filters">
-  <div class="filter-group">
-    <span class="filter-label">Topic</span>
-    {% for s in site.sections %}
-    <button class="chip" data-filter="section" data-value="{{ s.key }}">{{ s.label }}</button>
-    {% endfor %}
+  <div class="filter-bar-head">
+    <button class="filter-toggle" id="filter-toggle" aria-expanded="false" aria-controls="filter-body">
+      <span class="filter-toggle-label">Filter</span>
+      <span class="filter-toggle-arrow" aria-hidden="true">▾</span>
+    </button>
+    <span class="filter-meta inline-meta">
+      <span id="result-count"></span><span id="active-hint"></span> · <a href="#" id="clear-filters">clear all</a>
+    </span>
   </div>
-  <div class="filter-group">
-    <span class="filter-label">Region</span>
-    {% for r in site.regions %}
-    <button class="chip" data-filter="region" data-value="{{ r.key }}">{{ r.label }}</button>
-    {% endfor %}
-  </div>
-  <div class="filter-group">
-    <span class="filter-label">Status</span>
-    {% for st in site.statuses %}
-    <button class="chip" data-filter="status" data-value="{{ st.key }}">{{ st.label }}</button>
-    {% endfor %}
-  </div>
-  <div class="filter-meta">
-    <span id="result-count"></span> · <a href="#" id="clear-filters">clear all</a>
+  <div class="filter-body" id="filter-body" hidden>
+    <div class="filter-group">
+      <span class="filter-label">Topic</span>
+      {% for s in site.sections %}
+      <button class="chip" data-filter="section" data-value="{{ s.key }}">{{ s.label }}</button>
+      {% endfor %}
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Region</span>
+      {% for r in site.regions %}
+      <button class="chip" data-filter="region" data-value="{{ r.key }}">{{ r.label }}</button>
+      {% endfor %}
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Status</span>
+      {% for st in site.statuses %}
+      <button class="chip" data-filter="status" data-value="{{ st.key }}">{{ st.label }}</button>
+      {% endfor %}
+    </div>
   </div>
 </div>
 
