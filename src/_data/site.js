@@ -28,6 +28,10 @@ module.exports = {
     { key: "surveillance", num: "10", label: "Surveillance & Control" },
     { key: "underclass", num: "11", label: "Permanent Underclass" },
     { key: "global", num: "12", label: "The Global Picture" },
+    { key: "minds", num: "13", label: "Minds & Mental Health" },
+    { key: "wins", num: "14", label: "Accountability & Wins" },
+    { key: "empire", num: "15", label: "Empire & Oil" },
+    { key: "spectacle", num: "16", label: "Sport & Spectacle" },
   ],
 
   // Regions for the region filter.
@@ -38,6 +42,7 @@ module.exports = {
     { key: "eu", label: "EU" },
     { key: "africa", label: "Africa" },
     { key: "mena", label: "MENA" },
+    { key: "au", label: "Australia" },
   ],
 
   // Status reflects how settled a claim is — the page's core credibility signal.
@@ -49,6 +54,8 @@ module.exports = {
     { key: "alleged", label: "Alleged (in court)" },
     { key: "ongoing", label: "Ongoing" },
     { key: "context", label: "Context / debate" },
+    { key: "law", label: "Law / policy" },
+    { key: "win", label: "Accountability win" },
   ],
 
   // Pullquotes displayed between sections. Key = the section they appear AFTER.
