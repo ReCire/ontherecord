@@ -212,6 +212,12 @@ section { margin-bottom: 64px; scroll-margin-top: 120px; }
   transition: all .12s;
 }
 .expand-all-btn:hover { border-color: var(--ink); color: var(--ink); }
+.expand-all-btn:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  border-color: var(--line);
+  color: var(--faint);
+}
 
 /* sec-content: no height animation — just snap (clean for long pages) */
 .sec-content[hidden] { display: none; }

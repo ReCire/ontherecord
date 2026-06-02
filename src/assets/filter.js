@@ -483,9 +483,20 @@
       restoreOrder();
       index.forEach(function (rec) { removeEyebrow(rec); });
       clearAllHighlights();
+      // Re-enable expand-all button when search is cleared
+      if (expandAllBtn) {
+        expandAllBtn.disabled = false;
+        expandAllBtn.removeAttribute("aria-disabled");
+      }
     }
 
     if (hasQuery) {
+      // Disable expand-all button during search
+      if (expandAllBtn) {
+        expandAllBtn.disabled = true;
+        expandAllBtn.setAttribute("aria-disabled", "true");
+      }
+
       // Flat mode: sort visible by score desc, originalIndex asc (stable)
       var visible = index.filter(function (r) { return r._visible; });
       visible.sort(function (a, b) {
