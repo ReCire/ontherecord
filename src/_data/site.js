@@ -1,5 +1,7 @@
 module.exports = {
   title: "On The Record",
+  url: "https://ontherecord.vercel.app", // update to your final domain
+  ogImage: "/assets/og-image.png", // 1200×630px image — add to src/assets/
   tagline:
     "The people ask only for what is necessary. The powerful aspire to everything. Below: what was done, who did it, and where it is written down.",
 

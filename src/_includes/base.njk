@@ -4,7 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{ site.title }} — A Documented Ledger</title>
-<meta name="description" content="A documented ledger of corporate and political harm, with primary sources.">
+<meta name="description" content="A documented ledger of corporate and political harm, with primary sources. Every claim links to a court filing, government report, or primary investigation.">
+<link rel="canonical" href="{{ site.url }}/">
+
+<!-- OpenGraph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ site.url }}/">
+<meta property="og:title" content="{{ site.title }} — A Documented Ledger">
+<meta property="og:description" content="Every claim links to a court filing, government report, or primary investigation. No anonymous allegations.">
+{% if site.ogImage %}<meta property="og:image" content="{{ site.url }}{{ site.ogImage }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">{% endif %}
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="{{ site.title }}">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ site.title }} — A Documented Ledger">
+<meta name="twitter:description" content="Every claim links to a court filing, government report, or primary investigation. No anonymous allegations.">
+{% if site.ogImage %}<meta name="twitter:image" content="{{ site.url }}{{ site.ogImage }}">{% endif %}
+
+<!-- Indexing -->
+<meta name="robots" content="index, follow">
 <style>
   /* Self-hosted fonts — no third-party requests, no visitor IP leakage.
      Drop the .woff2 files into assets/fonts/ (see README). Until then this
