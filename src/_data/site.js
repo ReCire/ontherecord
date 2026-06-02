@@ -16,22 +16,35 @@ module.exports = {
   // Canonical sections. The `key` is what you put in an entry's frontmatter
   // (section: corruption). Order here = display order on the page.
   sections: [
-    { key: "corruption", num: "01", label: "Corruption & Bribery" },
-    { key: "slavery", num: "02", label: "Forced Labor" },
-    { key: "climate", num: "03", label: "Climate Deception" },
-    { key: "environment", num: "04", label: "Environmental Harm" },
+    // --- PART I: EXISTENTIAL & PHYSICAL HARM ---
+    { key: "climate", num: "01", label: "Climate Deception" },
+    { key: "environment", num: "02", label: "Environmental Harm" },
+
+    // --- PART II: ECONOMIC STRATIFICATION & LABOR ---
+    { key: "underclass", num: "03", label: "Permanent Underclass" },
+    { key: "slavery", num: "04", label: "Forced Labor" },
     { key: "labor", num: "05", label: "Union Busting" },
+
+    // --- PART III: THE FINANCIAL & LEGAL SYSTEMS OF IMPUNITY ---
     { key: "money", num: "06", label: "Money Trails" },
-    { key: "pardons", num: "07", label: "Pardons & Impunity" },
-    { key: "deutschland", num: "08", label: "Deutschland" },
-    { key: "machine", num: "09", label: "AI & The Human Cost" },
-    { key: "surveillance", num: "10", label: "Surveillance & Control" },
-    { key: "underclass", num: "11", label: "Permanent Underclass" },
-    { key: "global", num: "12", label: "The Global Picture" },
-    { key: "minds", num: "13", label: "Minds & Mental Health" },
-    { key: "wins", num: "14", label: "Accountability & Wins" },
-    { key: "empire", num: "15", label: "Empire & Oil" },
-    { key: "spectacle", num: "16", label: "Sport & Spectacle" },
+    { key: "corruption", num: "07", label: "Corruption & Bribery" },
+    { key: "pardons", num: "08", label: "Pardons & Impunity" },
+    { key: "deutschland", num: "09", label: "Deutschland" },
+
+    // --- PART IV: GEOPOLITICAL POWER & INFLUENCE ---
+    { key: "empire", num: "10", label: "Empire & Oil" },
+    { key: "global", num: "11", label: "The Global Picture" },
+
+    // --- PART V: TECHNOCRACY & CONTROL ---
+    { key: "machine", num: "12", label: "AI & The Human Cost" },
+    { key: "surveillance", num: "13", label: "Surveillance & Control" },
+    { key: "minds", num: "14", label: "Minds & Mental Health" },
+
+    // --- PART VI: COGNITIVE OVERLAYS & THE PIVOT ---
+    { key: "spectacle", num: "15", label: "Sport & Spectacle" },
+    { key: "wins", num: "16", label: "Accountability & Wins" },
+
+    // --- PART VII: THE GRAVEST ADJUDICATED CRIMES ---
     { key: "atrocity", num: "17", label: "Genocide & Atrocity" },
   ],
 
