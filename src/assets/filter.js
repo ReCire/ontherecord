@@ -336,8 +336,8 @@
   function reorderEntries(orderedEls) {
     // We need a common parent to insert into.
     // In grouped mode all entries are in their section blocks;
-    // in flat/search mode we move them all into the first section block
-    // (which is still in the DOM), in score order.
+    // in flat/search mode we move them all into the first section block's
+    // .sec-content container, in score order.
     // Strategy: collect pre positions, move nodes, apply inverted transforms.
 
     var rects = {};
@@ -353,19 +353,31 @@
       });
     }
 
-    // Move all entries into a fragment in order, then re-insert after sec-head
-    // of the first visible section block
+    // Move all entries into a fragment in order, then re-insert into
+    // the .sec-content of the first visible section block
     var targetBlock = sectionBlocks[0];
     if (!targetBlock) return;
 
     var frag = document.createDocumentFragment();
     orderedEls.forEach(function (el) { frag.appendChild(el); });
-    // Insert after sec-head
-    var secHead = targetBlock.querySelector(".sec-head");
-    if (secHead && secHead.nextSibling) {
-      targetBlock.insertBefore(frag, secHead.nextSibling);
+    // Insert into .sec-content (after .sec-sub if present, otherwise at start)
+    var secContent = targetBlock.querySelector(".sec-content");
+    if (!secContent) {
+      // Fallback: insert after sec-head if .sec-content missing (shouldn't happen)
+      var secHead = targetBlock.querySelector(".sec-head");
+      if (secHead && secHead.nextSibling) {
+        targetBlock.insertBefore(frag, secHead.nextSibling);
+      } else {
+        targetBlock.appendChild(frag);
+      }
+      return;
+    }
+    // Insert after .sec-sub if it exists, otherwise prepend to .sec-content
+    var secSub = secContent.querySelector(".sec-sub");
+    if (secSub && secSub.nextSibling) {
+      secContent.insertBefore(frag, secSub.nextSibling);
     } else {
-      targetBlock.appendChild(frag);
+      secContent.insertBefore(frag, secContent.firstChild);
     }
 
     if (!reducedMotion && Object.keys(rects).length) {
@@ -391,7 +403,8 @@
 
   // Restore original DOM order (back to grouped layout)
   function restoreOrder() {
-    // Sort index by originalIndex, put each entry back in its section block
+    // Sort index by originalIndex, put each entry back in its section block's
+    // .sec-content container, after .sec-sub if present
     var bySection = {};
     index.forEach(function (rec) {
       var key = rec.el.getAttribute("data-section");
@@ -406,11 +419,23 @@
       recs.sort(function (a, b) { return a.originalIndex - b.originalIndex; });
       var frag = document.createDocumentFragment();
       recs.forEach(function (r) { frag.appendChild(r.el); });
-      var secHead = block.querySelector(".sec-head");
-      if (secHead && secHead.nextSibling) {
-        block.insertBefore(frag, secHead.nextSibling);
+      // Insert into .sec-content (after .sec-sub if present, otherwise at start)
+      var secContent = block.querySelector(".sec-content");
+      if (!secContent) {
+        // Fallback: insert after sec-head if .sec-content missing (shouldn't happen)
+        var secHead = block.querySelector(".sec-head");
+        if (secHead && secHead.nextSibling) {
+          block.insertBefore(frag, secHead.nextSibling);
+        } else {
+          block.appendChild(frag);
+        }
+        return;
+      }
+      var secSub = secContent.querySelector(".sec-sub");
+      if (secSub && secSub.nextSibling) {
+        secContent.insertBefore(frag, secSub.nextSibling);
       } else {
-        block.appendChild(frag);
+        secContent.insertBefore(frag, secContent.firstChild);
       }
     });
   }
