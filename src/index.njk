@@ -22,8 +22,15 @@ layout: base.njk
       <span class="filter-toggle-label">Filter</span>
       <span class="filter-toggle-arrow" aria-hidden="true">▾</span>
     </button>
+    <div class="search-wrap js-only">
+      <label for="search-input" class="sr-only">Search the record</label>
+      <input type="search" id="search-input" class="search-input"
+        placeholder="Search the record…" autocomplete="off"
+        aria-label="Search entries" spellcheck="false">
+      <button type="button" id="search-clear" class="search-clear" aria-label="Clear search" hidden>✕</button>
+    </div>
     <span class="filter-meta inline-meta">
-      <span id="result-count"></span><span id="active-hint"></span> · <a href="#" id="clear-filters">clear all</a>
+      <span id="result-count" aria-live="polite" aria-atomic="true"></span><span id="active-hint"></span> · <a href="#" id="clear-filters">clear all</a>
     </span>
   </div>
   <div class="filter-body" id="filter-body" hidden>
@@ -49,7 +56,7 @@ layout: base.njk
 </div>
 
 {% for s in site.sections %}
-<section id="{{ s.key }}" data-section-block="{{ s.key }}">
+<section id="{{ s.key }}" data-section-block="{{ s.key }}" data-section-label="{{ s.label }}">
   <div class="sec-head">
     <span class="sec-num">{{ s.num }}</span>
     <h2>{{ s.label }}</h2>

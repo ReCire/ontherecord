@@ -55,6 +55,16 @@ h1 {
 }
 .quick-nav a:hover { border-bottom-color: var(--red); }
 
+/* ---- Screen-reader only ---- */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* ---- JS-only elements (hidden without JS, shown when .js class present) ---- */
+.js-only { display: none; }
+.js .js-only { display: flex; }
+
 /* ---- Filter bar ---- */
 .filters {
   position: sticky; top: 0; z-index: 20;
@@ -107,6 +117,64 @@ h1 {
 .filter-meta a { color: var(--red); text-decoration: none; border-bottom: 1px solid transparent; }
 .filter-meta a:hover { border-bottom-color: var(--red); }
 .filter-meta.inline-meta { margin-top: 0; }
+
+/* ---- Search box ---- */
+.search-wrap {
+  position: relative;
+  align-items: center;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 340px;
+}
+.search-input {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  letter-spacing: 0.06em;
+  width: 100%; background: transparent;
+  border: 1px solid var(--line); color: var(--ink);
+  padding: 4px 28px 4px 10px;
+  outline: none; appearance: none; -webkit-appearance: none;
+}
+.search-input::placeholder { color: var(--faint); text-transform: uppercase; letter-spacing: 0.08em; }
+.search-input:focus { border-color: var(--red); }
+/* Remove native clear button in WebKit */
+.search-input::-webkit-search-decoration,
+.search-input::-webkit-search-cancel-button { -webkit-appearance: none; }
+.search-clear {
+  position: absolute; right: 0; top: 0; bottom: 0;
+  width: 28px; background: transparent; border: none;
+  color: var(--faint); font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+.search-clear:hover { color: var(--red); }
+
+/* ---- Search results ---- */
+/* <mark> highlight — on-brand red, matching ::selection */
+mark {
+  background: var(--red); color: var(--paper);
+  padding: 0 1px;
+}
+
+/* Section eyebrow on entries in flat search mode */
+.entry-section-eyebrow {
+  display: block;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 6px;
+}
+
+/* Empty state */
+.search-empty {
+  font-family: 'JetBrains Mono', monospace; font-size: 13px;
+  color: var(--faint); padding: 40px 0 20px;
+  letter-spacing: 0.04em;
+}
+.search-empty a { color: var(--red); text-decoration: none; border-bottom: 1px solid var(--red); }
+.search-empty a:hover { background: var(--red); color: var(--paper); }
+
+/* Reduced-motion: kill FLIP transitions */
+@media (prefers-reduced-motion: reduce) {
+  .entry { transition: none !important; }
+}
 
 /* ---- Sections & entries ---- */
 section { margin-bottom: 64px; scroll-margin-top: 120px; }

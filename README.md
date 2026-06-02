@@ -96,6 +96,50 @@ region, or status? Add it there once and it becomes available everywhere
 
 ---
 
+## Search
+
+The filter bar includes an instant, client-side full-text search. No server,
+no index file, no dependencies — a JS index is built once on page load from the
+already-rendered HTML, and every keystroke re-scores and re-sorts the visible
+entries.
+
+**Behaviour:**
+- Queries are tokenized on whitespace; every token must match somewhere in an
+  entry for it to appear (AND semantics).
+- While a query is active, the page switches to **flat-results mode**: section
+  headings and pullquotes are hidden and entries are sorted by relevance score.
+  Clearing the query restores the original grouped layout exactly.
+- A small red section label (eyebrow) appears on each card in flat mode so the
+  user still knows which category it belongs to.
+- Matched substrings in entry titles are wrapped in `<mark>` (red background,
+  white text — matching the site's `::selection` style). Markup is never corrupted:
+  highlighting uses DOM text-node replacement, never `innerHTML` with raw input.
+- Facet chips (Topic/Region/Status) compose with search: an entry must pass
+  both the active chips AND the query to be shown.
+- The query is reflected in the URL as `?q=…` via `history.replaceState` — links
+  are shareable and survive a reload.
+- Keyboard: `/` or `Cmd/Ctrl-K` focuses the search box; `Esc` clears and blurs.
+
+**Scoring weights** (tunable in the `W` object at the top of `src/assets/filter.js`):
+
+| Signal | Points |
+|--------|--------|
+| Full query phrase found in title | +100 |
+| Each token found in title | +25 |
+| Title starts with a token | +10 bonus |
+| Each token found in tag | +8 |
+| Each token found in section label | +5 |
+| Each token found in body text | +2 |
+
+Entries scoring 0 (no token matches) are hidden. Ties are broken by original
+document order (stable sort).
+
+**Progressive enhancement:** with JS disabled, the search box does not appear
+(`.js-only` class, toggled by an inline `<script>` in `<head>`). The full
+grouped ledger renders and reads normally.
+
+---
+
 ## Archiving sources (link-rot defense)
 
 News URLs die, government pages move, articles get pulled. For an accountability
