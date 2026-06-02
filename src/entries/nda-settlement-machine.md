@@ -1,6 +1,6 @@
 ---
 title: The Settlement Machine — How NDAs Manufacture Silence
-section: spectacle
+section: abuse
 region: us
 status: context
 date: 2022-12-07

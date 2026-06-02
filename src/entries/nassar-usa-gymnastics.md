@@ -1,6 +1,6 @@
 ---
 title: Larry Nassar & USA Gymnastics — When Every Institution Failed
-section: spectacle
+section: abuse
 region: us
 status: ruling
 date: 2018-01-24

@@ -1,6 +1,6 @@
 ---
 title: The Catholic Church — Abuse, Denial, and the Cover-Up Playbook
-section: spectacle
+section: abuse
 region: global
 status: finding
 date: 2018-08-14

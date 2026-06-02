@@ -43,9 +43,10 @@ module.exports = {
     // --- PART VI: COGNITIVE OVERLAYS & THE PIVOT ---
     { key: "spectacle", num: "15", label: "Sport & Spectacle" },
     { key: "wins", num: "16", label: "Accountability & Wins" },
+    { key: "abuse", num: "17", label: "Abuse & Impunity" },
 
     // --- PART VII: THE GRAVEST ADJUDICATED CRIMES ---
-    { key: "atrocity", num: "17", label: "Genocide & Atrocity" },
+    { key: "atrocity", num: "18", label: "Genocide & Atrocity" },
   ],
 
   // Regions for the region filter.
@@ -75,13 +76,14 @@ module.exports = {
 
   // Pullquotes displayed between sections. Key = the section they appear AFTER.
   pullquotes: {
-    corruption: "Abuses are the work and the domain of the powerful. They are the scourges of the people.",
-    environment: "War is peace. Freedom is slavery. Ignorance is strength. — They told you. In writing.",
+    climate: "War is peace. Freedom is slavery. Ignorance is strength. — They told you. In writing.",
+    underclass: "The people ask only for what is necessary. The powerful aspire to everything.",
     money: "Corrupt. Useless. Puppets. Robbing us of minds, of souls.",
+    corruption: "Abuses are the work and the domain of the powerful. They are the scourges of the people.",
+    global: "They want to invade and dominate everything. It's time to build the guillotines.",
     machine: "You fucks were bullied in school. This is how you pay us back now?",
     surveillance: "Get out the guillotine. — No j/k. Violence is no solution. Speak openly. Be vulnerable.",
-    underclass: "The people ask only for what is necessary. The powerful aspire to everything.",
-    global: "They want to invade and dominate everything. It's time to build the guillotines.",
+    wins: "The arc of the moral universe is long, but it bends toward justice. — Sometimes it bends because people make it bend.",
   },
 
   // One-line italic intro shown under each section heading. Keyed by section key.
@@ -101,7 +103,8 @@ module.exports = {
     minds: "What the feed does to attention, mood, and the young — and the research the platforms studied, then buried.",
     wins: "Proof it doesn't have to be this way: laws, verdicts, and people who used power for the public instead of against it.",
     empire: "Coups, oil, and arms — the machinery of domination, much of it now in the perpetrators' own declassified words.",
-    spectacle: "Sport, celebrity, and the institutions that sell spectacle — and the abuse the spectacle was built to hide.",
+    spectacle: "Sport, celebrity, and the institutions that sell spectacle — and the corruption the spectacle was built to hide. FIFA bribes, Davos hypocrisy, and the cultural appropriation machine.",
+    abuse: "When institutions protect abusers instead of victims, it is a choice. The cases below show who made it, who paid for it, and who finally broke the silence.",
     atrocity: "The gravest crimes, held to the strictest standard of proof: what courts ruled, what bodies formally found, and what remains contested — never blurred.",
   },
 

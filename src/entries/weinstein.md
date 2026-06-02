@@ -1,6 +1,6 @@
 ---
 title: Harvey Weinstein — The Case That Lit
-section: spectacle
+section: abuse
 region: us
 status: ruling
 date: 2025-06-11

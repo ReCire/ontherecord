@@ -1,6 +1,6 @@
 ---
 title: R. Kelly — The Industry That Heard and Looked Away
-section: spectacle
+section: abuse
 region: us
 status: ruling
 date: 2022-06-29
