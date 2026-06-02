@@ -182,6 +182,44 @@ section { margin-bottom: 64px; scroll-margin-top: 120px; }
   display: flex; align-items: baseline; gap: 16px;
   border-bottom: 2px solid var(--ink); padding-bottom: 10px; margin-bottom: 6px;
 }
+
+/* Toggle affordance — only when JS is present */
+.js .sec-head[data-sec-toggle] {
+  cursor: pointer; user-select: none;
+}
+.js .sec-head[data-sec-toggle]:hover h2 { color: var(--red); }
+.js .sec-head[data-sec-toggle]:focus-visible {
+  outline: 2px solid var(--red); outline-offset: 2px;
+}
+
+/* Caret */
+.sec-caret {
+  display: none; /* hidden without JS */
+  font-family: 'JetBrains Mono', monospace; font-size: 14px;
+  color: var(--faint); margin-left: auto;
+  transition: transform 0.18s ease;
+}
+.js .sec-caret { display: inline-block; }
+.sec-head[aria-expanded="false"] .sec-caret { transform: rotate(-90deg); }
+
+/* Expand-all button */
+.expand-all-btn {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  background: transparent; color: var(--faint);
+  border: 1px solid var(--line); padding: 4px 10px;
+  cursor: pointer; white-space: nowrap;
+  transition: all .12s;
+}
+.expand-all-btn:hover { border-color: var(--ink); color: var(--ink); }
+
+/* sec-content: no height animation — just snap (clean for long pages) */
+.sec-content[hidden] { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sec-caret { transition: none; }
+}
+
 .sec-num { font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 13px; color: var(--red); }
 h2 {
   font-family: 'JetBrains Mono', monospace; font-weight: 800;

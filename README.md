@@ -96,6 +96,25 @@ region, or status? Add it there once and it becomes available everywhere
 
 ---
 
+## Collapsible sections
+
+Each of the 17 content sections can be folded/expanded by clicking (or pressing
+Enter/Space on) its heading. All sections start **expanded** — nothing is hidden
+from first-time readers, crawlers, or users without JS.
+
+- The **"Collapse all / Expand all"** button in the sticky filter bar flips every
+  section at once. The label reflects the dominant state.
+- Collapsed state is **session-only** — it is never written to `localStorage` or
+  the URL. Reload resets everything to expanded.
+- **Filters and search force sections open** when they produce a match inside a
+  folded block, so results are never hidden behind a collapsed heading.
+- Each section's pullquote is hidden if the section has zero visible entries
+  (e.g. when region/status filters exclude everything in that section).
+- With JS disabled, the collapse UI (button, caret) does not appear and all
+  sections render expanded — progressive enhancement throughout.
+
+---
+
 ## Search
 
 The filter bar includes an instant, client-side full-text search. No server,

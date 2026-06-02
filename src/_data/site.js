@@ -71,6 +71,27 @@ module.exports = {
     global: "They want to invade and dominate everything. It's time to build the guillotines.",
   },
 
+  // One-line italic intro shown under each section heading. Keyed by section key.
+  sectionIntros: {
+    surveillance: "From harvesting teenagers' phones to robot dogs at the stadium gate — the machinery of watching, and who builds it.",
+    machine: "The platforms and models built on other people's work — and the human costs socialized while the gains concentrate. (This ledger was assembled with help from an AI built by Anthropic, one of the companies named below. Read that tension however you like.)",
+    corruption: "Documented settlements and guilty pleas. Not allegations — admissions and convictions, with the paperwork attached.",
+    slavery: "Lawsuits and government findings on coerced labor inside the supply chains of household-name brands.",
+    climate: "They knew. Internal documents, surfaced through lawsuits and congressional subpoenas, prove it.",
+    environment: "Products sold as safe. Damage paid for in verdicts, settlements, and lives.",
+    labor: "Findings by administrative law judges and the National Labor Relations Board. Not opinion — adjudicated fact.",
+    money: "The shadow financial system that keeps wealth out of public view — exposed by the largest journalism investigations in history.",
+    pardons: "When accountability is erased by decree. Documented from government records and federal reporting.",
+    deutschland: "Der größte Steuerraub der Nachkriegsgeschichte, Selbstbereicherung in der Pandemie und die Drehtür zwischen Politik und Konzernen — belegt durch Gerichtsurteile und Recherchen.",
+    underclass: "In the richest square miles on earth, the gap isn't a glitch — it's the design.",
+    global: "War, courts, conflict minerals, and the long shadow of empire. Here especially, the line between what a court has ruled and what remains alleged is drawn carefully.",
+    minds: "What the feed does to attention, mood, and the young — and the research the platforms studied, then buried.",
+    wins: "Proof it doesn't have to be this way: laws, verdicts, and people who used power for the public instead of against it.",
+    empire: "Coups, oil, and arms — the machinery of domination, much of it now in the perpetrators' own declassified words.",
+    spectacle: "Sport, celebrity, and the institutions that sell spectacle — and the abuse the spectacle was built to hide.",
+    atrocity: "The gravest crimes, held to the strictest standard of proof: what courts ruled, what bodies formally found, and what remains contested — never blurred.",
+  },
+
   // "How To Use This" deeper-digging links
   deepDig: [
     { label: "DB", name: "Violation Tracker — searchable corporate penalty database", url: "https://violationtracker.goodjobsfirst.org/" },

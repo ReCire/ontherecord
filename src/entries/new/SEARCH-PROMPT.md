@@ -1,12 +1,5 @@
 # IDE Prompt — Dynamic Search for "On The Record"
 
-Paste everything below the line into your IDE agent (Cursor/Copilot/Claude Code).
-It is written against your actual repo: Eleventy + Nunjucks, a single rendered
-`index.html`, `src/assets/filter.js` (vanilla JS, IIFE, no framework), and the
-design tokens in `src/assets/style.css`. No build-tool or dependency changes.
-
----
-
 ## Role & context
 
 You are a principal front-end engineer working on a static Eleventy site called

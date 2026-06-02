@@ -19,6 +19,8 @@
   var active  = { section: new Set(), region: new Set(), status: new Set() };
   var query   = "";                 // current search query string
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // section collapse state: key → true (expanded) | false (collapsed)
+  var sectionExpanded = {};
 
   // =========================================================================
   // DOM REFERENCES
@@ -210,13 +212,86 @@
   }
 
   // =========================================================================
+  // SECTION COLLAPSE — toggle a single section open/closed
+  // =========================================================================
+  function setSectionExpanded(block, expanded) {
+    var key     = block.getAttribute("data-section-block");
+    var head    = block.querySelector("[data-sec-toggle]");
+    var content = block.querySelector(".sec-content");
+    sectionExpanded[key] = expanded;
+    if (head)    head.setAttribute("aria-expanded", expanded ? "true" : "false");
+    if (content) {
+      if (expanded) { content.removeAttribute("hidden"); }
+      else          { content.setAttribute("hidden", ""); }
+    }
+  }
+
+  // Force a section open (called by render when it has visible entries)
+  function ensureSectionOpen(block) {
+    var key = block.getAttribute("data-section-block");
+    if (!sectionExpanded[key]) setSectionExpanded(block, true);
+  }
+
+  // Wire toggle click + keyboard on every [data-sec-toggle] head
+  sectionBlocks.forEach(function (block) {
+    var key  = block.getAttribute("data-section-block");
+    var head = block.querySelector("[data-sec-toggle]");
+    sectionExpanded[key] = true; // default: expanded
+    if (!head) return;
+    function toggle() {
+      setSectionExpanded(block, !sectionExpanded[key]);
+      updateExpandAllLabel();
+    }
+    head.addEventListener("click", toggle);
+    head.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+    });
+  });
+
+  // =========================================================================
+  // EXPAND-ALL / COLLAPSE-ALL CONTROL
+  // =========================================================================
+  var expandAllBtn = document.getElementById("expand-all");
+
+  function updateExpandAllLabel() {
+    if (!expandAllBtn) return;
+    var anyCollapsed = sectionBlocks.some(function (b) {
+      return !sectionExpanded[b.getAttribute("data-section-block")];
+    });
+    // Label describes the ACTION (what clicking will do) — if any collapsed,
+    // clicking will expand all; otherwise clicking will collapse all.
+    if (anyCollapsed) {
+      expandAllBtn.textContent = "Expand all";
+      expandAllBtn.setAttribute("aria-label", "Expand all sections");
+    } else {
+      expandAllBtn.textContent = "Collapse all";
+      expandAllBtn.setAttribute("aria-label", "Collapse all sections");
+    }
+  }
+
+  if (expandAllBtn) {
+    expandAllBtn.addEventListener("click", function () {
+      var anyCollapsed = sectionBlocks.some(function (b) {
+        return !sectionExpanded[b.getAttribute("data-section-block")];
+      });
+      // If any are collapsed → expand all; else collapse all
+      sectionBlocks.forEach(function (b) { setSectionExpanded(b, anyCollapsed); });
+      updateExpandAllLabel();
+    });
+  }
+
+  // =========================================================================
   // FLAT-RESULTS MODE — hides section headers & pullquotes during search
   // =========================================================================
   function enterFlatMode() {
     sectionBlocks.forEach(function (block) {
       block.setAttribute("data-flat", "1");
+      // Ensure content is visible while in flat mode (collapsed sections
+      // would hide matching entries otherwise)
+      var content = block.querySelector(".sec-content");
+      if (content) content.removeAttribute("hidden");
     });
-    document.querySelectorAll(".sec-head, .pullquote").forEach(function (el) {
+    document.querySelectorAll(".sec-head").forEach(function (el) {
       el.setAttribute("data-hidden-search", "1");
       el.style.display = "none";
     });
@@ -225,6 +300,13 @@
   function exitFlatMode() {
     sectionBlocks.forEach(function (block) {
       block.removeAttribute("data-flat");
+      // Restore each section's collapsed state
+      var key = block.getAttribute("data-section-block");
+      var content = block.querySelector(".sec-content");
+      if (content) {
+        if (sectionExpanded[key]) { content.removeAttribute("hidden"); }
+        else                      { content.setAttribute("hidden", ""); }
+      }
     });
     document.querySelectorAll("[data-hidden-search]").forEach(function (el) {
       el.removeAttribute("data-hidden-search");
@@ -432,6 +514,11 @@
               if (rec._visible) { blockVisible++; totalVisible++; }
             }
           });
+          // Task 3: force section open if it has matching entries
+          if (blockVisible > 0) ensureSectionOpen(block);
+          // Task 4: hide the section's pullquote if 0 entries are visible
+          var pq = block.querySelector(".pullquote");
+          if (pq) pq.style.display = blockVisible > 0 ? "" : "none";
         }
       });
       hideEmpty();
@@ -452,6 +539,7 @@
     }
 
     updateHint();
+    updateExpandAllLabel();
   }
 
   // =========================================================================

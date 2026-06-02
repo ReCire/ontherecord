@@ -29,6 +29,7 @@ layout: base.njk
         aria-label="Search entries" spellcheck="false">
       <button type="button" id="search-clear" class="search-clear" aria-label="Clear search" hidden>✕</button>
     </div>
+    <button type="button" id="expand-all" class="expand-all-btn js-only" aria-label="Collapse all sections">Collapse all</button>
     <span class="filter-meta inline-meta">
       <span id="result-count" aria-live="polite" aria-atomic="true"></span><span id="active-hint"></span> · <a href="#" id="clear-filters">clear all</a>
     </span>
@@ -57,45 +58,53 @@ layout: base.njk
 
 {% for s in site.sections %}
 <section id="{{ s.key }}" data-section-block="{{ s.key }}" data-section-label="{{ s.label }}">
-  <div class="sec-head">
+  <div class="sec-head" role="button" tabindex="0"
+    aria-expanded="true" aria-controls="sec-content-{{ s.key }}"
+    data-sec-toggle>
     <span class="sec-num">{{ s.num }}</span>
     <h2>{{ s.label }}</h2>
+    <span class="sec-caret" aria-hidden="true">▾</span>
   </div>
-  {%- set count = 0 -%}
-  {% for entry in collections.entries %}
-    {%- if entry.data.section == s.key -%}
-      {%- set count = count + 1 -%}
-      <article class="entry"
-        data-section="{{ entry.data.section }}"
-        data-region="{{ entry.data.region }}"
-        data-status="{{ entry.data.status }}"
-        data-year="{{ entry.data.date | year }}">
-        <h3>
-          {% if entry.data.tag %}<span class="tag">{{ entry.data.tag }}</span>{% endif %}
-          {{ entry.data.title }}
-        </h3>
-        <div class="body">{{ entry.templateContent | safe }}</div>
-        {% if entry.data.sources and entry.data.sources.length %}
-        <div class="sources">
-          {% for src in entry.data.sources %}
-          <span class="src"><span class="label{% if src.video %} vid{% endif %}">{% if src.video %}▶ VIDEO{% else %}SRC{% endif %}</span><a href="{{ src.url }}" target="_blank" rel="noopener">{{ src.label }}</a>{% if src.archive_url %} <span class="src-sep">·</span> <a class="archive-link" href="{{ src.archive_url }}" target="_blank" rel="noopener" title="Permanent snapshot — Wayback Machine">archived</a>{% endif %}</span>
-          {% endfor %}
-        </div>
-        {% endif %}
-        {% if entry.data.last_verified %}<div class="verified">Sources last verified {{ entry.data.last_verified }}</div>{% endif %}
-      </article>
-    {%- endif -%}
-  {% endfor %}
-  {% if count == 0 %}<p class="sec-empty">No entries yet in this section.</p>{% endif %}
+  <div class="sec-content" id="sec-content-{{ s.key }}">
+    {% if site.sectionIntros[s.key] %}
+    <p class="sec-sub">{{ site.sectionIntros[s.key] }}</p>
+    {% endif %}
+    {%- set count = 0 -%}
+    {% for entry in collections.entries %}
+      {%- if entry.data.section == s.key -%}
+        {%- set count = count + 1 -%}
+        <article class="entry"
+          data-section="{{ entry.data.section }}"
+          data-region="{{ entry.data.region }}"
+          data-status="{{ entry.data.status }}"
+          data-year="{{ entry.data.date | year }}">
+          <h3>
+            {% if entry.data.tag %}<span class="tag">{{ entry.data.tag }}</span>{% endif %}
+            {{ entry.data.title }}
+          </h3>
+          <div class="body">{{ entry.templateContent | safe }}</div>
+          {% if entry.data.sources and entry.data.sources.length %}
+          <div class="sources">
+            {% for src in entry.data.sources %}
+            <span class="src"><span class="label{% if src.video %} vid{% endif %}">{% if src.video %}▶ VIDEO{% else %}SRC{% endif %}</span><a href="{{ src.url }}" target="_blank" rel="noopener">{{ src.label }}</a>{% if src.archive_url %} <span class="src-sep">·</span> <a class="archive-link" href="{{ src.archive_url }}" target="_blank" rel="noopener" title="Permanent snapshot — Wayback Machine">archived</a>{% endif %}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+          {% if entry.data.last_verified %}<div class="verified">Sources last verified {{ entry.data.last_verified }}</div>{% endif %}
+        </article>
+      {%- endif -%}
+    {% endfor %}
+    {% if count == 0 %}<p class="sec-empty">No entries yet in this section.</p>{% endif %}
+    {% if site.pullquotes[s.key] %}
+    <p class="pullquote">{{ site.pullquotes[s.key] }}</p>
+    {% endif %}
+  </div>
 </section>
-{% if site.pullquotes[s.key] %}
-<p class="pullquote">{{ site.pullquotes[s.key] }}</p>
-{% endif %}
 {% endfor %}
 
 <section id="sources">
   <div class="sec-head">
-    <span class="sec-num">13</span>
+    <span class="sec-num">§</span>
     <h2>How To Use This</h2>
   </div>
   <p class="sec-sub">A ledger is only as good as its sources.</p>
