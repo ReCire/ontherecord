@@ -86,11 +86,43 @@ no editing other files.**
 | `date`     | yes      | ISO date (`YYYY-MM-DD`). Drives sorting (newest first) + date filter.|
 | `tag`      | no       | Small red label above the title, e.g. `"Settlement · 2008"`.        |
 | `sources`  | no       | List of `{ label, url }`. Add `video: true` for a ▶ VIDEO link.     |
+| `archive_url` | auto  | Wayback snapshot per source — written by `npm run archive` (see below).|
+| `last_verified` | auto | Date sources were last archived — written by `npm run archive`.    |
 
 Valid values for `section`, `region`, and `status` all live in
 **`src/_data/site.js`** — that's the one place to look. Want a new section,
 region, or status? Add it there once and it becomes available everywhere
 (filter chip + section heading).
+
+---
+
+## Archiving sources (link-rot defense)
+
+News URLs die, government pages move, articles get pulled. For an accountability
+site a dead link reads like the evidence vanished. The fix: capture a permanent
+[Wayback Machine](https://web.archive.org) snapshot of every source and store it
+in the entry frontmatter.
+
+After adding or editing entries, run:
+```
+npm run archive
+```
+For each source it checks for an existing Wayback snapshot, creates one via
+*Save Page Now* if none exists, and writes `archive_url` back into the
+frontmatter plus a `last_verified` date. The site then renders each source as
+`source · archived`.
+
+It's **idempotent** — already-archived sources are skipped. To re-snapshot
+everything (e.g. yearly refresh):
+```
+npm run archive -- --force
+```
+Some publishers block the Wayback crawler; those sources are left as-is and
+reported so you can re-run later. **Commit the frontmatter changes** the script
+makes — the archive URLs belong in version control.
+
+> Run this **locally**, not on Vercel. The deploy filesystem is ephemeral, so
+> writes wouldn't persist, and Save Page Now is too slow for a build step.
 
 ---
 
