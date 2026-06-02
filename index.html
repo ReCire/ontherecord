@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ON THE RECORD — A Documented Ledger</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap');
+
+  :root {
+    --paper: #ece8df;
+    --ink: #14110d;
+    --red: #a81e0e;
+    --faint: #6b6356;
+    --line: #c4bdae;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.55;
+    padding: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(20,17,13,0.025) 28px, rgba(20,17,13,0.025) 29px);
+  }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+  header {
+    border-bottom: 3px solid var(--ink);
+    padding: 70px 0 28px;
+    margin-bottom: 8px;
+  }
+
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--red);
+    font-weight: 700;
+    margin-bottom: 22px;
+  }
+
+  h1 {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 800;
+    font-size: clamp(38px, 9vw, 74px);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .standfirst {
+    font-size: 21px;
+    line-height: 1.45;
+    max-width: 600px;
+    color: var(--ink);
+  }
+
+  .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--faint);
+    margin-top: 30px;
+    text-transform: uppercase;
+    line-height: 1.9;
+  }
+
+  nav {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    padding: 30px 0;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 50px;
+  }
+  nav a {
+    color: var(--ink);
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 18px 4px 0;
+    border-bottom: 1px solid transparent;
+    text-transform: uppercase;
+  }
+  nav a:hover { border-bottom: 1px solid var(--red); color: var(--red); }
+  nav .num { color: var(--red); font-weight: 700; }
+
+  section { margin-bottom: 64px; scroll-margin-top: 20px; }
+
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 10px;
+    margin-bottom: 6px;
+  }
+  .sec-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 800;
+    font-size: 13px;
+    color: var(--red);
+  }
+  h2 {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 800;
+    font-size: clamp(22px, 5vw, 30px);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+  .sec-sub {
+    font-size: 16px;
+    color: var(--faint);
+    font-style: italic;
+    margin: 14px 0 30px;
+  }
+
+  .entry {
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .entry:last-child { border-bottom: none; }
+
+  .entry h3 {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .entry h3 .tag {
+    color: var(--red);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 5px;
+  }
+  .entry p { margin-bottom: 12px; }
+
+  .sources {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+    line-height: 1.8;
+  }
+  .sources a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--red);
+    padding-bottom: 1px;
+    word-break: break-word;
+  }
+  .sources a:hover { background: var(--red); color: var(--paper); border-bottom-color: var(--ink); }
+  .sources .label { color: var(--faint); text-transform: uppercase; margin-right: 6px; }
+  .sources .label.vid { color: var(--red); font-weight: 700; }
+  .sources span.src { display: block; margin-top: 4px; }
+
+  .pullquote {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: clamp(18px, 4vw, 24px);
+    line-height: 1.3;
+    text-transform: uppercase;
+    border-left: 5px solid var(--red);
+    padding: 8px 0 8px 24px;
+    margin: 50px 0;
+    color: var(--ink);
+  }
+
+  footer {
+    border-top: 3px solid var(--ink);
+    margin-top: 60px;
+    padding: 40px 0 90px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    line-height: 1.9;
+    color: var(--faint);
+  }
+  footer strong { color: var(--ink); }
+  footer .disclaim {
+    border: 1px solid var(--line);
+    padding: 18px 20px;
+    margin: 24px 0;
+    text-transform: none;
+    line-height: 1.7;
+  }
+
+  ::selection { background: var(--red); color: var(--paper); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">A documented ledger · with primary sources</div>
+  <h1>On The<br>Record</h1>
+  <p class="standfirst">The people ask only for what is necessary. The powerful aspire to everything. Below: what was done, who did it, and where it is written down.</p>
+  <div class="meta">
+    Every claim links to a court filing, government report, or primary investigation.<br>
+    No anonymous allegations. Read the sources. Verify everything.
+  </div>
+</header>
+
+<nav>
+  <a href="#corruption"><span class="num">01</span> Corruption &amp; Bribery</a>
+  <a href="#slavery"><span class="num">02</span> Forced Labor</a>
+  <a href="#climate"><span class="num">03</span> Climate Deception</a>
+  <a href="#environment"><span class="num">04</span> Environmental Harm</a>
+  <a href="#labor"><span class="num">05</span> Union Busting</a>
+  <a href="#money"><span class="num">06</span> Money Trails</a>
+  <a href="#pardons"><span class="num">07</span> Pardons &amp; Impunity</a>
+  <a href="#deutschland"><span class="num">08</span> Deutschland</a>
+  <a href="#machine"><span class="num">09</span> AI &amp; The Human Cost</a>
+  <a href="#surveillance"><span class="num">10</span> Surveillance &amp; Control</a>
+  <a href="#underclass"><span class="num">11</span> Permanent Underclass</a>
+  <a href="#global"><span class="num">12</span> The Global Picture</a>
+  <a href="#sources"><span class="num">13</span> How To Use This</a>
+</nav>
+
+<section id="corruption">
+  <div class="sec-head">
+    <span class="sec-num">01</span>
+    <h2>Corruption &amp; Bribery</h2>
+  </div>
+  <p class="sec-sub">Documented settlements and guilty pleas. These are not allegations — they are admissions and convictions.</p>
+
+  <div class="entry">
+    <h3><span class="tag">Settlement · 2008</span>Siemens AG — $1.6 Billion Global Bribery Settlement</h3>
+    <p>The German industrial conglomerate pleaded guilty to corruption and falsifying business records, settling with U.S. and German authorities in one of the largest corporate bribery cases in history. Investigators documented roughly 4,000 separate bribery payments totaling around €1.3 billion between 2000 and 2006.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://whistleblowerlaw.com/top-10-fcpa-settlements/" target="_blank" rel="noopener">whistleblowerlaw.com — Top 10 FCPA Settlements</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.phillipsandcohen.com/whistleblower-resources/largest-fcpa-settlements/" target="_blank" rel="noopener">Phillips &amp; Cohen — Largest FCPA Settlements</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Settlement · 2020</span>Goldman Sachs — $2.9 Billion Over 1MDB</h3>
+    <p>Goldman settled charges that it paid over $1 billion in bribes to government officials in Malaysia and the UAE to win contracts, paying $1.6 billion to U.S. authorities and $1.3 billion elsewhere. A former managing director was later convicted and sentenced to 10 years; the former Southeast Asia chairman pleaded guilty.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.phillipsandcohen.com/whistleblower-resources/largest-fcpa-settlements/" target="_blank" rel="noopener">Phillips &amp; Cohen — Largest FCPA Settlements</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Settlement · 2022</span>Glencore — Multi-Jurisdiction Bribery Pleas</h3>
+    <p>The commodities giant settled bribery cases across multiple countries, including a UK conviction requiring £281 million for bribes paid in Nigeria, Cameroon, Ivory Coast, Equatorial Guinea and South Sudan, pleading guilty to seven charges under the UK Bribery Act, plus a settlement tied to Brazil's Lava Jato case.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://bh-compliance.com/en/blog/cases-of-corruption-that-marked-2022-2023/" target="_blank" rel="noopener">BH Compliance — Corruption Cases 2022–2023</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Investigation</span>The Repeat-Offender Pattern</h3>
+    <p>An ICIJ investigation found that across two decades, prosecutors in 30 countries negotiated settlements with at least 265 companies, collecting $34.9 billion. Critically: 34 companies — 21 of them on the Global Fortune 500 — settled, then broke the law again, often within a few years. The fines are a cost of doing business.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.icij.org/investigations/ericsson-list/as-us-style-corporate-leniency-deals-for-bribery-and-corruption-go-global-repeat-offenders-are-on-the-rise/" target="_blank" rel="noopener">ICIJ — Corporate Leniency Deals Go Global</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://goodjobsfirst.org/the-high-cost-of-misconduct-corporate-penalties-reach-the-trillion-dollar-mark/" target="_blank" rel="noopener">Good Jobs First — Violation Tracker</a></span>
+    </div>
+  </div>
+</section>
+
+<p class="pullquote">Abuses are the work and the domain of the powerful. They are the scourges of the people.</p>
+
+<section id="slavery">
+  <div class="sec-head">
+    <span class="sec-num">02</span>
+    <h2>Forced Labor &amp; Exploitation</h2>
+  </div>
+  <p class="sec-sub">Lawsuits and government findings on coerced labor inside the supply chains of household-name brands.</p>
+
+  <div class="entry">
+    <h3><span class="tag">Lawsuit · 2019 / 2024</span>Cobalt in the Congo — Apple, Alphabet, Dell, Microsoft, Tesla</h3>
+    <p>Human-rights firm International Rights Advocates sued these companies alleging complicity in the death and injury of children mining cobalt in the DRC. A 2024 suit against Apple specifically alleges its cobalt and tantalum supply chains remain tied to hazardous child and forced labor, environmental damage and armed groups in Congo and Rwanda.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.freedomunited.org/news/apple-child-labor-lawsuit/" target="_blank" rel="noopener">Freedom United — Apple Child Labor Charges</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://theexodusroad.com/slavery-in-supply-chains/" target="_blank" rel="noopener">The Exodus Road — Slavery in Supply Chains</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Supreme Court · 2021</span>Nestlé / Cargill — Cocoa &amp; Child Slavery in Côte d'Ivoire</h3>
+    <p>Six Malian citizens alleged that as children they were trafficked to Ivorian cocoa plantations and forced to work in brutal conditions, suing Nestlé and Cargill for aiding and abetting. The Supreme Court ruled the companies' "mere corporate presence" abroad did not allow the case to proceed under the Alien Tort Statute — a ruling rights advocates warned could shut the door on future supply-chain claims.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://harvardlawreview.org/print/vol-136/policy-as-a-one-legged-stool-u-s-actions-against-supply-chain-forced-labor-abuses/" target="_blank" rel="noopener">Harvard Law Review — Supply Chain Forced Labor</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Lawsuit · 2024</span>Starbucks — Forced Labor in Brazilian Coffee</h3>
+    <p>Eight Brazilian workers filed a class action alleging that workers on supplier coffee farms were forced to labor under conditions U.S. law defines as modern slavery. The broader case names multiple coffee multinationals.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.business-humanrights.org/en/latest-news/usa-legal-challenges-against-coffee-multinationals-over-allegations-of-forced-labour-in-their-supply-chains/" target="_blank" rel="noopener">Business &amp; Human Rights Resource Centre</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Congressional Report</span>Xinjiang Forced Labor — 20 Named U.S. Corporations</h3>
+    <p>A congressional report named 20 U.S. corporations suspected of directly employing forced labor or sourcing from suppliers suspected of using it, in connection with the Xinjiang region. Named companies included major apparel, food and retail brands. U.S. import law now presumes goods from the region are made with forced labor unless proven otherwise.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://theexodusroad.com/slavery-in-supply-chains/" target="_blank" rel="noopener">The Exodus Road — Slavery in Supply Chains</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://legalclarity.org/chinese-slavery-history-forced-labor-and-u-s-law/" target="_blank" rel="noopener">LegalClarity — Forced Labor &amp; U.S. Law</a></span>
+    </div>
+  </div>
+</section>
+
+<section id="climate">
+  <div class="sec-head">
+    <span class="sec-num">03</span>
+    <h2>Climate Deception</h2>
+  </div>
+  <p class="sec-sub">They knew. Internal documents, surfaced through lawsuits and congressional subpoenas, prove it.</p>
+
+  <div class="entry">
+    <h3><span class="tag">Internal Documents</span>Exxon Knew — And Modeled It Accurately</h3>
+    <p>A 2023 peer-reviewed review found that the warming projections made by ExxonMobil's own scientists between 1977 and 2003 had "accurately" projected and "skillfully" modeled global warming from fossil fuel burning. A 1982 internal report predicted almost exactly the warming since observed. The company then spent decades funding efforts to undermine the public's understanding of that same science.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://en.wikipedia.org/wiki/ExxonMobil_climate_change_denial" target="_blank" rel="noopener">ExxonMobil Climate Change Denial (overview + citations)</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://theconversation.com/what-big-oil-knew-about-climate-change-in-its-own-words-170642" target="_blank" rel="noopener">The Conversation — What Big Oil Knew, In Its Own Words</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Senate Report · 2024</span>The Joint Staff Investigation — Exxon, Chevron, Shell, BP, API</h3>
+    <p>A U.S. Senate Budget Committee and House Oversight joint investigation concluded, citing internal documents, that fossil fuel companies have understood since at least the 1960s that burning their products causes climate change — then worked for decades to deny the science and undermine public understanding, evolving from outright denial into "deception, disinformation, and doublespeak."</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.budget.senate.gov/imo/media/doc/fossil_fuel_report1.pdf" target="_blank" rel="noopener">U.S. Senate Budget Committee — Full Report (PDF)</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Document Archive</span>The Climate Deception Dossiers</h3>
+    <p>The Union of Concerned Scientists assembled seven "deception dossiers" — collections of internal company and trade-association documents obtained through leaks, lawsuits and FOIA requests — documenting a coordinated decades-long campaign underwritten by ExxonMobil, Chevron, ConocoPhillips, BP, Shell, Peabody Energy and others. The Global Climate Coalition (1989) existed to sow doubt and block climate treaties.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.ucs.org/resources/climate-deception-dossiers" target="_blank" rel="noopener">Union of Concerned Scientists — Deception Dossiers</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Reporting · 2023</span>The Deception Continued Internally Until At Least 2016</h3>
+    <p>Internal documents obtained by the Wall Street Journal, later surfaced in a New York State lawsuit, showed Exxon executives privately downplaying climate change and pushing back on cutting oil and gas use as recently as 2016 — even after the company had publicly conceded that fossil fuels contribute to warming.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.npr.org/2023/09/14/1199570023/exxon-climate-change-fossil-fuels-global-warming-oil-gas" target="_blank" rel="noopener">NPR — Exxon Minimized Climate Change Internally</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Documentary</span>"The Power of Big Oil" — Frontline / PBS</h3>
+    <p>An epic three-part PBS Frontline investigation spanning 40 years and multiple administrations, drawing on newly uncovered documents and over 100 interviews — including industry whistleblowers and former allies expressing regret — on how fossil fuel companies and their political allies cast doubt and delayed climate action for decades. Free to stream on Frontline's official YouTube channel.</p>
+    <div class="sources">
+      <span class="src"><span class="label vid">▶ VIDEO</span><a href="https://www.youtube.com/watch?v=shs2IKKTngk" target="_blank" rel="noopener">Frontline PBS — The Power of Big Oil (official)</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.pbs.org/wgbh/frontline/documentary/the-power-of-big-oil/" target="_blank" rel="noopener">PBS — full series &amp; reporting</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://climateintegrity.org/news/view/the-most-damning-moments-from-the-power-of-big-oil-pbs" target="_blank" rel="noopener">Climate Integrity — most damning moments</a></span>
+    </div>
+  </div>
+</section>
+
+<section id="environment">
+  <div class="sec-head">
+    <span class="sec-num">04</span>
+    <h2>Environmental &amp; Human Harm</h2>
+  </div>
+  <p class="sec-sub">Products sold as safe. Damage paid for in verdicts, settlements and lives.</p>
+
+  <div class="entry">
+    <h3><span class="tag">Settlements · $10B+</span>Bayer / Monsanto — Roundup &amp; Glyphosate</h3>
+    <p>After acquiring Monsanto in 2018, Bayer inherited more than 100,000 lawsuits alleging the glyphosate weedkiller Roundup caused non-Hodgkin lymphoma. The company's liability has exceeded $10 billion, with nearly $11 billion paid to claimants and a proposed $7.25 billion class settlement advancing in 2026. The WHO's cancer agency classified glyphosate as "probably carcinogenic" in 2015; the company maintains it is safe and has not admitted liability.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://cen.acs.org/environment/pesticides/bayer-roundup-glyphosate-cancer-class-action-lawsuit-settlement/104/web/2026/03" target="_blank" rel="noopener">Chemical &amp; Engineering News — $7.25B settlement advances</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://finance.yahoo.com/sectors/healthcare/articles/2-billion-bayer-verdict-roundup-194517794.html" target="_blank" rel="noopener">Yahoo Finance — $2B verdict &amp; litigation history</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://investigatemidwest.org/2026/05/26/bayers-proposed-roundup-settlement-violates-constitution-new-legal-filing-claims/" target="_blank" rel="noopener">Investigate Midwest — settlement challenge</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Settlement · ~$36B</span>BP — Deepwater Horizon</h3>
+    <p>The 2010 Gulf of Mexico blowout killed 11 workers and caused the largest marine oil spill in history. BP — along with rig owner Transocean and Halliburton, which helped construct the well — faced a wave of litigation over their actions before, during and after the disaster, ultimately paying roughly $36 billion in settlements, most of it from BP.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://goodjobsfirst.org/the-high-cost-of-misconduct-corporate-penalties-reach-the-trillion-dollar-mark/" target="_blank" rel="noopener">Good Jobs First — Violation Tracker / Mega-Scandals</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Settlements</span>Monsanto — PCB Contamination</h3>
+    <p>Beyond Roundup, Monsanto settled PCB verdicts tied to the Sky Valley Education Center in Washington State and resolved PCB environmental cases with the states of Illinois and West Virginia — a separate chapter of contamination liability from a chemical the company manufactured for decades.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.bayer.com/media/en-us/monsanto-announces-roundup-class-settlement-agreement-to-resolve-current-and-future-claims/" target="_blank" rel="noopener">Bayer press release (company's own statement)</a></span>
+    </div>
+  </div>
+</section>
+
+<p class="pullquote">War is peace. Freedom is slavery. Ignorance is strength. — They told you. In writing.</p>
+
+<section id="labor">
+  <div class="sec-head">
+    <span class="sec-num">05</span>
+    <h2>Union Busting</h2>
+  </div>
+  <p class="sec-sub">Findings by administrative law judges and the National Labor Relations Board. Not opinion — adjudicated fact.</p>
+
+  <div class="entry">
+    <h3><span class="tag">NLRB Record</span>Starbucks — "Biggest Violator of Labor Law in Modern History"</h3>
+    <p>As of early 2024, NLRB regional offices had docketed 771 open or settled unfair-labor-practice charges against Starbucks or its law firm. Administrative law judges found violations in 60 of 61 transferred cases. By December 2024 over 100 decisions had ordered relief, including reinstatement for dozens of illegally fired workers. The NLRB cited the company's "egregious and widespread misconduct."</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.epi.org/publication/corporate-union-busting/" target="_blank" rel="noopener">Economic Policy Institute — Corporate Union Busting</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://sbworkersunited.org/union-baristas-are-on-strike-over-starbucks-record-breaking-labor-law-violations/" target="_blank" rel="noopener">Starbucks Workers United — Labor Law Violations</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.pbs.org/newshour/economy/the-union-busting-practices-that-landed-starbucks-in-hot-water" target="_blank" rel="noopener">PBS NewsHour — Union Busting Practices</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">NLRB Record</span>Amazon — 250+ Open or Settled Cases</h3>
+    <p>The NLRB found merit to accusations that Amazon held mandatory anti-union meetings and threatened workers. According to the agency, more than 250 open or settled cases over workers' organizing rights stand against the company; multiple administrative law judges have ruled against it, and a federal court ordered it not to interfere with organizing.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.epi.org/blog/whats-behind-the-corporate-effort-to-kneecap-the-national-labor-relations-board-spacex-amazon-trader-joes-and-starbucks-are-trying-to-have-the-nlrb-declared-unconstitutional/" target="_blank" rel="noopener">EPI — Corporate Effort to Kneecap the NLRB</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://news.bloomberglaw.com/white-collar-and-criminal-law/amazon-starbucks-labor-law-allegations-union-busting-explained" target="_blank" rel="noopener">Bloomberg Law — Allegations Explained</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Context</span>The Penalties Are Designed To Be Survivable</h3>
+    <p>Employers spend more than $400 million per year on "union-avoidance" consultants. Researchers note the law's penalties are too weak to deter violations — there are no real consequences beyond reinstatement and back pay, so breaking the law remains the rational corporate choice.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.epi.org/press/new-report-details-how-amazon-starbucks-and-trader-joes-have-crushed-worker-organizing-campaigns/" target="_blank" rel="noopener">EPI — How Corporations Crushed Organizing</a></span>
+    </div>
+  </div>
+</section>
+
+<section id="money">
+  <div class="sec-head">
+    <span class="sec-num">06</span>
+    <h2>Money Trails</h2>
+  </div>
+  <p class="sec-sub">The shadow financial system that lets the powerful keep wealth out of public view — exposed by the largest journalism investigations in history.</p>
+
+  <div class="entry">
+    <h3><span class="tag">Leak · 11.9M files</span>The Pandora Papers</h3>
+    <p>The largest investigation in journalism history: 2.94 terabytes of data from 14 offshore providers, analyzed by more than 600 journalists in 117 countries. It exposed the secret offshore holdings of more than 330 politicians and public officials in over 90 countries — including 35 current and former national leaders — plus over 130 Forbes billionaires whose combined fortunes exceeded $600 billion. Among the named: King Abdullah II of Jordan ($100M in California homes) and associates of multiple heads of state.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.icij.org/investigations/pandora-papers/" target="_blank" rel="noopener">ICIJ — Pandora Papers (primary investigation)</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.icij.org/investigations/pandora-papers/global-investigation-tax-havens-offshore/" target="_blank" rel="noopener">ICIJ — Hidden riches of world leaders</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.washingtonpost.com/business/interactive/2021/pandora-papers-offshore-finance/" target="_blank" rel="noopener">Washington Post — Secret offshore system</a></span>
+      <span class="src"><span class="label vid">▶ VIDEO</span><a href="https://www.youtube.com/watch?v=tFTPI-Win-Q" target="_blank" rel="noopener">ICIJ — Pandora Papers explained (official channel)</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Leak · 11.5M files</span>The Panama Papers</h3>
+    <p>The 2016 predecessor leak from the Panamanian firm Mossack Fonseca that first cracked open the offshore world for public view, exposing how the wealthy and powerful hid assets in ways law enforcement could not detect — and triggering investigations, resignations and prosecutions worldwide.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.icij.org/investigations/panama-papers/" target="_blank" rel="noopener">ICIJ — Panama Papers (primary investigation)</a></span>
+      <span class="src"><span class="label vid">▶ VIDEO</span><a href="https://www.youtube.com/watch?v=NgkpQEhKwTw" target="_blank" rel="noopener">ICIJ — Panama Papers explainer (official channel)</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Pattern</span>The Compliance That Comes After</h3>
+    <p>ICIJ analyzed 109 suspicious-activity reports filed by one Panamanian law firm and found that 87 of the anti-money-laundering forms were written only <em>after</em> authorities or journalists had publicly identified the clients as involved in alleged wrongdoing. The safeguards activate when exposure is imminent — not before.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.icij.org/investigations/pandora-papers/about-pandora-papers-leak-dataset/" target="_blank" rel="noopener">ICIJ — Inside the Pandora Papers dataset</a></span>
+    </div>
+  </div>
+</section>
+
+<p class="pullquote">Corrupt. Useless. Puppets. Robbing us of minds, of souls.</p>
+
+<section id="pardons">
+  <div class="sec-head">
+    <span class="sec-num">07</span>
+    <h2>Pardons &amp; Impunity</h2>
+  </div>
+  <p class="sec-sub">When accountability is erased by decree. Documented from government records and federal reporting.</p>
+
+  <div class="entry">
+    <h3><span class="tag">January 2025</span>The Mass January 6 Clemency</h3>
+    <p>On his first day back in office, the President pardoned roughly 1,500 people convicted in connection with the January 6, 2021 Capitol attack — the largest federal criminal investigation in U.S. history — and ordered all pending indictments dismissed. The pardons covered offenses ranging from misdemeanor trespass to assaulting police with weapons. The DOJ had recorded approximately 608 defendants charged with assaulting, resisting or impeding officers, including roughly 174 charged with using a deadly weapon or causing serious bodily injury.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.justsecurity.org/106689/january-6-pardons-statistics/" target="_blank" rel="noopener">Just Security — Pardons by the numbers (DOJ data)</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.aljazeera.com/news/2025/1/23/the-january-6-pardons-who-has-trump-ordered-to-be-released" target="_blank" rel="noopener">Al Jazeera — Who was released</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Commutations</span>Seditious Conspiracy — Sentences Cut</h3>
+    <p>Fourteen leaders and members of the Oath Keepers and Proud Boys had their sentences commuted, including Proud Boys leader Enrique Tarrio — sentenced to 22 years, the longest term handed down, after a judge called him "the ultimate leader" of the conspiracy — and Oath Keepers founder Stewart Rhodes, who was serving 18 years for seditious conspiracy.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.aljazeera.com/amp/news/2025/1/21/trump-grants-clemency-to-all-charged-over-january-six-us-capitol-attack" target="_blank" rel="noopener">Al Jazeera — Clemency for all charged</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://glaad.org/fact-sheet-for-reporters-trumps-pardon-of-jan-6th-insurrectionists/" target="_blank" rel="noopener">GLAAD — Fact sheet on the pardons</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Reporting</span>The Records Behind the Pardons</h3>
+    <p>Federal reporting documented that dozens of pardoned defendants carried separate prior convictions — including rape, manslaughter, domestic violence and drug trafficking — and that the clemency erased the records of more than 700 people while halting hundreds of pending prosecutions.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.npr.org/2025/01/30/nx-s1-5276336/donald-trump-jan-6-rape-assault-pardons-rioters" target="_blank" rel="noopener">NPR — Criminal records of pardoned rioters</a></span>
+    </div>
+  </div>
+</section>
+
+<section id="deutschland">
+  <div class="sec-head">
+    <span class="sec-num">08</span>
+    <h2>Deutschland: Macht &amp; Geld</h2>
+  </div>
+  <p class="sec-sub">Der größte Steuerraub der Nachkriegsgeschichte, Selbstbereicherung in der Pandemie und die Drehtür zwischen Politik und Konzernen. Belegt durch Gerichtsurteile und Recherchen.</p>
+
+  <div class="entry">
+    <h3><span class="tag">Steuerraub · ~€30 Mrd</span>Cum-Ex — Der größte Steuerskandal der Nachkriegszeit</h3>
+    <p>Banken und ihre Helfer nutzten eine Regelungslücke: Bei Aktienkreisgeschäften ließen sich mehrere Akteure die nur einmal gezahlte Kapitalertragsteuer mehrfach erstatten. Der Schaden allein für den deutschen Staat wird auf rund 30 Milliarden Euro geschätzt (mit Cum-Cum bis zu 35 Mrd.), europaweit auf etwa 150 Milliarden. Der BGH bestätigte 2021 erstmals, dass Cum-Ex strafbare Steuerhinterziehung ist. Laut Finanzwende gibt es rund 1.800 Beschuldigte. Besonders pikant: Statt die Geschäfte zu unterbinden, übernahm das Bundesfinanzministerium 2002 teils wörtlich einen Gesetzesvorschlag des Bankenverbands.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://correctiv.org/themen/cum-ex-steuerbetrug/" target="_blank" rel="noopener">CORRECTIV — CumEx-Files (federführende Recherche)</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.finanzwende.de/themen/cumex/chronik-von-cumex" target="_blank" rel="noopener">Finanzwende — CumEx-Chronik</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.zdfheute.de/politik/deutschland/cum-ex-skandal-backgroundcheck-100.html" target="_blank" rel="noopener">ZDFheute — Wie der Staat versagt</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Urteil · rechtskräftig</span>Warburg-Bank — Banker im Gefängnis, Geld zurückgefordert</h3>
+    <p>Die Hamburger Privatbank M.M. Warburg gilt als tief in Cum-Ex verstrickt. Zwei Banker wurden wegen schwerer Steuerhinterziehung verurteilt; der BGH verwarf 2025 ihre Revisionen — die Urteile sind rechtskräftig. Der Bundesfinanzhof bestätigte zudem Steuerrückforderungen von 155 Millionen Euro gegen die Bank. Das Verfahren reicht bis in höchste politische Kreise; ein Hamburger Untersuchungsausschuss befasste sich mit erlassenen Steuernachforderungen.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.handelsblatt.com/finanzen/banken-versicherungen/cum-ex/cum-ex-skandal-bundesgerichtshof-bestaetigt-urteil-gegen-zwei-warburg-banker/100147177.html" target="_blank" rel="noopener">Handelsblatt — BGH bestätigt Urteile</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.lto.de/recht/nachrichten/n/viiib1724-bfh-warburg-cum-ex-steuer-rueckzahlung" target="_blank" rel="noopener">LTO — BFH zu 155-Mio-Rückforderung</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Maskenaffäre · 2021</span>Provisionen aus der Pandemie</h3>
+    <p>Mehrere Unionsabgeordnete sollen an der Vermittlung von Schutzmasken in der Pandemie persönlich verdient haben. CSU-Abgeordneter Georg Nüßlein soll über seine Firma 660.000 Euro Provision erhalten haben; seine Immunität wurde aufgehoben. CDU-Abgeordneter Nikolas Löbel räumte rund 250.000 Euro Provision ein und legte sein Mandat nieder. Beide verließen ihre Parteien. Mehrere strafrechtliche Verfahren wurden mangels strafbarer Handlung eingestellt — was vor allem die Lücken im Abgeordnetenrecht offenlegte.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://de.wikipedia.org/wiki/Maskenaff%C3%A4re_(CDU/CSU)" target="_blank" rel="noopener">Übersicht der Maskenaffäre (mit Einzelnachweisen)</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.euronews.com/2021/03/08/german-mp-resigns-amid-claims-he-used-pandemic-to-enrich-himself" target="_blank" rel="noopener">Euronews — Löbel tritt zurück</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Untreue · Haft</span>Middelhoff / Arcandor / Karstadt-Quelle</h3>
+    <p>Das Landgericht Essen verurteilte Ex-Arcandor-Chef Thomas Middelhoff 2014 wegen Untreue in 27 Fällen und Steuerhinterziehung zu drei Jahren Haft — unter anderem wegen privater Charterflüge auf Konzernkosten (über 500.000 Euro). Der Mutterkonzern der Kaufhauskette Karstadt war 2009 insolvent gegangen, kurz nachdem Middelhoff mit einer Abfindung von 2,3 Mio. Euro ausgeschieden war. Hintergrund: ein Plan, KarstadtQuelle mit der Quelle-Erbin Madeleine Schickedanz, dem Immobilienmakler Josef Esch und der Privatbank Sal. Oppenheim von der Börse zu nehmen und in Einzelteilen zu verkaufen.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.foxnews.com/world/prominent-german-exec-thomas-middelhoff-convicted-over-travel-costs-at-troubled-store-firm" target="_blank" rel="noopener">AP/Fox — Middelhoff verurteilt (engl.)</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.lto.de/recht/kanzleien-unternehmen/k/arcandor-insolvenz-thomas-middelhoff-anstiftung-untreue-landgericht-essen" target="_blank" rel="noopener">LTO — Arcandor-Insolvenzverfahren</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Drehtür-Effekt</span>Vom Amt in den Aufsichtsrat — Schröder &amp; Co.</h3>
+    <p>Wochen nach dem Ende seiner Kanzlerschaft 2005 wechselte Gerhard Schröder zur Gazprom-kontrollierten Nord Stream AG — ein Pipeline-Projekt, das er als Kanzler gemeinsam mit Putin massiv gefördert hatte. Später Aufsichtsratschef bei Rosneft. Er steht sinnbildlich für die „Drehtür": Eckart von Klaeden (Kanzleramt → Daimler), Ronald Pofalla (Kanzleramtschef → Cheflobbyist Deutsche Bahn), Kurt Beck (Ministerpräsident → Berater Boehringer Ingelheim) und weitere folgten demselben Muster. Die Fälle lösten Debatten über strengere Karenzzeiten aus.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://lobbypedia.de/wiki/Gerhard_Schr%C3%B6der" target="_blank" rel="noopener">Lobbypedia — Schröder &amp; der Drehtür-Effekt</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://lobbypedia.de/wiki/Gazprom" target="_blank" rel="noopener">Lobbypedia — Gazprom &amp; Nord Stream</a></span>
+      <span class="src"><span class="label vid">▶ VIDEO</span><a href="https://www.youtube.com/results?search_query=ARD+Die+Story+Au%C3%9Fer+Dienst+Gerhard+Schr%C3%B6der" target="_blank" rel="noopener">ARD „Die Story" — Außer Dienst (Doku, Suche)</a></span>
+    </div>
+  </div>
+</section>
+
+<section id="machine">
+  <div class="sec-head">
+    <span class="sec-num">09</span>
+    <h2>AI &amp; The Human Cost</h2>
+  </div>
+  <p class="sec-sub">The platforms and models built on other people's work — and the human costs being socialized while the gains concentrate. (This ledger was assembled with the help of an AI built by Anthropic, one of the companies named below. Read that tension however you like.)</p>
+
+  <div class="entry">
+    <h3><span class="tag">Settlement · $1.5B</span>Anthropic — Pirated Books to Train AI</h3>
+    <p>In a class action brought by authors, a California judge ruled in June 2025 that training AI on books can be fair use — but that downloading pirated copies is not, finding Anthropic may have downloaded as many as 7 million books from pirate sites. The case settled for $1.5 billion, an estimated ~$3,000 per work, covering nearly half a million authors. Some authors objected that the deal doesn't hold AI firms accountable for the act of training on the stolen material itself.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.nortonrosefulbright.com/en/knowledge/publications/ce8eaa5f/ai-in-litigation-series-an-update-on-ai-copyright-cases-in-2026" target="_blank" rel="noopener">Norton Rose Fulbright — AI copyright cases update</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://techcrunch.com/2025/12/23/john-carreyrou-and-other-authors-bring-new-lawsuit-against-six-major-ai-companies/" target="_blank" rel="noopener">TechCrunch — new authors' suit &amp; the ruling explained</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://news.bloomberglaw.com/ip-law/openai-anthropic-xai-hit-with-copyright-lawsuit-from-writers" target="_blank" rel="noopener">Bloomberg Law — writers sue six AI giants</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Litigation · ongoing</span>The Broader Training-Data Fight</h3>
+    <p>Dozens of suits are pending across the industry. The New York Times sued OpenAI and Microsoft over training on its articles; authors including Theranos whistleblower John Carreyrou sued OpenAI, Google, Meta, xAI, Anthropic and Perplexity in December 2025 over pirated books. As of late 2025, roughly 51 copyright suits were tracked against AI companies. The companies' core defense is fair use — a question no court will fully settle before mid-2026 at the earliest.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://chatgptiseatingtheworld.com/2025/10/08/status-of-all-51-copyright-lawsuits-v-ai-oct-8-2025-no-more-decisions-on-fair-use-in-2025/" target="_blank" rel="noopener">Tracker — status of all 51 AI copyright suits</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.engadget.com/ai/new-york-times-reporter-files-lawsuit-against-ai-companies-161624268.html" target="_blank" rel="noopener">Engadget — NYT reporter sues AI companies</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Streaming</span>Spotify — Among the Lowest Payouts</h3>
+    <p>Spotify pays roughly $0.003–$0.005 per stream — about $3 per 1,000 streams in 2024, versus Apple Music's ~$6.20 and Amazon Music's ~$8.80. Since April 2024, tracks must hit 1,000 streams in 12 months to earn anything, a change one union estimated demonetized ~86% of the platform's catalogue. By one calculation it withheld ~$47 million from small independent artists, redirecting it to bigger ones. Spotify counters that it paid the industry a record $10 billion in 2024 and that "no streaming service pays per stream."</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://techcrunch.com/2025/03/11/spotify-says-its-payouts-are-getting-better-but-artists-still-disagree" target="_blank" rel="noopener">TechCrunch — payouts vs. artist reality</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://council.rollingstone.com/blog/spotify-under-fire-over-investments-and-artist-pay/" target="_blank" rel="noopener">Rolling Stone Council — the pay controversy</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.newschoolfreepress.com/2025/12/08/spotify-isnt-your-friend-how-the-platform-takes-your-money-while-artists-pay-the-price/" target="_blank" rel="noopener">New School Free Press — the 1,000-stream threshold</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Studies · 2025</span>The Vanishing Bottom Rung</h3>
+    <p>Multiple studies converge on the same signal: entry-level work is being absorbed first. Stanford's Digital Economy Lab found steep relative employment declines since late 2022 for workers aged 22–25 in AI-exposed jobs. A Harvard study of 62M+ LinkedIn profiles found early-career headcount at AI-adopting firms fell 7.7% over six quarters while senior staff kept growing. SignalFire found a 50% drop in new hires with under a year of experience. The fear: if firms stop hiring juniors, they eat their own seed corn — no pipeline to senior talent.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://fortune.com/2025/09/04/ai-entry-level-jobs-uncertainty-college-grads" target="_blank" rel="noopener">Fortune — Stanford &amp; Harvard findings</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.cnbc.com/2025/09/07/ai-entry-level-jobs-hiring-careers.html" target="_blank" rel="noopener">CNBC — SignalFire 50% decline</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://washingtonmonthly.com/2026/05/29/ai-entry-level-jobs-college-graduates/" target="_blank" rel="noopener">Washington Monthly — how AI broke the entry-level job</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Quote · verified</span>Peter Thiel — "Freedom and Democracy Are Not Compatible"</h3>
+    <p>In a 2009 essay for the libertarian Cato Institute ("The Education of a Libertarian"), the Palantir and PayPal co-founder wrote: <em>"I no longer believe that freedom and democracy are compatible."</em> In the same piece he lamented that expanding the franchise to women and the growth of welfare beneficiaries had made democratic politics inhospitable to his ideals, and pointed to seasteading, cyberspace and space as escapes from democratic oversight. The quote is real and frequently cited; what it implies about his agenda is the subject of legitimate debate.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.cato-unbound.org/2009/04/13/peter-thiel/education-libertarian/" target="_blank" rel="noopener">Cato Unbound — the original essay (primary source)</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://jacobin.com/2025/10/peter-thiel-would-be-philosopher-king-takes-on-democracy" target="_blank" rel="noopener">Jacobin — critical analysis</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Culture</span>"Brain Rot" — Named, Measured, Studied</h3>
+    <p>Oxford named "brain rot" its Word of the Year 2024 after a 230% surge in usage — defined as the deterioration of one's mental state from overconsuming trivial online content. The term (coined by Thoreau in 1854) now anchors peer-reviewed research: a 2025 rapid review across PubMed, Scopus and Web of Science examined links between low-quality digital content, doomscrolling and declines in attention, memory and critical thinking among young people. The flip side of algorithmic "slop": the displacement of human creativity by infinitely generable, low-value content.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.mdpi.com/2076-3425/15/3/283" target="_blank" rel="noopener">Brain Sciences — peer-reviewed review (2025)</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://multilingual.com/oxford-word-of-the-year-2024-is-brain-rot/" target="_blank" rel="noopener">Oxford WOTY 2024 — announcement</a></span>
+    </div>
+  </div>
+</section>
+
+<p class="pullquote">You fucks were bullied in school. This is how you pay us back now?</p>
+
+<section id="surveillance">
+  <div class="sec-head">
+    <span class="sec-num">10</span>
+    <h2>Surveillance &amp; Control</h2>
+  </div>
+  <p class="sec-sub">From harvesting teenagers' phones to robot dogs at the stadium gate — the machinery of watching, and who builds it.</p>
+
+  <div class="entry">
+    <h3><span class="tag">2013–2019</span>Meta / Facebook — Onavo &amp; the "Research" App</h3>
+    <p>Facebook bought the VPN app Onavo in 2013 for a reported $200M and marketed it as a tool to "protect" users — while it quietly logged which apps people used, how long, and what sites they visited. That data tipped Facebook off to WhatsApp's rise (which it then bought) and Snapchat's decline before the public knew. After Apple removed it, the same code lived on in a "Facebook Research" app that paid teenagers up to $20/month for root access to their phones. Apple revoked Facebook's developer certificate; Facebook shut Onavo down in 2019.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://techcrunch.com/2019/02/21/facebook-removes-onavo/" target="_blank" rel="noopener">TechCrunch — Facebook shuts down spyware VPN Onavo</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://gizmodo.com/facebook-is-shutting-down-its-sneaky-data-harvesting-v-1832814616" target="_blank" rel="noopener">Gizmodo — the data-harvesting VPN</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">$5B + $725M</span>Cambridge Analytica — 87 Million Profiles</h3>
+    <p>A personality-quiz app harvested data from up to 87 million Facebook profiles — most of them friends of the ~305,000 who took the quiz — via Facebook's Open Graph platform. Cambridge Analytica used it to psychologically profile and target US voters in the 2016 campaign. Whistleblower Christopher Wylie exposed it in 2018. The FTC fined Facebook $5 billion (its largest-ever penalty), the SEC added $100M for misleading investors, and Meta later paid $725M to settle a class action.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.ftc.gov/news-events/news/press-releases/2019/07/ftc-imposes-5-billion-penalty-sweeping-new-privacy-restrictions-facebook" target="_blank" rel="noopener">FTC — $5B penalty (primary source)</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.npr.org/2022/12/23/1145303268/facebook-meta-cambridge-analytica-privacy-settlement" target="_blank" rel="noopener">NPR — $725M class-action settlement</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">2013</span>The Snowden Revelations</h3>
+    <p>In 2013, NSA contractor Edward Snowden leaked classified documents revealing the scale of US and allied mass surveillance: the bulk collection of Americans' phone records, the PRISM program drawing data from major tech companies, and global interception programs run with partners like Britain's GCHQ. The disclosures, published by The Guardian and Washington Post, won a Pulitzer and forced the first real public reckoning — and modest legal reforms — over warrantless mass surveillance.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://en.wikipedia.org/wiki/Global_surveillance_disclosures_(2013%E2%80%93present)" target="_blank" rel="noopener">Overview &amp; document trail (with primary citations)</a></span>
+      <span class="src"><span class="label vid">▶ VIDEO</span><a href="https://www.youtube.com/watch?v=0hLjuVyIIrs" target="_blank" rel="noopener">The Guardian — Snowden's first interview (official)</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">$1B+ gov contracts</span>Palantir — The Everything Database</h3>
+    <p>Peter Thiel's Palantir integrates surveillance, financial, travel, biometric and criminal data into unified platforms (Gotham, Foundry) used by the CIA, Pentagon, ICE and police. In April 2025 ICE paid $30M for "ImmigrationOS" to give "near real-time visibility" tracking immigrants — folded into a sole-source ICM deal that has ballooned past $145M. Palantir's Maven warfare system, which autonomously detects and tracks humans from surveillance feeds, was boosted to $1.3B with 20,000+ military users. Reporting alleges work toward a cross-agency "master database" on Americans, which Palantir denies.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.aclu.org/news/privacy-technology/palantir-deportation-roundup" target="_blank" rel="noopener">ACLU — Palantir &amp; the deportation machine</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.americanimmigrationcouncil.org/blog/ice-immigrationos-palantir-ai-track-immigrants/" target="_blank" rel="noopener">American Immigration Council — ImmigrationOS</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://blog.palantir.com/correcting-the-record-response-to-the-eff-january-15-2026-report-on-palantir-4b3a12536cd2" target="_blank" rel="noopener">Palantir's own rebuttal (their side)</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Nuance · 2025–26</span>Anthropic, the Pentagon &amp; the Guardrails</h3>
+    <p>The popular shorthand — "Anthropic handed a military deal to OpenAI" — is not quite the record. Anthropic held a $200M Pentagon contract (Claude was the first frontier model in classified networks). When the Pentagon demanded "any lawful use" language — removing Anthropic's bans on using Claude for mass domestic surveillance and fully autonomous weapons — Anthropic refused. The administration then blacklisted it as a "supply chain risk" (a label previously reserved for foreign adversaries) and OpenAI took the classified-systems deal, with its own CEO calling the timing "opportunistic and sloppy." A federal judge later blocked the designation. Read the guardrail fight however you like — the refusal is the documented part.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.cnn.com/2026/05/01/tech/pentagon-ai-anthropic" target="_blank" rel="noopener">CNN — Pentagon, Anthropic &amp; the blacklist</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.npr.org/2026/02/27/nx-s1-5729118/trump-anthropic-pentagon-openai-ai-weapons-ban" target="_blank" rel="noopener">NPR — OpenAI deal after Anthropic ban</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">2026</span>Robot Dogs at the World Cup Gate</h3>
+    <p>For the 2026 FIFA World Cup, Boston Dynamics' Spot robots are being deployed at US venues including AT&amp;T Stadium in Dallas for perimeter security — roaming with 360° cameras, thermal sensors and AI anomaly detection, feeding live data to human teams. In Guadalupe, Mexico, a "K9-X" unit of four quadruped robots patrols BBVA Stadium. Critics note the same platforms are being militarized abroad, and that the NYPD's earlier "Digidog" was pulled after backlash over deploying it in a predominantly Black and Latino Bronx neighborhood. No federal US law governs police use of autonomous surveillance robots.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.wfaa.com/article/news/latest-news-ott/robot-dogs-drones-and-dozens-of-agencies-inside-the-massive-security-operation-for-the-fifa-world-cup-in-dfw/287-b5537983-c8ff-45aa-bde3-f160368ec639" target="_blank" rel="noopener">WFAA — Spot patrolling the Dallas World Cup</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.eweek.com/news/robot-dogs-first-responders-2026-world-cup/" target="_blank" rel="noopener">eWeek — robot dogs at BBVA Stadium</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Environmental</span>The Data Center Next Door</h3>
+    <p>The AI build-out is landing hard on host communities. A mid-sized data center can use as much water as a small town; some consume up to 5 million gallons a day, and a 2025 SourceMaterial/Guardian report found Google operating seven data centers in water-scarce US areas with six more planned. Cooling systems and generators run 24/7 — noise can exceed 105 dB, and neighbors report headaches, vertigo, nausea, sleep disturbance and a constant ringing. Diesel backup generators raise respiratory-illness risk, and these facilities disproportionately land near marginalized communities. In 2025, local opposition delayed or cancelled an estimated $156 billion in projects.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.eesi.org/articles/view/communities-are-raising-noise-pollution-concernsabout-data-centers" target="_blank" rel="noopener">EESI — noise pollution &amp; health complaints</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.consumerreports.org/data-centers/ai-data-centers-impact-on-electric-bills-water-and-more-a1040338678/" target="_blank" rel="noopener">Consumer Reports — bills, water &amp; community impact</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.environmentalhealthproject.org/post/the-dangers-of-data-centers" target="_blank" rel="noopener">Environmental Health Project — the dangers</a></span>
+    </div>
+  </div>
+</section>
+
+<p class="pullquote">Get out the guillotine. — No j/k. Violence is no solution. Speak openly. Be vulnerable.</p>
+
+<section id="underclass">
+  <div class="sec-head">
+    <span class="sec-num">11</span>
+    <h2>The Permanent Underclass</h2>
+  </div>
+  <p class="sec-sub">In the richest square miles on earth, the gap isn't a glitch — it's the design. Data from San José State University's annual audit.</p>
+
+  <div class="entry">
+    <h3><span class="tag">Pain Index · 2025</span>Nine Households, 15% of the Wealth</h3>
+    <p>San José State University's 2025 Silicon Valley Pain Index found that just nine households hold 15% of the region's wealth — controlling $683.2 billion, a $136 billion jump in a single year — while 0.1% of residents hold 71% of the wealth. At the same time, around 110,000 households reported nearly no assets. The valley's wealth divide has widened at twice the US rate over the past decade. This is the measured anatomy of a region splitting into a tiny ownership class and everyone else.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.sjsu.edu/hri/policy-projects/svpi/index.php" target="_blank" rel="noopener">SJSU Human Rights Institute — Pain Index (primary)</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.theguardian.com/us-news/2025/jul/nine-households-control-15-wealth-silicon-valley" target="_blank" rel="noopener">The Guardian — nine households, 15%</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Housing</span>Four Minimum-Wage Jobs to Rent a Two-Bedroom</h3>
+    <p>To afford a median two-bedroom in Santa Clara County you need about $125,280 a year — the equivalent of four full-time minimum-wage jobs. Renters in San José need $136,532, the highest in the nation, and no Silicon Valley city has raised its minimum wage in three years. Homelessness rose 8.2% in a single year. At De Anza College in Cupertino — a top community college — roughly 20% of students are homeless, some sleeping in the campus parking lot with faculty permission.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://medium.com/newsarticulated/silicon-valley-is-bracing-for-a-permanent-underclass-should-you-be-worried-too-71c7336a7d6c" target="_blank" rel="noopener">Bracing for a Permanent Underclass (compiles Pain Index data)</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.almanacnews.com/housing/2025/03/11/report-silicon-valley-in-flux-and-uncertainty-as-inequality-rises/" target="_blank" rel="noopener">Joint Venture SV Index — housing &amp; homelessness</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Race</span>33 Cents on the Dollar</h3>
+    <p>The same audit documents stark racial stratification: Hispanic workers in San José, Sunnyvale and Santa Clara earn about 33 cents for every dollar their white counterparts make. Only about 3% of Apple's R&amp;D workforce is Black. The prosperity the region exports to the world is not shared by the people who clean, cook, build and care for it.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.aol.com/news/nine-households-control-15-wealth-211740516.html" target="_blank" rel="noopener">Guardian/AOL — racial wage gap in the Pain Index</a></span>
+    </div>
+  </div>
+</section>
+
+<p class="pullquote">The people ask only for what is necessary. The powerful aspire to everything.</p>
+
+<section id="global">
+  <div class="sec-head">
+    <span class="sec-num">12</span>
+    <h2>The Global Picture</h2>
+  </div>
+  <p class="sec-sub">War, courts, conflict minerals and the long shadow of empire. Here especially, the line between what a court has ruled and what remains alleged matters — so it is drawn carefully.</p>
+
+  <div class="entry">
+    <h3><span class="tag">ICJ · what was actually ruled</span>South Africa v. Israel — "Plausible" Genocide Risk</h3>
+    <p>In January 2024 the International Court of Justice found South Africa's genocide claim against Israel <em>plausible</em> enough to order provisional measures: Israel must prevent genocidal acts, prevent and punish incitement, and allow humanitarian aid. The Court issued further measures as the Rafah offensive escalated. Crucially, the ICJ has <em>not</em> ruled on the merits — that is, it has not determined that genocide has occurred; that case will take years. The Court also did not order a ceasefire. Precision here matters: a plausibility finding for provisional measures is a legal threshold, not a verdict.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.icj-cij.org/case/192" target="_blank" rel="noopener">ICJ — official case page &amp; orders (primary)</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.middleeasteye.net/explainers/israels-genocide-gaza-whatever-happened-south-africas-case-icj" target="_blank" rel="noopener">Explainer — the provisional measures</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">ICC · arrest warrants issued</span>Warrants for Netanyahu, Gallant — and Hamas Leaders</h3>
+    <p>In November 2024 the International Criminal Court issued arrest warrants for Israeli PM Benjamin Netanyahu and then-Defence Minister Yoav Gallant on charges of crimes against humanity (including murder and persecution) and the war crime of starvation as a method of warfare. The same day it issued warrants for Hamas leaders over the October 7 atrocities. A warrant is a finding that there are reasonable grounds to believe crimes were committed — not a conviction. The ICC has no police force, so enforcement depends on member states.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.icc-cpi.int/news/situation-state-palestine-icc-pre-trial-chamber-i-rejects-state-israels-challenges" target="_blank" rel="noopener">ICC — official statements (primary)</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.uwa.edu.au/news/article/2025/october/why-are-the-icj-and-icc-cases-on-israel-and-gaza-taking-so-long" target="_blank" rel="noopener">Why the ICJ &amp; ICC cases take so long</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">UN reports</span>Conflict Minerals &amp; the M23 War in Congo</h3>
+    <p>Decades of war in eastern DRC are financed in part by minerals. UN experts and rights groups say Rwanda backs the M23 armed group, which in 2024 seized the Rubaya mine — roughly 15% of the world's coltan — earning an estimated $800,000/month in taxes. The DRC and Rwanda together supply about half the world's coltan, the ore behind the tantalum in phones and laptops. A 2025 UN report named a Rwandan exporter as buying smuggled Congolese minerals; a Global Witness investigation traced conflict coltan toward EU commodity trader Traxys (which denies its Rwandan coltan came from Rubaya). The chain runs from atrocity to the device in your hand.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://globalwitness.org/en/campaigns/transition-minerals/new-investigation-suggests-eu-trader-traxys-buys-conflict-minerals-from-drc/" target="_blank" rel="noopener">Global Witness — conflict coltan investigation</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.genocidewatch.com/single-post/special-report-conflict-minerals-in-the-drc" target="_blank" rel="noopener">Genocide Watch — conflict minerals report</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://www.theafricareport.com/375627/what-role-do-minerals-and-tech-firms-play-in-the-drc-conflict/" target="_blank" rel="noopener">Africa Report — minerals &amp; the conflict (nuance)</a></span>
+    </div>
+  </div>
+
+  <div class="entry">
+    <h3><span class="tag">Debate · structural</span>The CFA Franc &amp; "Modern Colonisation"</h3>
+    <p>Fourteen African nations still use the CFA franc, a currency created by France in 1945 and historically tied to the French Treasury, which members were long required to deposit reserves with. Academic critics (in <em>Third World Quarterly</em> and elsewhere) call it "the most blatant example of functioning neocolonialism in Africa today" — a device sustaining dependency and channeling raw materials (uranium for French nuclear power, manganese, phosphates) on favourable terms. Defenders, including an LSE analysis, argue the reserve mechanism is more symbolic than economically decisive and that recent reforms address the worst of it. The debate over trade-and-currency as soft empire is live and serious — presented here as a debate, with both sides linked.</p>
+    <div class="sources">
+      <span class="src"><span class="label">SRC</span><a href="https://www.tandfonline.com/doi/abs/10.1080/01436597.2019.1585183" target="_blank" rel="noopener">Third World Quarterly — "France à fric" (critique)</a></span>
+      <span class="src"><span class="label">SRC</span><a href="https://blogs.lse.ac.uk/africaatlse/2020/03/19/cfa-franc-reforms-monetary-policy-symbolic-colonialism/" target="_blank" rel="noopener">LSE — the reforms are more symbolic (counter-view)</a></span>
+    </div>
+  </div>
+</section>
+
+<p class="pullquote">They want to invade and dominate everything. It's time to build the guillotines.</p>
+
+<section id="sources">
+  <div class="sec-head">
+    <span class="sec-num">13</span>
+    <h2>How To Use This</h2>
+  </div>
+  <p class="sec-sub">A ledger is only as good as its sources.</p>
+  <div class="entry">
+    <p>Every entry above links to a court filing, a government report, an investigative outlet, or a primary document archive. Don't take this page's word for anything — follow the links and read the originals. Where a claim rests on a lawsuit, that means it is an allegation being tested in court, not a proven fact; where it rests on a guilty plea, settlement admission, or NLRB ruling, it has been adjudicated. The distinction matters. Use it.</p>
+    <p><strong style="font-family:'JetBrains Mono',monospace;font-size:14px;">For deeper digging:</strong></p>
+    <div class="sources">
+      <span class="src"><span class="label">DB</span><a href="https://violationtracker.goodjobsfirst.org/" target="_blank" rel="noopener">Violation Tracker — searchable corporate penalty database</a></span>
+      <span class="src"><span class="label">DB</span><a href="https://www.business-humanrights.org/" target="_blank" rel="noopener">Business &amp; Human Rights Resource Centre</a></span>
+      <span class="src"><span class="label">DB</span><a href="https://www.icij.org/" target="_blank" rel="noopener">International Consortium of Investigative Journalists</a></span>
+      <span class="src"><span class="label">DB</span><a href="https://www.climatefiles.com/" target="_blank" rel="noopener">Climate Files — fossil fuel document archive</a></span>
+      <span class="src"><span class="label">DB</span><a href="https://www.nlrb.gov/" target="_blank" rel="noopener">National Labor Relations Board — case search</a></span>
+      <span class="src"><span class="label">DB</span><a href="https://lobbypedia.de/" target="_blank" rel="noopener">Lobbypedia (LobbyControl) — deutsche Lobby-Datenbank</a></span>
+      <span class="src"><span class="label">DB</span><a href="https://correctiv.org/" target="_blank" rel="noopener">CORRECTIV — gemeinnütziges Recherchezentrum</a></span>
+      <span class="src"><span class="label">DB</span><a href="https://www.finanzwende.de/" target="_blank" rel="noopener">Finanzwende — Finanzmarkt-Watchdog</a></span>
+      <span class="src"><span class="label">DB</span><a href="https://globalwitness.org/" target="_blank" rel="noopener">Global Witness — resource &amp; conflict investigations</a></span>
+      <span class="src"><span class="label">DB</span><a href="https://www.icj-cij.org/" target="_blank" rel="noopener">International Court of Justice — official rulings</a></span>
+      <span class="src"><span class="label">DB</span><a href="https://www.icc-cpi.int/" target="_blank" rel="noopener">International Criminal Court — cases &amp; warrants</a></span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>ON THE RECORD</strong> — an open ledger of documented corporate &amp; political harm.<br>
+  Compiled from public court filings, government reports and investigative journalism.
+  <div class="disclaim">
+    This page documents wrongdoing and points to evidence. It is a tool for accountability through information, organizing and the law — not a call for harm against any person. The people speak openly, in daylight, with the record in hand. That is the point.
+  </div>
+  Verify everything. Cite your sources. Share freely.
+</footer>
+
+</div>
+</body>
+</html>

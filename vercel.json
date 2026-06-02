@@ -1,0 +1,5 @@
+{
+  "buildCommand": "npx @11ty/eleventy",
+  "outputDirectory": "_site",
+  "framework": null
+}

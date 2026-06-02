@@ -1,0 +1,150 @@
+---
+layout: base.njk
+---
+<header>
+  <div class="kicker">A documented ledger · with primary sources</div>
+  <h1>On The<br>Record</h1>
+  <p class="standfirst">{{ site.tagline }}</p>
+  <div class="meta">
+    Every claim links to a court filing, government report, or primary investigation.<br>
+    No anonymous allegations. Read the sources. Verify everything.
+  </div>
+</header>
+
+<div class="filters" id="filters">
+  <div class="filter-group">
+    <span class="filter-label">Topic</span>
+    {% for s in site.sections %}
+    <button class="chip" data-filter="section" data-value="{{ s.key }}">{{ s.label }}</button>
+    {% endfor %}
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">Region</span>
+    {% for r in site.regions %}
+    <button class="chip" data-filter="region" data-value="{{ r.key }}">{{ r.label }}</button>
+    {% endfor %}
+  </div>
+  <div class="filter-group">
+    <span class="filter-label">Status</span>
+    {% for st in site.statuses %}
+    <button class="chip" data-filter="status" data-value="{{ st.key }}">{{ st.label }}</button>
+    {% endfor %}
+  </div>
+  <div class="filter-meta">
+    <span id="result-count"></span> · <a href="#" id="clear-filters">clear all</a>
+  </div>
+</div>
+
+{% for s in site.sections %}
+<section id="{{ s.key }}" data-section-block="{{ s.key }}">
+  <div class="sec-head">
+    <span class="sec-num">{{ s.num }}</span>
+    <h2>{{ s.label }}</h2>
+  </div>
+  {%- set count = 0 -%}
+  {% for entry in collections.entries %}
+    {%- if entry.data.section == s.key -%}
+      {%- set count = count + 1 -%}
+      <article class="entry"
+        data-section="{{ entry.data.section }}"
+        data-region="{{ entry.data.region }}"
+        data-status="{{ entry.data.status }}"
+        data-year="{{ entry.data.date | year }}">
+        <h3>
+          {% if entry.data.tag %}<span class="tag">{{ entry.data.tag }}</span>{% endif %}
+          {{ entry.data.title }}
+        </h3>
+        <div class="body">{{ entry.templateContent | safe }}</div>
+        {% if entry.data.sources and entry.data.sources.length %}
+        <div class="sources">
+          {% for src in entry.data.sources %}
+          <span class="src"><span class="label{% if src.video %} vid{% endif %}">{% if src.video %}▶ VIDEO{% else %}SRC{% endif %}</span><a href="{{ src.url }}" target="_blank" rel="noopener">{{ src.label }}</a></span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </article>
+    {%- endif -%}
+  {% endfor %}
+  {% if count == 0 %}<p class="sec-empty">No entries yet in this section.</p>{% endif %}
+</section>
+{% if site.pullquotes[s.key] %}
+<p class="pullquote">{{ site.pullquotes[s.key] }}</p>
+{% endif %}
+{% endfor %}
+
+<section id="sources">
+  <div class="sec-head">
+    <span class="sec-num">13</span>
+    <h2>How To Use This</h2>
+  </div>
+  <p class="sec-sub">A ledger is only as good as its sources.</p>
+  <div class="entry">
+    <p>Every entry above links to a court filing, a government report, an investigative outlet, or a primary document archive. Don't take this page's word for anything — follow the links and read the originals. Where a claim rests on a lawsuit, that means it is an allegation being tested in court, not a proven fact; where it rests on a guilty plea, settlement admission, or NLRB ruling, it has been adjudicated. The distinction matters. Use it.</p>
+    <p><strong style="font-family:'JetBrains Mono',monospace;font-size:14px;">For deeper digging:</strong></p>
+    <div class="sources">
+      {% for link in site.deepDig %}
+      <span class="src"><span class="label">{{ link.label }}</span><a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.name }}</a></span>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="sec-head">
+    <span class="sec-num">+</span>
+    <h2>Suggest an Entry</h2>
+  </div>
+  <p class="sec-sub">Know a documented case that belongs here? Send it — anonymously if you like. Include a primary source if you have one.</p>
+
+  {% if site.web3formsKey %}
+  <form id="suggest-form" action="https://api.web3forms.com/submit" method="POST">
+    <input type="hidden" name="access_key" value="{{ site.web3formsKey }}">
+    <input type="hidden" name="subject" value="On The Record — new entry suggestion">
+    <input type="hidden" name="from_name" value="On The Record site">
+    <!-- Honeypot: hidden from humans, bots fill it, Web3Forms drops it. -->
+    <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+
+    <label for="topic">Topic / who</label>
+    <input type="text" id="topic" name="topic" placeholder="e.g. Company X, Politician Y">
+
+    <label for="message">What happened &amp; why it belongs</label>
+    <textarea id="message" name="message" required placeholder="Describe the case…"></textarea>
+
+    <label for="source">Primary source link (optional)</label>
+    <input type="url" id="source" name="source" placeholder="https://…">
+
+    <label for="contact_back">Contact back (optional — leave blank to stay anonymous)</label>
+    <input type="email" id="contact_back" name="contact_back" placeholder="you@example.com">
+
+    {% if site.turnstileSiteKey %}
+    <div class="cf-turnstile" data-sitekey="{{ site.turnstileSiteKey }}" style="margin-top:16px;"></div>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    {% endif %}
+
+    <button type="submit" id="submit-btn">Send Suggestion</button>
+    <div id="form-status"></div>
+  </form>
+  <p class="form-note">
+    Submissions go to the maintainer's inbox via Web3Forms. No tracking, no account required.
+    A hidden anti-bot field protects against spam.
+  </p>
+  {% else %}
+  <p class="form-note">
+    The suggestion form isn't active yet. To enable it: get a free key at web3forms.com
+    (just enter an email — no account), paste it into <code>src/_data/site.js</code> as
+    <code>web3formsKey</code>, and rebuild. Until then, suggestions can be sent by whatever
+    channel the maintainer prefers.
+  </p>
+  {% endif %}
+</section>
+
+<footer>
+  <strong>{{ site.title | upper }}</strong> — an open ledger of documented corporate &amp; political harm.<br>
+  Compiled from public court filings, government reports and investigative journalism.
+  <div class="disclaim">
+    This page documents wrongdoing and points to evidence. It is a tool for accountability through
+    information, organizing and the law — not a call for harm against any person. The people speak
+    openly, in daylight, with the record in hand. That is the point.
+  </div>
+  Verify everything. Cite your sources. Share freely.
+</footer>

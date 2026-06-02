@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ site.title }} — A Documented Ledger</title>
+<meta name="description" content="A documented ledger of corporate and political harm, with primary sources.">
+<style>
+  /* Self-hosted fonts — no third-party requests, no visitor IP leakage.
+     Drop the .woff2 files into assets/fonts/ (see README). Until then this
+     falls back to system mono/serif gracefully. */
+  @font-face {
+    font-family: 'JetBrains Mono'; font-weight: 400 800; font-display: swap;
+    src: url('/assets/fonts/jetbrains-mono.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Newsreader'; font-weight: 400 500; font-display: swap;
+    src: url('/assets/fonts/newsreader.woff2') format('woff2');
+  }
+</style>
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+<div class="wrap">
+{{ content | safe }}
+</div>
+<script src="/assets/filter.js" defer></script>
+</body>
+</html>
