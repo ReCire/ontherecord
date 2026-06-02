@@ -8,6 +8,7 @@ tag: Debate · structural
 sources:
   - label: openDemocracy — something fishy about the Great Reset / stakeholder capitalism
     url: https://www.opendemocracy.net/en/oureconomy/conspiracy-theories-aside-there-something-fishy-about-great-reset/
+    archive_url: https://web.archive.org/web/20260401170240/https://www.opendemocracy.net/en/oureconomy/conspiracy-theories-aside-there-something-fishy-about-great-reset/
   - label: Deseret News — the Davos Manifesto 2020 & 'better kind of capitalism'
     url: https://www.deseret.com/indepth/2021/1/2/22203108/great-reset-world-economic-forum-politics-conservative-conspiracy-parler-america-first/
     archive_url: https://web.archive.org/web/20260416121034/https://www.deseret.com/indepth/2021/1/2/22203108/great-reset-world-economic-forum-politics-conservative-conspiracy-parler-america-first/

@@ -8,6 +8,7 @@ tag: Study · 2024
 sources:
   - label: Bertelsmann Stiftung — 'Disconcerted Public' study (primary)
     url: https://www.bertelsmann-stiftung.de/en/topics/latest-news/2024/february/vast-majority-views-disinformation-as-a-threat-to-democracy-and-social-cohesion
+    archive_url: https://web.archive.org/web/20260602215247/https://www.bertelsmann-stiftung.de/en/topics/latest-news/2024/february/vast-majority-views-disinformation-as-a-threat-to-democracy-and-social-cohesion
   - label: EU DisinfoLab — Germany disinformation landscape
     url: https://www.disinfo.eu/wp-content/uploads/2023/03/20230224_GER_DisinfoFS_V2.pdf
     archive_url: https://web.archive.org/web/20260602185239/https://www.disinfo.eu/wp-content/uploads/2023/03/20230224_GER_DisinfoFS_V2.pdf

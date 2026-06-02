@@ -11,8 +11,10 @@ sources:
     archive_url: https://web.archive.org/web/20260531175823/https://www.icij.org/investigations/pandora-papers/
   - label: ICIJ — Hidden riches of world leaders
     url: https://www.icij.org/investigations/pandora-papers/global-investigation-tax-havens-offshore/
+    archive_url: https://web.archive.org/web/20260522212852/https://www.icij.org/investigations/pandora-papers/global-investigation-tax-havens-offshore/
   - label: Washington Post — Secret offshore system
     url: https://www.washingtonpost.com/business/interactive/2021/pandora-papers-offshore-finance/
+    archive_url: https://web.archive.org/web/20250725041017/https://www.washingtonpost.com/business/interactive/2021/pandora-papers-offshore-finance/
   - label: ICIJ — Pandora Papers explained (official channel)
     url: https://www.youtube.com/watch?v=tFTPI-Win-Q
     video: true

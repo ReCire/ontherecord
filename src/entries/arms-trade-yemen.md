@@ -11,6 +11,7 @@ sources:
     archive_url: https://web.archive.org/web/20260311000750/https://www.hrw.org/news/2023/01/31/uk-court-rule-arms-sales-saudi-arabia
   - label: Oxfam via Defense News — US/UK arms killed civilians in Yemen
     url: https://www.defensenews.com/global/mideast-africa/2023/01/11/arms-supplied-by-us-uk-killed-civilians-in-yemen-report-finds/
+    archive_url: https://web.archive.org/web/20260602214129/https://www.defensenews.com/global/mideast-africa/2023/01/11/arms-supplied-by-us-uk-killed-civilians-in-yemen-report-finds/
   - label: Amnesty International — arms sales dwarf aid spending
     url: https://amnesty.org.nz/yemen-multibillion-dollar-arms-sales-usa-and-uk-reveal-shameful-contradiction-aid-efforts/
     archive_url: https://web.archive.org/web/20260211032817/https://amnesty.org.nz/yemen-multibillion-dollar-arms-sales-usa-and-uk-reveal-shameful-contradiction-aid-efforts/

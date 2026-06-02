@@ -11,6 +11,7 @@ sources:
     archive_url: https://web.archive.org/web/20260403122357/https://edition.cnn.com/2026/03/30/politics/prediction-markets-justice-department
   - label: Fortune — DOJ charges soldier who bet on the Maduro raid
     url: https://fortune.com/2026/04/26/prediction-markets-insider-trading-illegal-kalshi-polymarket-robin-hanson-economist/
+    archive_url: https://web.archive.org/web/20260602220134/https://fortune.com/2026/04/26/prediction-markets-insider-trading-illegal-kalshi-polymarket-robin-hanson-economist/
   - label: NPR — campaign staffers say they make 'thousands' betting on their own candidates
     url: https://www.npr.org/2026/05/07/nx-s1-5795891/prediction-markets-kalshi-polymarket-campaigns
     archive_url: https://web.archive.org/web/20260602040406/https://www.npr.org/2026/05/07/nx-s1-5795891/prediction-markets-kalshi-polymarket-campaigns

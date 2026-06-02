@@ -8,6 +8,7 @@ tag: Studies · 2025
 sources:
   - label: Fortune — Stanford & Harvard findings
     url: https://fortune.com/2025/09/04/ai-entry-level-jobs-uncertainty-college-grads
+    archive_url: https://web.archive.org/web/20260602192144/https://fortune.com/2025/09/04/ai-entry-level-jobs-uncertainty-college-grads/
   - label: CNBC — SignalFire 50% decline
     url: https://www.cnbc.com/2025/09/07/ai-entry-level-jobs-hiring-careers.html
   - label: Washington Monthly — how AI broke the entry-level job

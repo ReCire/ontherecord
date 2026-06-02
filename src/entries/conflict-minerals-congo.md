@@ -8,6 +8,7 @@ tag: UN reports
 sources:
   - label: Global Witness — conflict coltan investigation
     url: https://globalwitness.org/en/campaigns/transition-minerals/new-investigation-suggests-eu-trader-traxys-buys-conflict-minerals-from-drc/
+    archive_url: https://web.archive.org/web/20260602184154/https://globalwitness.org/en/campaigns/transition-minerals/new-investigation-suggests-eu-trader-traxys-buys-conflict-minerals-from-drc/
   - label: Genocide Watch — conflict minerals report
     url: https://www.genocidewatch.com/single-post/special-report-conflict-minerals-in-the-drc
   - label: Africa Report — minerals & the conflict (nuance)

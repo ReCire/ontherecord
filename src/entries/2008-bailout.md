@@ -11,6 +11,7 @@ sources:
     archive_url: https://web.archive.org/web/20260520173746/https://www.propublica.org/article/the-bailout-was-11-years-ago-were-still-tracking-every-penny
   - label: Center for Public Integrity — who is to blame
     url: https://publicintegrity.org/inequality-poverty-opportunity/the-roots-of-the-financial-crisis-who-is-to-blame/
+    archive_url: https://web.archive.org/web/20260602183330/https://publicintegrity.org/inequality-poverty-opportunity/the-roots-of-the-financial-crisis-who-is-to-blame/
   - label: Retro Report — housing bubble to bailout
     url: https://retroreport.org/video/the-2008-financial-crisis-explained-housing-bubble-to-bailout/
     archive_url: https://web.archive.org/web/20260111031134/https://retroreport.org/video/the-2008-financial-crisis-explained-housing-bubble-to-bailout/

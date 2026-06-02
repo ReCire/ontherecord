@@ -8,6 +8,7 @@ tag: Untreue · Haft
 sources:
   - label: AP/Fox — Middelhoff verurteilt (engl.)
     url: https://www.foxnews.com/world/prominent-german-exec-thomas-middelhoff-convicted-over-travel-costs-at-troubled-store-firm
+    archive_url: https://web.archive.org/web/20260602190418/https://www.foxnews.com/world/prominent-german-exec-thomas-middelhoff-convicted-over-travel-costs-at-troubled-store-firm
   - label: LTO — Arcandor-Insolvenzverfahren
     url: https://www.lto.de/recht/kanzleien-unternehmen/k/arcandor-insolvenz-thomas-middelhoff-anstiftung-untreue-landgericht-essen
     archive_url: https://web.archive.org/web/20250324025307/https://www.lto.de/recht/kanzleien-unternehmen/k/arcandor-insolvenz-thomas-middelhoff-anstiftung-untreue-landgericht-essen
