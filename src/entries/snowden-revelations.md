@@ -8,6 +8,7 @@ tag: '2013'
 sources:
   - label: Overview & document trail (with primary citations)
     url: https://en.wikipedia.org/wiki/Global_surveillance_disclosures_(2013%E2%80%93present)
+    archive_url: https://web.archive.org/web/20260601141846/https://en.wikipedia.org/wiki/Global_surveillance_disclosures_(2013%E2%80%93present)
   - label: The Guardian — Snowden's first interview (official)
     url: https://www.youtube.com/watch?v=0hLjuVyIIrs
     video: true

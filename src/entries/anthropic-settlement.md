@@ -8,6 +8,7 @@ tag: Settlement · $1.5B
 sources:
   - label: Norton Rose Fulbright — AI copyright cases update
     url: https://www.nortonrosefulbright.com/en/knowledge/publications/ce8eaa5f/ai-in-litigation-series-an-update-on-ai-copyright-cases-in-2026
+    archive_url: https://web.archive.org/web/20260418011738/https://www.nortonrosefulbright.com/en/knowledge/publications/ce8eaa5f/ai-in-litigation-series-an-update-on-ai-copyright-cases-in-2026
   - label: TechCrunch — new authors' suit & the ruling explained
     url: https://techcrunch.com/2025/12/23/john-carreyrou-and-other-authors-bring-new-lawsuit-against-six-major-ai-companies/
     archive_url: https://web.archive.org/web/20260215032707/https://techcrunch.com/2025/12/23/john-carreyrou-and-other-authors-bring-new-lawsuit-against-six-major-ai-companies/

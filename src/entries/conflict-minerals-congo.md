@@ -11,6 +11,7 @@ sources:
     archive_url: https://web.archive.org/web/20260602184154/https://globalwitness.org/en/campaigns/transition-minerals/new-investigation-suggests-eu-trader-traxys-buys-conflict-minerals-from-drc/
   - label: Genocide Watch — conflict minerals report
     url: https://www.genocidewatch.com/single-post/special-report-conflict-minerals-in-the-drc
+    archive_url: https://web.archive.org/web/20260602214423/https://www.genocidewatch.com/single-post/special-report-conflict-minerals-in-the-drc
   - label: Africa Report — minerals & the conflict (nuance)
     url: https://www.theafricareport.com/375627/what-role-do-minerals-and-tech-firms-play-in-the-drc-conflict/
     archive_url: https://web.archive.org/web/20250805102700/https://www.theafricareport.com/375627/what-role-do-minerals-and-tech-firms-play-in-the-drc-conflict/

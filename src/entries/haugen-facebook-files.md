@@ -8,6 +8,7 @@ tag: Whistleblower · 2021
 sources:
   - label: NPR — whistleblower tells Congress Facebook harms kids
     url: https://www.npr.org/2021/10/05/1043207218/whistleblower-to-congress-facebook-products-harm-children-and-weaken-democracy
+    archive_url: https://web.archive.org/web/20260602215518/https://www.npr.org/2021/10/05/1043207218/whistleblower-to-congress-facebook-products-harm-children-and-weaken-democracy
   - label: MIT Technology Review — why Haugen says the algorithms are dangerous
     url: https://www.technologyreview.com/2021/10/05/1036519/facebook-whistleblower-frances-haugen-algorithms/
     archive_url: https://web.archive.org/web/20260602185529/https://www.technologyreview.com/2021/10/05/1036519/facebook-whistleblower-frances-haugen-algorithms/

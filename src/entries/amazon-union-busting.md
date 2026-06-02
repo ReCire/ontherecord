@@ -8,6 +8,7 @@ tag: NLRB Record
 sources:
   - label: EPI — Corporate Effort to Kneecap the NLRB
     url: https://www.epi.org/blog/whats-behind-the-corporate-effort-to-kneecap-the-national-labor-relations-board-spacex-amazon-trader-joes-and-starbucks-are-trying-to-have-the-nlrb-declared-unconstitutional/
+    archive_url: https://web.archive.org/web/20260602183349/https://www.epi.org/blog/whats-behind-the-corporate-effort-to-kneecap-the-national-labor-relations-board-spacex-amazon-trader-joes-and-starbucks-are-trying-to-have-the-nlrb-declared-unconstitutional/
   - label: Bloomberg Law — Allegations Explained
     url: https://news.bloomberglaw.com/white-collar-and-criminal-law/amazon-starbucks-labor-law-allegations-union-busting-explained
     archive_url: https://web.archive.org/web/20250723003252/https://news.bloomberglaw.com/white-collar-and-criminal-law/amazon-starbucks-labor-law-allegations-union-busting-explained

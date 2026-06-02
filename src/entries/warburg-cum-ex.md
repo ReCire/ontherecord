@@ -8,6 +8,7 @@ tag: Urteil · rechtskräftig
 sources:
   - label: Handelsblatt — BGH bestätigt Urteile
     url: https://www.handelsblatt.com/finanzen/banken-versicherungen/cum-ex/cum-ex-skandal-bundesgerichtshof-bestaetigt-urteil-gegen-zwei-warburg-banker/100147177.html
+    archive_url: https://web.archive.org/web/20260602192135/https://www.handelsblatt.com/finanzen/banken-versicherungen/cum-ex/cum-ex-skandal-bundesgerichtshof-bestaetigt-urteil-gegen-zwei-warburg-banker/100147177.html
   - label: LTO — BFH zu 155-Mio-Rückforderung
     url: https://www.lto.de/recht/nachrichten/n/viiib1724-bfh-warburg-cum-ex-steuer-rueckzahlung
     archive_url: https://web.archive.org/web/20260120050637/https://www.lto.de/recht/nachrichten/n/viiib1724-bfh-warburg-cum-ex-steuer-rueckzahlung

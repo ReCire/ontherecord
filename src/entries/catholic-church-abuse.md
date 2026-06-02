@@ -8,6 +8,7 @@ tag: Investigations · $5B+ paid
 sources:
   - label: Pennsylvania Attorney General — grand jury report (primary)
     url: https://www.attorneygeneral.gov/report/
+    archive_url: https://web.archive.org/web/20260602214349/https://www.attorneygeneral.gov/report/
   - label: National Catholic Reporter — over $5 billion spent on abuse allegations
     url: https://www.ncronline.org/news/more-5-billion-spent-catholic-sexual-abuse-allegations-new-report-finds
     archive_url: https://web.archive.org/web/20260428120557/https://www.ncronline.org/news/more-5-billion-spent-catholic-sexual-abuse-allegations-new-report-finds

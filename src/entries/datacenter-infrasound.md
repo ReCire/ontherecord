@@ -11,6 +11,7 @@ sources:
     archive_url: https://web.archive.org/web/20260516004050/https://www.tomshardware.com/tech-industry/artificial-intelligence/data-centers-face-increasing-infrasound-complaints-from-neighboring-communities-sounds-do-not-register-on-decibel-meters-but-irritate-local-citizens
   - label: CDC/NIOSH — case study on low-frequency noise & health symptoms (primary)
     url: https://stacks.cdc.gov/view/cdc/207218
+    archive_url: https://web.archive.org/web/20260602214702/https://stacks.cdc.gov/view/cdc/207218
   - label: Nocebo hypothesis study — wind turbines & health complaints (skeptical view)
     url: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4227478/
     archive_url: https://web.archive.org/web/20260602184417/https://pmc.ncbi.nlm.nih.gov/articles/PMC4227478/
