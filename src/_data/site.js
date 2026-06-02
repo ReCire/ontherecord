@@ -32,6 +32,7 @@ module.exports = {
     { key: "wins", num: "14", label: "Accountability & Wins" },
     { key: "empire", num: "15", label: "Empire & Oil" },
     { key: "spectacle", num: "16", label: "Sport & Spectacle" },
+    { key: "atrocity", num: "17", label: "Genocide & Atrocity" },
   ],
 
   // Regions for the region filter.
@@ -56,6 +57,7 @@ module.exports = {
     { key: "context", label: "Context / debate" },
     { key: "law", label: "Law / policy" },
     { key: "win", label: "Accountability win" },
+    { key: "finding", label: "Official finding" },
   ],
 
   // Pullquotes displayed between sections. Key = the section they appear AFTER.
