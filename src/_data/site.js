@@ -83,7 +83,7 @@ module.exports = {
     global: "They want to invade and dominate everything. It's time to build the guillotines.",
     machine: "You fucks were bullied in school. This is how you pay us back now?",
     surveillance: "Get out the guillotine. — No j/k. Violence is no solution. Speak openly. Be vulnerable.",
-    wins: "The arc of the moral universe is long, but it bends toward justice. — Sometimes it bends because people make it bend.",
+    wins: "Speak the thing you are afraid to say. Find the others. They are all there, waiting for someone to go first.",
   },
 
   // One-line italic intro shown under each section heading. Keyed by section key.
