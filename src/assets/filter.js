@@ -59,7 +59,7 @@
       // Strip the tag text from the title text so it doesn't double-score
       var titleClean = titleRaw.replace(tagRaw, "").trim();
 
-      return {
+      var rec = {
         el:           el,
         title:        titleClean.toLowerCase(),
         titleRaw:     titleClean,         // for highlighting (preserves case)
@@ -69,53 +69,60 @@
         body:         bodyRaw.toLowerCase(),
         originalIndex: 0,                 // set after map
       };
+
+      // Capture pristine HTML at build time (not lazily)
+      var h3 = el.querySelector("h3");
+      rec._origH3HTML = h3 ? h3.innerHTML : "";
+      var body = el.querySelector(".body");
+      rec._origBodyHTML = body ? body.innerHTML : "";
+
+      return rec;
     });
   }
 
   function buildIndexFromData(searchData) {
-    // Map emitted index data to DOM elements
+    // Map every DOM entry by its unique slug.
     var elBySlug = {};
     entryEls.forEach(function (el) {
-      var section = el.getAttribute("data-section");
-      var year = el.getAttribute("data-year");
-      // Try to match by section + year + title (fallback)
-      elBySlug[section + "-" + year] = el;
+      var slug = el.getAttribute("data-slug");
+      if (slug) elBySlug[slug] = el;
     });
 
-    return searchData.map(function (item, i) {
-      var el = entryEls[i]; // Fallback: assume DOM order matches index order
-      // Try to find matching element by data attributes
-      for (var j = 0; j < entryEls.length; j++) {
-        var candidate = entryEls[j];
-        if (candidate.getAttribute("data-section") === item.sectionKey &&
-            candidate.getAttribute("data-year") == item.year) {
-          el = candidate;
-          break;
-        }
+    var recs = [];
+    searchData.forEach(function (item) {
+      var el = elBySlug[item.slug];
+      if (!el) {
+        // No DOM element for this slug — skip rather than mis-pair.
+        // (Can happen if data and DOM drift; fail safe, don't guess.)
+        console.warn("[search] no DOM element for slug:", item.slug);
+        return;
       }
-
       var titleClean = item.title;
       var tagRaw = item.tag || "";
-      // Strip tag from title if present
-      if (tagRaw && titleClean.includes(tagRaw)) {
+      if (tagRaw && titleClean.indexOf(tagRaw) !== -1) {
         titleClean = titleClean.replace(tagRaw, "").trim();
       }
-
-      return {
-        el:           el,
-        title:        titleClean.toLowerCase(),
-        titleRaw:     titleClean,
-        tag:          tagRaw.toLowerCase(),
-        sectionLabel: item.sectionLabel.toLowerCase(),
-        sectionLabelRaw: item.sectionLabel,
-        body:         item.text.toLowerCase(),
-        originalIndex: i,
+      var rec = {
+        el:              el,
+        title:           titleClean.toLowerCase(),
+        titleRaw:        titleClean,
+        tag:             tagRaw.toLowerCase(),
+        sectionLabel:    (item.sectionLabel || "").toLowerCase(),
+        sectionLabelRaw: item.sectionLabel || "",
+        body:            (item.text || "").toLowerCase(),
+        originalIndex:   0,
       };
+      var h3 = el.querySelector("h3");
+      rec._origH3HTML = h3 ? h3.innerHTML : "";
+      var body = el.querySelector(".body");
+      rec._origBodyHTML = body ? body.innerHTML : "";
+      recs.push(rec);
     });
+    return recs;
   }
 
   // Try to use emitted index first
-  if (window.__SEARCH_INDEX__) {
+  if (window.__SEARCH_INDEX__ && window.__SEARCH_INDEX__.length) {
     index = buildIndexFromData(window.__SEARCH_INDEX__);
   } else {
     // Fetch search-index.json asynchronously, fall back to DOM immediately
@@ -136,6 +143,17 @@
         // DOM fallback already in place, do nothing
       });
   }
+
+  // Set originalIndex by DOM order for restoreOrder to work
+  var domOrder = {};
+  entryEls.forEach(function (el, i) {
+    var slug = el.getAttribute("data-slug");
+    if (slug) domOrder[slug] = i;
+  });
+  index.forEach(function (r) {
+    var slug = r.el.getAttribute("data-slug");
+    r.originalIndex = domOrder[slug] !== undefined ? domOrder[slug] : 0;
+  });
 
   // =========================================================================
   // FACET FILTER
@@ -203,6 +221,8 @@
     var last = 0;
     var m;
     while ((m = pattern.exec(text)) !== null) {
+      // Guard: avoid infinite loop on zero-width match
+      if (m.index === pattern.lastIndex) pattern.lastIndex++;
       if (m.index > last) {
         frag.appendChild(document.createTextNode(text.slice(last, m.index)));
       }
@@ -217,41 +237,48 @@
     return frag;
   }
 
-  // Apply / remove highlights in a single h3 (title only).
-  // We store the original textContent on the element to restore it cleanly.
+  // Generic walker — highlights every text node under root,
+  // skipping nodes inside any element matching skipSelector.
+  function highlightWithin(root, tokens, skipSelector) {
+    if (!tokens.length) return;
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (node) {
+        if (!node.textContent.trim()) return NodeFilter.FILTER_REJECT;
+        if (skipSelector && node.parentElement && node.parentElement.closest(skipSelector))
+          return NodeFilter.FILTER_REJECT;
+        // don't re-enter existing <mark>
+        if (node.parentElement && node.parentElement.tagName === "MARK")
+          return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var targets = [];
+    var n;
+    while ((n = walker.nextNode())) targets.push(n);   // collect first (don't mutate while walking)
+    targets.forEach(function (textNode) {
+      var frag = highlightText(textNode.textContent, tokens);
+      if (frag.childNodes.length) textNode.parentNode.replaceChild(frag, textNode);
+    });
+  }
+
+  // Apply / remove highlights in h3 (title) and body.
+  // Restores from pristine HTML captured at index build time.
   function applyHighlight(rec, tokens) {
     var h3 = rec.el.querySelector("h3");
-    if (!h3) return;
-
-    // Always restore from stored original first
-    if (!rec._origH3HTML) rec._origH3HTML = h3.innerHTML;
-    h3.innerHTML = rec._origH3HTML;
-
-    if (!tokens.length) return;
-
-    // Only highlight the title text node (the last child or main text),
-    // not the <span class="tag"> part
-    var tagSpan = h3.querySelector(".tag");
-    var textNode = null;
-
-    // Find the text node that is the title (not inside .tag)
-    for (var i = h3.childNodes.length - 1; i >= 0; i--) {
-      var n = h3.childNodes[i];
-      if (n.nodeType === 3 && n.textContent.trim()) { textNode = n; break; }
+    if (h3) {
+      h3.innerHTML = rec._origH3HTML || "";
+      if (tokens.length) highlightWithin(h3, tokens, ".tag");
     }
-    if (!textNode) return;
-
-    var original = textNode.textContent;
-    var frag = highlightText(original, tokens);
-    h3.replaceChild(frag, textNode);
+    var body = rec.el.querySelector(".body");
+    if (body) {
+      body.innerHTML = rec._origBodyHTML || "";
+      if (tokens.length) highlightWithin(body, tokens, null);
+    }
   }
 
   function clearAllHighlights() {
     index.forEach(function (rec) {
-      if (rec._origH3HTML) {
-        var h3 = rec.el.querySelector("h3");
-        if (h3) h3.innerHTML = rec._origH3HTML;
-      }
+      applyHighlight(rec, []);
     });
   }
 
@@ -529,7 +556,7 @@
   var _searchActive = false;
 
   function render() {
-    var tokens = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    var tokens = query.trim().toLowerCase().split(/\s+/).filter(function (t) { return t && t.trim(); });
     var hasQuery = tokens.length > 0;
 
     // -- Compute scores & visibility
@@ -572,15 +599,13 @@
         return b._score - a._score || a.originalIndex - b.originalIndex;
       });
 
-      // Show/hide + eyebrows + highlights
+      // Show/hide + eyebrows
       index.forEach(function (rec) {
         rec.el.style.display = rec._visible ? "" : "none";
         if (rec._visible) {
           ensureEyebrow(rec);
-          applyHighlight(rec, tokens);
         } else {
           removeEyebrow(rec);
-          applyHighlight(rec, []); // restore
         }
       });
 
@@ -588,6 +613,11 @@
       if (visible.length) {
         reorderEntries(visible.map(function (r) { return r.el; }));
       }
+
+      // Highlight AFTER reorder (Fix D)
+      index.forEach(function (rec) {
+        applyHighlight(rec, rec._visible ? tokens : []);
+      });
 
       // Section blocks: show first block as container, hide rest
       sectionBlocks.forEach(function (block, i) {

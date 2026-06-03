@@ -148,10 +148,16 @@ h1 {
 .search-clear:hover { color: var(--red); }
 
 /* ---- Search results ---- */
-/* <mark> highlight — on-brand red, matching ::selection */
-mark {
-  background: var(--red); color: var(--paper);
+/* Title matches: strong, on-brand */
+h3 mark {
+  background: var(--red); color: var(--paper); padding: 0 1px;
+}
+/* Body matches: lighter tint, keeps text readable */
+.body mark {
+  background: rgba(168, 30, 14, 0.16);   /* --red at ~16% */
+  color: inherit;
   padding: 0 1px;
+  border-radius: 1px;
 }
 
 /* Section eyebrow on entries in flat search mode */

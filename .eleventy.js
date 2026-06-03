@@ -74,7 +74,7 @@ module.exports = function (eleventyConfig) {
   });
 
   // Add search index as global data for templates
-  eleventyConfig.addGlobalData("searchIndexData", function () {
+  eleventyConfig.addGlobalData("searchIndex", function () {
     const resolvedEntriesData = require("./src/_data/resolvedEntries");
     const site = require("./src/_data/site");
     const i18n = {
@@ -90,7 +90,7 @@ module.exports = function (eleventyConfig) {
       sectionLabels[s.key] = i18nData.sections[s.key];
     });
 
-    return entries.map(entry => ({
+    const indexArray = entries.map(entry => ({
       slug: entry.slug,
       title: entry.title,
       tag: entry.tag,
@@ -101,6 +101,13 @@ module.exports = function (eleventyConfig) {
       year: new Date(entry.date).getFullYear(),
       text: blocksToPlaintext(entry.bodyBlocks),
     }));
+
+    // Stringify to JSON and escape to prevent </script> injection
+    const json = JSON.stringify(indexArray);
+    return json
+      .replace(/</g, '\\u003c')
+      .replace(/>/g, '\\u003e')
+      .replace(/&/g, '\\u0026');
   });
 
   // Format an ISO date as e.g. "Nov 2024" for display.

@@ -78,6 +78,7 @@ permalink: /
       {%- if entry.section == s.key -%}
         {%- set count = count + 1 -%}
         <article class="entry"
+          data-slug="{{ entry.slug }}"
           data-section="{{ entry.section }}"
           data-region="{{ entry.region }}"
           data-status="{{ entry.status }}"
