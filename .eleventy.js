@@ -34,7 +34,7 @@ module.exports = function (eleventyConfig) {
     const languages = ["en"];
     const site = require("./src/_data/site");
     const i18n = {
-      en: require("./src/_data/i18n/en"),
+      en: require("./src/_data/locales/en"),
     };
 
     for (const lang of languages) {
@@ -78,7 +78,7 @@ module.exports = function (eleventyConfig) {
     const resolvedEntriesData = require("./src/_data/resolvedEntries");
     const site = require("./src/_data/site");
     const i18n = {
-      en: require("./src/_data/i18n/en"),
+      en: require("./src/_data/locales/en"),
     };
 
     const entries = resolvedEntriesData.en;
