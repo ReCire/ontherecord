@@ -1,0 +1,21 @@
+{
+  "slug": "exxon-knew",
+  "section": "climate",
+  "region": "us",
+  "status": "report",
+  "date": "2023-01-12T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "The Conversation — What Big Oil Knew, In Its Own Words",
+      "url": "https://theconversation.com/what-big-oil-knew-about-climate-change-in-its-own-words-170642",
+      "archive_url": "https://web.archive.org/web/20260503174808/https://theconversation.com/what-big-oil-knew-about-climate-change-in-its-own-words-170642"
+    },
+    {
+      "label": "Frontline PBS — The Power of Big Oil (official)",
+      "url": "https://www.youtube.com/watch?v=shs2IKKTngk",
+      "video": true,
+      "archive_url": "https://web.archive.org/web/20260602215206/https://www.youtube.com/watch?v=shs2IKKTngk"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

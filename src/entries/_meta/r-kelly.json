@@ -1,0 +1,25 @@
+{
+  "slug": "r-kelly",
+  "section": "abuse",
+  "region": "us",
+  "status": "ruling",
+  "date": "2022-06-29T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "PBS NewsHour — appeals court upholds convictions & 30-year sentence",
+      "url": "https://www.pbs.org/newshour/nation/federal-appeals-court-upholds-singer-r-kellys-convictions-and-30-year-prison-sentence",
+      "archive_url": "https://web.archive.org/web/20260602220206/https://www.pbs.org/newshour/nation/federal-appeals-court-upholds-singer-r-kellys-convictions-and-30-year-prison-sentence"
+    },
+    {
+      "label": "NBC News — sentenced to 30 years",
+      "url": "https://www.nbcnews.com/news/us-news/r-kelly-sentenced-30-years-sex-trafficking-case-rcna35832",
+      "archive_url": "https://web.archive.org/web/20260602220256/https://www.nbcnews.com/news/us-news/r-kelly-sentenced-30-years-sex-trafficking-case-rcna35832"
+    },
+    {
+      "label": "CNN — the racketeering & sex-trafficking verdict",
+      "url": "https://www.cnn.com/2021/09/27/us/r-kelly-verdict",
+      "archive_url": "https://web.archive.org/web/20260602220335/https://www.cnn.com/2021/09/27/us/r-kelly-verdict"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

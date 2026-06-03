@@ -1,0 +1,25 @@
+{
+  "slug": "sbf-ftx",
+  "section": "corruption",
+  "region": "us",
+  "status": "ruling",
+  "date": "2024-03-28T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "Fortune — SBF's pardon bid, White House says not under consideration",
+      "url": "https://fortune.com/2026/02/24/sam-bankman-fried-ftx-trump-pardon-binance-cz-crypto-tucker-carlson/",
+      "archive_url": "https://web.archive.org/web/20260304091724/https://fortune.com/2026/02/24/sam-bankman-fried-ftx-trump-pardon-binance-cz-crypto-tucker-carlson/"
+    },
+    {
+      "label": "CNN — the redemption effort and the appeal",
+      "url": "https://www.cnn.com/2025/11/03/business/sam-bankman-fried-crypto-trump",
+      "archive_url": "https://web.archive.org/web/20260602220428/https://www.cnn.com/2025/11/03/business/sam-bankman-fried-crypto-trump"
+    },
+    {
+      "label": "Decrypt — the broader crypto pardon pattern",
+      "url": "https://decrypt.co/354067/trump-wont-consider-pardoning-sam-bankman-fried",
+      "archive_url": "https://web.archive.org/web/20260602191235/https://decrypt.co/354067/trump-wont-consider-pardoning-sam-bankman-fried"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

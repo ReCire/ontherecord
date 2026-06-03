@@ -1,0 +1,25 @@
+{
+  "slug": "maxwell-conviction",
+  "section": "pardons",
+  "region": "us",
+  "status": "ruling",
+  "date": "2022-06-28T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "FindLaw — US v. Ghislaine Maxwell (court record, primary)",
+      "url": "https://caselaw.findlaw.com/court/us-dis-crt-sd-new-yor/117591910.html",
+      "archive_url": "https://web.archive.org/web/20260128161405/https://caselaw.findlaw.com/court/us-dis-crt-sd-new-yor/117591910.html"
+    },
+    {
+      "label": "CNBC — Supreme Court rejects Maxwell's appeal",
+      "url": "https://www.cnbc.com/2025/10/06/supreme-court-ghislaine-maxwell-epstein-trump.html",
+      "archive_url": "https://web.archive.org/web/20260514175752/https://www.cnbc.com/2025/10/06/supreme-court-ghislaine-maxwell-epstein-trump.html"
+    },
+    {
+      "label": "Scripps/AOL — Maxwell seeks commutation from Trump",
+      "url": "https://www.aol.com/articles/ghislaine-maxwell-seeks-commutation-20-192905453.html",
+      "archive_url": "https://web.archive.org/web/20260602215750/https://www.aol.com/articles/ghislaine-maxwell-seeks-commutation-20-192905453.html"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

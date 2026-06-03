@@ -1,0 +1,25 @@
+{
+  "slug": "starbucks-union-busting",
+  "section": "labor",
+  "region": "us",
+  "status": "ruling",
+  "date": "2024-12-01T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "Economic Policy Institute — Corporate Union Busting",
+      "url": "https://www.epi.org/publication/corporate-union-busting/",
+      "archive_url": "https://web.archive.org/web/20260522193735/https://www.epi.org/publication/corporate-union-busting/"
+    },
+    {
+      "label": "Starbucks Workers United — Labor Law Violations",
+      "url": "https://sbworkersunited.org/union-baristas-are-on-strike-over-starbucks-record-breaking-labor-law-violations/",
+      "archive_url": "https://web.archive.org/web/20260404193057/https://sbworkersunited.org/union-baristas-are-on-strike-over-starbucks-record-breaking-labor-law-violations/"
+    },
+    {
+      "label": "PBS NewsHour — Union Busting Practices",
+      "url": "https://www.pbs.org/newshour/economy/the-union-busting-practices-that-landed-starbucks-in-hot-water",
+      "archive_url": "https://web.archive.org/web/20260602191644/https://www.pbs.org/newshour/economy/the-union-busting-practices-that-landed-starbucks-in-hot-water"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

@@ -1,0 +1,20 @@
+{
+  "slug": "icj-south-africa-israel",
+  "section": "global",
+  "region": "mena",
+  "status": "ruling",
+  "date": "2024-01-26T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "ICJ — official case page & orders (primary)",
+      "url": "https://www.icj-cij.org/case/192",
+      "archive_url": "https://web.archive.org/web/20260531164110/https://www.icj-cij.org/case/192"
+    },
+    {
+      "label": "Explainer — the provisional measures",
+      "url": "https://www.middleeasteye.net/explainers/israels-genocide-gaza-whatever-happened-south-africas-case-icj",
+      "archive_url": "https://web.archive.org/web/20260525010609/https://www.middleeasteye.net/explainers/israels-genocide-gaza-whatever-happened-south-africas-case-icj"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

@@ -1,0 +1,26 @@
+{
+  "slug": "power-of-big-oil",
+  "section": "climate",
+  "region": "us",
+  "status": "report",
+  "date": "2022-04-19T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "Frontline PBS — The Power of Big Oil (official)",
+      "url": "https://www.youtube.com/watch?v=shs2IKKTngk",
+      "video": true,
+      "archive_url": "https://web.archive.org/web/20260602185025/https://www.youtube.com/watch?v=shs2IKKTngk"
+    },
+    {
+      "label": "PBS — full series & reporting",
+      "url": "https://www.pbs.org/wgbh/frontline/documentary/the-power-of-big-oil/",
+      "archive_url": "https://web.archive.org/web/20260602190632/https://www.pbs.org/wgbh/frontline/documentary/the-power-of-big-oil/"
+    },
+    {
+      "label": "Climate Integrity — most damning moments",
+      "url": "https://climateintegrity.org/news/view/the-most-damning-moments-from-the-power-of-big-oil-pbs",
+      "archive_url": "https://web.archive.org/web/20260602190712/https://climateintegrity.org/news/view/the-most-damning-moments-from-the-power-of-big-oil-pbs"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

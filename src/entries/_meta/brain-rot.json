@@ -1,0 +1,19 @@
+{
+  "slug": "brain-rot",
+  "section": "machine",
+  "region": "global",
+  "status": "context",
+  "date": "2024-12-02T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "Brain Sciences — peer-reviewed review (2025)",
+      "url": "https://www.mdpi.com/2076-3425/15/3/283",
+      "archive_url": "https://web.archive.org/web/20260510140935/https://www.mdpi.com/2076-3425/15/3/283"
+    },
+    {
+      "label": "Oxford WOTY 2024 — announcement",
+      "url": "https://multilingual.com/oxford-word-of-the-year-2024-is-brain-rot/"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

@@ -1,0 +1,24 @@
+{
+  "slug": "palantir",
+  "section": "surveillance",
+  "region": "us",
+  "status": "report",
+  "date": "2025-04-01T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "ACLU — Palantir & the deportation machine",
+      "url": "https://www.aclu.org/news/privacy-technology/palantir-deportation-roundup",
+      "archive_url": "https://web.archive.org/web/20260518113708/https://www.aclu.org/news/privacy-technology/palantir-deportation-roundup"
+    },
+    {
+      "label": "American Immigration Council — ImmigrationOS",
+      "url": "https://www.americanimmigrationcouncil.org/blog/ice-immigrationos-palantir-ai-track-immigrants/",
+      "archive_url": "https://web.archive.org/web/20260518215838/https://www.americanimmigrationcouncil.org/blog/ice-immigrationos-palantir-ai-track-immigrants/"
+    },
+    {
+      "label": "Palantir's own rebuttal (their side)",
+      "url": "https://blog.palantir.com/correcting-the-record-response-to-the-eff-january-15-2026-report-on-palantir-4b3a12536cd2"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

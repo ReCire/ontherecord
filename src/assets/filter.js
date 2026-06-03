@@ -34,39 +34,108 @@
 
   // =========================================================================
   // SEARCH INDEX — built once, never re-read DOM per keystroke
+  // Prefers emitted index (window.__SEARCH_INDEX__ or /search-index.json),
+  // falls back to DOM scraping for progressive enhancement.
   // =========================================================================
-  var index = entryEls.map(function (el) {
-    var titleEl   = el.querySelector("h3");
-    var tagEl     = el.querySelector(".tag");
-    var bodyEl    = el.querySelector(".body");
-    var sectionBlock = el.closest ? el.closest("[data-section-block]")
-                      : (function () {
-                          var p = el.parentNode;
-                          while (p && !p.getAttribute("data-section-block")) p = p.parentNode;
-                          return p;
-                        })();
+  var index = [];
 
-    var titleRaw  = titleEl  ? titleEl.textContent  : "";
-    var tagRaw    = tagEl    ? tagEl.textContent     : "";
-    var bodyRaw   = bodyEl   ? bodyEl.textContent    : "";
-    var sectionLabel = sectionBlock ? (sectionBlock.getAttribute("data-section-label") || "") : "";
+  function buildIndexFromDOM() {
+    return entryEls.map(function (el) {
+      var titleEl   = el.querySelector("h3");
+      var tagEl     = el.querySelector(".tag");
+      var bodyEl    = el.querySelector(".body");
+      var sectionBlock = el.closest ? el.closest("[data-section-block]")
+                        : (function () {
+                            var p = el.parentNode;
+                            while (p && !p.getAttribute("data-section-block")) p = p.parentNode;
+                            return p;
+                          })();
 
-    // Strip the tag text from the title text so it doesn't double-score
-    var titleClean = titleRaw.replace(tagRaw, "").trim();
+      var titleRaw  = titleEl  ? titleEl.textContent  : "";
+      var tagRaw    = tagEl    ? tagEl.textContent     : "";
+      var bodyRaw   = bodyEl   ? bodyEl.textContent    : "";
+      var sectionLabel = sectionBlock ? (sectionBlock.getAttribute("data-section-label") || "") : "";
 
-    return {
-      el:           el,
-      title:        titleClean.toLowerCase(),
-      titleRaw:     titleClean,         // for highlighting (preserves case)
-      tag:          tagRaw.toLowerCase(),
-      sectionLabel: sectionLabel.toLowerCase(),
-      sectionLabelRaw: sectionLabel,
-      body:         bodyRaw.toLowerCase(),
-      originalIndex: 0,                 // set after map
-    };
-  });
-  // Store original document order
-  index.forEach(function (r, i) { r.originalIndex = i; });
+      // Strip the tag text from the title text so it doesn't double-score
+      var titleClean = titleRaw.replace(tagRaw, "").trim();
+
+      return {
+        el:           el,
+        title:        titleClean.toLowerCase(),
+        titleRaw:     titleClean,         // for highlighting (preserves case)
+        tag:          tagRaw.toLowerCase(),
+        sectionLabel: sectionLabel.toLowerCase(),
+        sectionLabelRaw: sectionLabel,
+        body:         bodyRaw.toLowerCase(),
+        originalIndex: 0,                 // set after map
+      };
+    });
+  }
+
+  function buildIndexFromData(searchData) {
+    // Map emitted index data to DOM elements
+    var elBySlug = {};
+    entryEls.forEach(function (el) {
+      var section = el.getAttribute("data-section");
+      var year = el.getAttribute("data-year");
+      // Try to match by section + year + title (fallback)
+      elBySlug[section + "-" + year] = el;
+    });
+
+    return searchData.map(function (item, i) {
+      var el = entryEls[i]; // Fallback: assume DOM order matches index order
+      // Try to find matching element by data attributes
+      for (var j = 0; j < entryEls.length; j++) {
+        var candidate = entryEls[j];
+        if (candidate.getAttribute("data-section") === item.sectionKey &&
+            candidate.getAttribute("data-year") == item.year) {
+          el = candidate;
+          break;
+        }
+      }
+
+      var titleClean = item.title;
+      var tagRaw = item.tag || "";
+      // Strip tag from title if present
+      if (tagRaw && titleClean.includes(tagRaw)) {
+        titleClean = titleClean.replace(tagRaw, "").trim();
+      }
+
+      return {
+        el:           el,
+        title:        titleClean.toLowerCase(),
+        titleRaw:     titleClean,
+        tag:          tagRaw.toLowerCase(),
+        sectionLabel: item.sectionLabel.toLowerCase(),
+        sectionLabelRaw: item.sectionLabel,
+        body:         item.text.toLowerCase(),
+        originalIndex: i,
+      };
+    });
+  }
+
+  // Try to use emitted index first
+  if (window.__SEARCH_INDEX__) {
+    index = buildIndexFromData(window.__SEARCH_INDEX__);
+  } else {
+    // Fetch search-index.json asynchronously, fall back to DOM immediately
+    index = buildIndexFromDOM();
+    index.forEach(function (r, i) { r.originalIndex = i; });
+
+    fetch("/search-index.json")
+      .then(function (res) { return res.json(); })
+      .then(function (data) {
+        // Replace index with data from JSON
+        index = buildIndexFromData(data);
+        // Re-apply current filter state if any
+        if (query || active.section.size || active.region.size || active.status.size) {
+          apply();
+        }
+      })
+      .catch(function () {
+        // DOM fallback already in place, do nothing
+      });
+  }
 
   // =========================================================================
   // FACET FILTER

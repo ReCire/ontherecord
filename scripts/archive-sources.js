@@ -3,7 +3,7 @@
  * archive-sources.js — Link-rot defense for On The Record.
  *
  * For every source in every entry, ensures a permanent Wayback Machine
- * snapshot exists and writes its URL back into the entry frontmatter as
+ * snapshot exists and writes its URL back into the entry metadata as
  * `archive_url`. Also stamps the entry with `last_verified` (today).
  *
  * This is a LOCAL maintenance script, not a build step. Run it before you
@@ -13,8 +13,12 @@
  *     npm run archive -- --force # re-snapshot every source (slow)
  *
  * It is idempotent: sources that already carry an archive_url are skipped
- * unless --force is passed. Commit the resulting frontmatter changes; the
+ * unless --force is passed. Commit the resulting metadata changes; the
  * Eleventy build simply renders url + archive_url ("source · archived").
+ *
+ * IMPORTANT: This script now reads from entries/_meta/*.json (the single
+ * source of truth for neutral metadata). It does NOT touch per-language
+ * Markdown files.
  *
  * Why not run this on Vercel? The deploy filesystem is ephemeral (writes
  * don't persist to the repo) and Save Page Now is slow + rate-limited.
@@ -30,10 +34,8 @@
 
 const fs = require("fs");
 const path = require("path");
-const matter = require("gray-matter");
-const yaml = require("js-yaml");
 
-const ENTRIES_DIR = path.join(__dirname, "..", "src", "entries");
+const META_DIR = path.join(__dirname, "..", "src", "entries", "_meta");
 const UA = "OnTheRecord-archiver/1.0 (+https://ontherecord.me)";
 const FORCE = process.argv.includes("--force");
 
@@ -41,13 +43,6 @@ const FORCE = process.argv.includes("--force");
 const SPN_TIMEOUT_MS = 45000; // Save Page Now can be slow.
 const SPN_DELAY_MS = 3000; // Pause between Save Page Now calls.
 const AVAIL_TIMEOUT_MS = 15000;
-
-// Keep YAML dates as strings (don't let js-yaml turn them into Date objects,
-// which would rewrite every `date:` field into an ISO timestamp on save).
-const yamlEngine = {
-  parse: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }),
-  stringify: (o) => yaml.dump(o, { schema: yaml.JSON_SCHEMA, lineWidth: -1 }),
-};
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -113,8 +108,7 @@ async function ensureSnapshot(url) {
 
 async function processEntry(file) {
   const raw = fs.readFileSync(file, "utf8");
-  const parsed = matter(raw, { engines: { yaml: yamlEngine } });
-  const data = parsed.data;
+  const data = JSON.parse(raw);
   if (!Array.isArray(data.sources) || data.sources.length === 0) {
     return { changed: false, archived: 0, failed: 0 };
   }
@@ -142,7 +136,7 @@ async function processEntry(file) {
 
   if (changed) {
     data.last_verified = today();
-    const out = matter.stringify(parsed.content, data, { engines: { yaml: yamlEngine } });
+    const out = JSON.stringify(data, null, 2) + "\n";
     fs.writeFileSync(file, out, "utf8");
   }
 
@@ -156,9 +150,9 @@ async function main() {
   }
 
   const files = fs
-    .readdirSync(ENTRIES_DIR)
-    .filter((f) => f.endsWith(".md") && !f.startsWith("INSTRUCTIONS"))
-    .map((f) => path.join(ENTRIES_DIR, f));
+    .readdirSync(META_DIR)
+    .filter((f) => f.endsWith(".json"))
+    .map((f) => path.join(META_DIR, f));
 
   console.log(`Archiving sources for ${files.length} entries${FORCE ? " (--force)" : ""}…\n`);
 
@@ -179,7 +173,7 @@ async function main() {
   if (totalFailed) {
     console.log(`${totalFailed} sources could not be archived this run — re-run later to retry.`);
   }
-  console.log("Review the frontmatter changes and commit them.");
+  console.log("Review the metadata changes and commit them.");
 }
 
 main().catch((err) => {

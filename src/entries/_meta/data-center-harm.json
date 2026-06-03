@@ -1,0 +1,25 @@
+{
+  "slug": "data-center-harm",
+  "section": "surveillance",
+  "region": "us",
+  "status": "report",
+  "date": "2025-01-01T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "EESI — noise pollution & health complaints",
+      "url": "https://www.eesi.org/articles/view/communities-are-raising-noise-pollution-concernsabout-data-centers",
+      "archive_url": "https://web.archive.org/web/20260518091416/https://www.eesi.org/articles/view/communities-are-raising-noise-pollution-concernsabout-data-centers"
+    },
+    {
+      "label": "Consumer Reports — bills, water & community impact",
+      "url": "https://www.consumerreports.org/data-centers/ai-data-centers-impact-on-electric-bills-water-and-more-a1040338678/",
+      "archive_url": "https://web.archive.org/web/20260512131348/https://www.consumerreports.org/data-centers/ai-data-centers-impact-on-electric-bills-water-and-more-a1040338678/"
+    },
+    {
+      "label": "Environmental Health Project — the dangers",
+      "url": "https://www.environmentalhealthproject.org/post/the-dangers-of-data-centers",
+      "archive_url": "https://web.archive.org/web/20260520215522/https://www.environmentalhealthproject.org/post/the-dangers-of-data-centers"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "rwanda-genocide",
+  "section": "atrocity",
+  "region": "africa",
+  "status": "ruling",
+  "date": "1998-09-02T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "USHMM — Rwanda: the first conviction for genocide (primary/educational)",
+      "url": "https://encyclopedia.ushmm.org/content/en/article/rwanda-the-first-conviction-for-genocide",
+      "archive_url": "https://web.archive.org/web/20260519095225/https://encyclopedia.ushmm.org/content/en/article/rwanda-the-first-conviction-for-genocide"
+    },
+    {
+      "label": "UN — the justice and reconciliation process in Rwanda (primary)",
+      "url": "https://www.un.org/en/preventgenocide/rwanda/pdf/bgjustice.pdf",
+      "archive_url": "https://web.archive.org/web/20260602191016/https://www.un.org/en/preventgenocide/rwanda/pdf/bgjustice.pdf"
+    },
+    {
+      "label": "Holocaust Memorial Day Trust — the ICTR",
+      "url": "https://hmd.org.uk/learn-about-the-holocaust-and-genocides/rwanda/international-criminal-tribunal-for-rwanda/",
+      "archive_url": "https://web.archive.org/web/20260219012731/https://hmd.org.uk/learn-about-the-holocaust-and-genocides/rwanda/international-criminal-tribunal-for-rwanda/"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

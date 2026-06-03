@@ -1,0 +1,21 @@
+{
+  "slug": "marcos-swiss-deposits",
+  "section": "global",
+  "region": "global",
+  "status": "ruling",
+  "date": "2003-07-15T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "Supreme Court of the Philippines — G.R. No. 152154 (primary ruling)",
+      "url": "https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/1/45143"
+    },
+    {
+      "label": "VERA Files — fact-check confirming the forfeiture and figures",
+      "url": "https://verafiles.org/articles/vera-files-fact-check-marcos-falsely-claims-ill-gotten-wealth-cases-are-untrue-propaganda"
+    },
+    {
+      "label": "GMA News — the Supreme Court's rulings on Marcos ill-gotten wealth",
+      "url": "https://www.gmanetwork.com/news/topstories/specialreports/626576/the-supreme-court-s-rulings-on-the-marcoses-ill-gotten-wealth/story/"
+    }
+  ]
+}

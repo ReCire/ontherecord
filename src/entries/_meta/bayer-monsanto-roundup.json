@@ -1,0 +1,25 @@
+{
+  "slug": "bayer-monsanto-roundup",
+  "section": "environment",
+  "region": "us",
+  "status": "settlement",
+  "date": "2026-03-01T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "Chemical & Engineering News — $7.25B settlement advances",
+      "url": "https://cen.acs.org/environment/pesticides/bayer-roundup-glyphosate-cancer-class-action-lawsuit-settlement/104/web/2026/03",
+      "archive_url": "https://web.archive.org/web/20260331222215/https://cen.acs.org/environment/pesticides/bayer-roundup-glyphosate-cancer-class-action-lawsuit-settlement/104/web/2026/03"
+    },
+    {
+      "label": "Yahoo Finance — $2B verdict & litigation history",
+      "url": "https://finance.yahoo.com/sectors/healthcare/articles/2-billion-bayer-verdict-roundup-194517794.html",
+      "archive_url": "https://web.archive.org/web/20260403113237/https://finance.yahoo.com/sectors/healthcare/articles/2-billion-bayer-verdict-roundup-194517794.html"
+    },
+    {
+      "label": "Investigate Midwest — settlement challenge",
+      "url": "https://investigatemidwest.org/2026/05/26/bayers-proposed-roundup-settlement-violates-constitution-new-legal-filing-claims/",
+      "archive_url": "https://web.archive.org/web/20260528153244/https://investigatemidwest.org/2026/05/26/bayers-proposed-roundup-settlement-violates-constitution-new-legal-filing-claims/"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

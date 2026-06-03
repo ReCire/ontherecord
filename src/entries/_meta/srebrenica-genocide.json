@@ -1,0 +1,25 @@
+{
+  "slug": "srebrenica-genocide",
+  "section": "atrocity",
+  "region": "eu",
+  "status": "ruling",
+  "date": "2004-04-19T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "UN — about the 1995 genocide in Srebrenica (primary)",
+      "url": "https://www.un.org/en/observances/srebrenica-genocide-commemoration-day/about",
+      "archive_url": "https://web.archive.org/web/20260602191522/https://www.un.org/en/observances/srebrenica-genocide-commemoration-day/about"
+    },
+    {
+      "label": "ICJ — summary of the judgment of 26 February 2007 (primary)",
+      "url": "https://www.icj-cij.org/node/103898",
+      "archive_url": "https://web.archive.org/web/20260302102031/https://www.icj-cij.org/node/103898"
+    },
+    {
+      "label": "UN News — ICTY confirms Srebrenica was genocide (Krstić appeal)",
+      "url": "https://news.un.org/en/story/2004/04/100662",
+      "archive_url": "https://web.archive.org/web/20260115093124/https://news.un.org/en/story/2004/04/100662"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

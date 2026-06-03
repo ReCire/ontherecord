@@ -1,0 +1,19 @@
+{
+  "slug": "robot-dogs-world-cup",
+  "section": "surveillance",
+  "region": "us",
+  "status": "context",
+  "date": "2026-06-01T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "WFAA — Spot patrolling the Dallas World Cup",
+      "url": "https://www.wfaa.com/article/news/latest-news-ott/robot-dogs-drones-and-dozens-of-agencies-inside-the-massive-security-operation-for-the-fifa-world-cup-in-dfw/287-b5537983-c8ff-45aa-bde3-f160368ec639",
+      "archive_url": "https://web.archive.org/web/20260602190940/https://www.wfaa.com/article/news/latest-news-ott/robot-dogs-drones-and-dozens-of-agencies-inside-the-massive-security-operation-for-the-fifa-world-cup-in-dfw/287-b5537983-c8ff-45aa-bde3-f160368ec639"
+    },
+    {
+      "label": "eWeek — robot dogs at BBVA Stadium",
+      "url": "https://www.eweek.com/news/robot-dogs-first-responders-2026-world-cup/"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

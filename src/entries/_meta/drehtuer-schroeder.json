@@ -1,0 +1,26 @@
+{
+  "slug": "drehtuer-schroeder",
+  "section": "deutschland",
+  "region": "de",
+  "status": "context",
+  "date": "2005-12-01T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "Lobbypedia — Schröder & der Drehtür-Effekt",
+      "url": "https://lobbypedia.de/wiki/Gerhard_Schr%C3%B6der",
+      "archive_url": "https://web.archive.org/web/20260306065047/https://lobbypedia.de/wiki/Gerhard_Schr%C3%B6der"
+    },
+    {
+      "label": "Lobbypedia — Gazprom & Nord Stream",
+      "url": "https://lobbypedia.de/wiki/Gazprom",
+      "archive_url": "https://web.archive.org/web/20260317160806/https://lobbypedia.de/wiki/Gazprom"
+    },
+    {
+      "label": "ARD „Die Story\" — Außer Dienst (Doku, Suche)",
+      "url": "https://www.youtube.com/results?search_query=ARD+Die+Story+Au%C3%9Fer+Dienst+Gerhard+Schr%C3%B6der",
+      "video": true,
+      "archive_url": "https://web.archive.org/web/20260602214938/https://www.youtube.com/results?search_query=ARD+Die+Story+Au%C3%9Fer+Dienst+Gerhard+Schr%C3%B6der"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

@@ -1,0 +1,5 @@
+---
+title: 'Cutting Schools, Cutting Safety Nets — Austerity as Policy'
+tag: Index · 2024
+---
+A recurring pattern across countries: public budgets for education, health and social protection are squeezed while tax structures and subsidies favour large corporations. The 2024 Commitment to Reducing Inequality Index (Oxfam / Development Finance International) found that, against 2022 figures, education budgets were cut in 56% of countries and health budgets in 43%, even as military spending rose — with the IMF actively recommending austerity in most countries it advised. A 2025 academic review found broad consensus that austerity during downturns deepens inequality, harms public health, and erodes trust in institutions, fuelling populism. For balance: free-market institutions such as the Heritage Foundation and Mercatus Center argue spending-led adjustments outperform tax rises for growth — so this is presented as a genuine policy debate, with the distributional evidence on one side and the growth argument on the other.

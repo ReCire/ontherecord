@@ -1,0 +1,20 @@
+{
+  "slug": "cambridge-analytica",
+  "section": "surveillance",
+  "region": "us",
+  "status": "settlement",
+  "date": "2019-07-24T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "FTC — $5B penalty (primary source)",
+      "url": "https://www.ftc.gov/news-events/news/press-releases/2019/07/ftc-imposes-5-billion-penalty-sweeping-new-privacy-restrictions-facebook",
+      "archive_url": "https://web.archive.org/web/20260525015308/https://www.ftc.gov/news-events/news/press-releases/2019/07/ftc-imposes-5-billion-penalty-sweeping-new-privacy-restrictions-facebook"
+    },
+    {
+      "label": "NPR — $725M class-action settlement",
+      "url": "https://www.npr.org/2022/12/23/1145303268/facebook-meta-cambridge-analytica-privacy-settlement",
+      "archive_url": "https://web.archive.org/web/20260318055730/https://www.npr.org/2022/12/23/1145303268/facebook-meta-cambridge-analytica-privacy-settlement"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

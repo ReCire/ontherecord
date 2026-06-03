@@ -1,0 +1,25 @@
+{
+  "slug": "epstein-2019-death",
+  "section": "pardons",
+  "region": "us",
+  "status": "ruling",
+  "date": "2019-08-10T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "DOJ Office of Inspector General — Report 23-085 (primary)",
+      "url": "https://oig.justice.gov/sites/default/files/reports/23-085.pdf",
+      "archive_url": "https://web.archive.org/web/20260527150445/https://oig.justice.gov/sites/default/files/reports/23-085.pdf"
+    },
+    {
+      "label": "PBS NewsHour — watchdog blames negligence & misconduct",
+      "url": "https://www.pbs.org/newshour/nation/misconduct-by-federal-jail-guards-led-to-jeffrey-epsteins-suicide-doj-watchdog-says",
+      "archive_url": "https://web.archive.org/web/20260602214958/https://www.pbs.org/newshour/nation/misconduct-by-federal-jail-guards-led-to-jeffrey-epsteins-suicide-doj-watchdog-says"
+    },
+    {
+      "label": "NBC News — the DOJ report on the death",
+      "url": "https://www.nbcnews.com/news/the-prison-system/misconduct-errors-allowed-jeffrey-epstein-commit-suicide-doj-finds-rcna91389",
+      "archive_url": "https://web.archive.org/web/20260325115315/https://www.nbcnews.com/news/the-prison-system/misconduct-errors-allowed-jeffrey-epstein-commit-suicide-doj-finds-rcna91389"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

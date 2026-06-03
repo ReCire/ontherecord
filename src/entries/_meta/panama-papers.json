@@ -1,0 +1,20 @@
+{
+  "slug": "panama-papers",
+  "section": "money",
+  "region": "global",
+  "status": "report",
+  "date": "2016-04-03T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "ICIJ — Panama Papers (primary investigation)",
+      "url": "https://www.icij.org/investigations/panama-papers/",
+      "archive_url": "https://web.archive.org/web/20260531012302/https://www.icij.org/investigations/panama-papers/"
+    },
+    {
+      "label": "ICIJ — Panama Papers explainer (official channel)",
+      "url": "https://www.youtube.com/watch?v=NgkpQEhKwTw",
+      "video": true
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

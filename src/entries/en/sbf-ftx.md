@@ -1,0 +1,5 @@
+---
+title: 'Sam Bankman-Fried & FTX — $8 Billion of Customer Money, Gone'
+tag: Convicted · 25 years
+---
+FTX, once the world's third-largest crypto exchange, collapsed in November 2022, revealing an ~$8 billion hole where customer funds should have been — money funnelled to its sister hedge fund Alameda Research. A jury convicted founder Sam Bankman-Fried in November 2023 on seven counts of fraud, money laundering and conspiracy; he was sentenced in March 2024 to 25 years. Prosecutors argued at sentencing he would likely reoffend given the chance. **Contrary to a common impression, he was *not* pardoned** — as of early 2026 the White House said clemency was "not under consideration," and he remains imprisoned, appealing. He belongs here alongside a notable pattern: in 2025 Trump *did* pardon or commute other crypto-world figures, including Silk Road's Ross Ulbricht, Binance founder Changpeng Zhao, and the BitMEX co-founders. The contrast — who gets clemency and who doesn't — is itself the story.

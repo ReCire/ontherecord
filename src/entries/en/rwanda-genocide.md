@@ -1,0 +1,5 @@
+---
+title: Rwanda 1994 — The First Genocide Conviction
+tag: Court ruling · ICTR
+---
+Between April and July 1994, extremist leaders of Rwanda's Hutu majority directed the killing of an estimated 800,000 people over roughly 100 days, the vast majority Tutsi, alongside moderate Hutu. This is the highest evidentiary tier: **adjudicated by an international court.** The UN established the International Criminal Tribunal for Rwanda (ICTR), which on 2 September 1998 convicted Jean-Paul Akayesu, former mayor of Taba — the first conviction for genocide ever handed down by an international court, and the first to define rape as an act of genocide. Days later the ICTR convicted Jean Kambanda, Rwanda's interim prime minister during the killings — the first head of government ever convicted of genocide. In all, the ICTR indicted 93 people and convicted 62; Rwanda's national courts and community "gacaca" courts tried hundreds of thousands more. The crime is not alleged or contested here. It is established law.

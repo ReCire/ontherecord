@@ -1,0 +1,15 @@
+{
+  "slug": "senate-climate-investigation",
+  "section": "climate",
+  "region": "us",
+  "status": "report",
+  "date": "2024-04-30T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "U.S. Senate Budget Committee — Full Report (PDF)",
+      "url": "https://www.budget.senate.gov/imo/media/doc/fossil_fuel_report1.pdf",
+      "archive_url": "https://web.archive.org/web/20260526075942/https://www.budget.senate.gov/imo/media/doc/fossil_fuel_report1.pdf"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

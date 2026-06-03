@@ -1,0 +1,24 @@
+{
+  "slug": "davos-private-jets",
+  "section": "spectacle",
+  "region": "global",
+  "status": "report",
+  "date": "2023-01-13T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "Greenpeace International — private jet flights to Davos (primary)",
+      "url": "https://www.greenpeace.org/international/press-release/57867/hundreds-of-ultra-short-private-jet-flights-to-davos-world-economic-forum/",
+      "archive_url": "https://web.archive.org/web/20251220061926/https://www.greenpeace.org/international/press-release/57867/hundreds-of-ultra-short-private-jet-flights-to-davos-world-economic-forum/"
+    },
+    {
+      "label": "CNN/Yahoo — the rich flocked to Davos by private jet to discuss climate",
+      "url": "https://www.yahoo.com/news/the-rich-and-powerful-flocked-to-davos-via-private-jet-to-discuss-climate-change-study-finds-195343594.html",
+      "archive_url": "https://web.archive.org/web/20230317152146/https://www.yahoo.com/news/the-rich-and-powerful-flocked-to-davos-via-private-jet-to-discuss-climate-change-study-finds-195343594.html"
+    },
+    {
+      "label": "illuminem — 'pure hypocrisy' and the rail alternative",
+      "url": "https://illuminem.com/illuminemvoices/pure-hypocrisy-wef-slammed-for-soaring-use-of-private-jets-to-davos"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

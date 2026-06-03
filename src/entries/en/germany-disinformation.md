@@ -1,0 +1,5 @@
+---
+title: Spaltung — Disinformation and the German Information Space
+tag: Study · 2024
+---
+Disinformation is widely recognised in Germany as a tool to divide society and distract from real problems. A 2024 Bertelsmann Stiftung study ("Disconcerted Public") found 84% of Germans view deliberately spread online misinformation as a big threat, and 81% see it as endangering democracy and social cohesion — with migration, climate, war and health flagged as the topics most targeted. EU DisinfoLab's landscape report maps the recurring narratives: attacks on the Green Party and climate policy, anti-refugee framing, and hoaxes undermining trust in elections and mainstream media. A notable nuance: while Germans overwhelmingly see disinformation as a threat, 70% think it's a problem for *other* people and only 16% consider themselves at risk — the blind spot that makes manipulation effective. When 200,000 citizens were asked for solutions, their top demands were media literacy and a clear separation of fact from editorial opinion in reporting.

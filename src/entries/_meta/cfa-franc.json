@@ -1,0 +1,20 @@
+{
+  "slug": "cfa-franc",
+  "section": "global",
+  "region": "africa",
+  "status": "context",
+  "date": "2019-12-21T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "Third World Quarterly — \"France à fric\" (critique)",
+      "url": "https://www.tandfonline.com/doi/abs/10.1080/01436597.2019.1585183",
+      "archive_url": "https://web.archive.org/web/20240622201401/https://www.tandfonline.com/doi/abs/10.1080/01436597.2019.1585183"
+    },
+    {
+      "label": "LSE — the reforms are more symbolic (counter-view)",
+      "url": "https://blogs.lse.ac.uk/africaatlse/2020/03/19/cfa-franc-reforms-monetary-policy-symbolic-colonialism/",
+      "archive_url": "https://web.archive.org/web/20260504165641/https://blogs.lse.ac.uk/africaatlse/2020/03/19/cfa-franc-reforms-monetary-policy-symbolic-colonialism/"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

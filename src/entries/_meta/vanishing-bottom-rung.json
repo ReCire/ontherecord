@@ -1,0 +1,24 @@
+{
+  "slug": "vanishing-bottom-rung",
+  "section": "machine",
+  "region": "us",
+  "status": "report",
+  "date": "2025-09-04T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "Fortune — Stanford & Harvard findings",
+      "url": "https://fortune.com/2025/09/04/ai-entry-level-jobs-uncertainty-college-grads",
+      "archive_url": "https://web.archive.org/web/20260602192144/https://fortune.com/2025/09/04/ai-entry-level-jobs-uncertainty-college-grads/"
+    },
+    {
+      "label": "CNBC — SignalFire 50% decline",
+      "url": "https://www.cnbc.com/2025/09/07/ai-entry-level-jobs-hiring-careers.html"
+    },
+    {
+      "label": "Washington Monthly — how AI broke the entry-level job",
+      "url": "https://washingtonmonthly.com/2026/05/29/ai-entry-level-jobs-college-graduates/",
+      "archive_url": "https://web.archive.org/web/20260601170341/https://washingtonmonthly.com/2026/05/29/ai-entry-level-jobs-college-graduates/"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

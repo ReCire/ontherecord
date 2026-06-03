@@ -1,0 +1,20 @@
+{
+  "slug": "middelhoff-arcandor",
+  "section": "deutschland",
+  "region": "de",
+  "status": "ruling",
+  "date": "2014-11-14T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "AP/Fox — Middelhoff verurteilt (engl.)",
+      "url": "https://www.foxnews.com/world/prominent-german-exec-thomas-middelhoff-convicted-over-travel-costs-at-troubled-store-firm",
+      "archive_url": "https://web.archive.org/web/20260602190418/https://www.foxnews.com/world/prominent-german-exec-thomas-middelhoff-convicted-over-travel-costs-at-troubled-store-firm"
+    },
+    {
+      "label": "LTO — Arcandor-Insolvenzverfahren",
+      "url": "https://www.lto.de/recht/kanzleien-unternehmen/k/arcandor-insolvenz-thomas-middelhoff-anstiftung-untreue-landgericht-essen",
+      "archive_url": "https://web.archive.org/web/20250324025307/https://www.lto.de/recht/kanzleien-unternehmen/k/arcandor-insolvenz-thomas-middelhoff-anstiftung-untreue-landgericht-essen"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

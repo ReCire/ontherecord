@@ -1,0 +1,25 @@
+{
+  "slug": "graduation-boos-ai",
+  "section": "minds",
+  "region": "us",
+  "status": "report",
+  "date": "2026-05-20T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "NPR — commencement speakers booed for bringing up AI",
+      "url": "https://www.npr.org/2026/05/20/nx-s1-5822419/ai-colleges-commencement-booing",
+      "archive_url": "https://web.archive.org/web/20260525171545/https://www.npr.org/2026/05/20/nx-s1-5822419/ai-colleges-commencement-booing"
+    },
+    {
+      "label": "US News — students rain boos on speakers",
+      "url": "https://www.usnews.com/news/national-news/articles/2026-05-18/ai-dei-the-middle-east-controversial-commencement-season-sees-students-rain-boos-on-speakers",
+      "archive_url": "https://web.archive.org/web/20260602185314/https://www.usnews.com/news/national-news/articles/2026-05-18/ai-dei-the-middle-east-controversial-commencement-season-sees-students-rain-boos-on-speakers"
+    },
+    {
+      "label": "Tom's Hardware — 'deal with it,' speaker fires back",
+      "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/college-students-drown-out-ai-praising-commencement-speeches-with-boos-deal-with-it-one-speaker-fires-back-as-students-heckle-positive-pitches-for-ais-role",
+      "archive_url": "https://web.archive.org/web/20260602215332/https://www.tomshardware.com/tech-industry/artificial-intelligence/college-students-drown-out-ai-praising-commencement-speeches-with-boos-deal-with-it-one-speaker-fires-back-as-students-heckle-positive-pitches-for-ais-role"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

@@ -1,0 +1,17 @@
+{
+  "slug": "dupont-c8-forever-chemicals",
+  "section": "environment",
+  "region": "us",
+  "status": "settlement",
+  "date": "2017-02-13T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "SEC / Chemours 8-K — $670.7M global PFOA settlement (primary filing)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001627223/000156459017001405/cc-ex991_6.htm"
+    },
+    {
+      "label": "SEC / Chemours 8-K — $1.185B public-water-systems PFAS settlement (primary filing)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001627223/000095017023025888/cc-ex99_1.htm"
+    }
+  ]
+}

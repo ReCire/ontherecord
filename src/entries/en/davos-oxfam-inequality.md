@@ -1,0 +1,5 @@
+---
+title: 'The Davos Paradox — Inequality Discussed, Inequality Widened'
+tag: Oxfam · annual
+---
+Every year Oxfam times an inequality report to the opening of Davos, and every year the numbers get worse — a running annotation on what the forum actually produces. By the 2026 meeting, global billionaire wealth had hit $18.3 trillion, up 16% in a single year (three times the prior five-year average) and 81% since 2020 — while one in four people couldn't reliably eat and nearly half of humanity lived in poverty. The world's 12 richest now hold more wealth than the poorest 4 billion combined. Oxfam's analysis: about 60% of billionaire wealth comes from inheritance, cronyism or monopoly power, and in 2024 for the first time more billionaires were minted by inheritance than entrepreneurship. Its 2026 paper, "Resisting the Rule of the Rich," focuses on how extreme wealth buys politics, media and justice — billionaires being roughly 4,000 times more likely than ordinary citizens to hold political office. The forum talks inequality; the ledger records its acceleration.

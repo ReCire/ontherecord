@@ -1,0 +1,25 @@
+{
+  "slug": "crypto-pardons",
+  "section": "pardons",
+  "region": "us",
+  "status": "report",
+  "date": "2025-10-23T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "Reuters/AOL — Trump pardons Binance founder CZ",
+      "url": "https://www.aol.com/articles/trump-pardons-convicted-binance-founder-201850233.html",
+      "archive_url": "https://web.archive.org/web/20251023235841/https://www.aol.com/articles/trump-pardons-convicted-binance-founder-201850233.html"
+    },
+    {
+      "label": "Fortune — the CZ pardon and World Liberty Financial ties",
+      "url": "https://fortune.com/crypto/2025/10/23/binance-changpeng-zhao-cz-pardon-president-donald-trump/",
+      "archive_url": "https://web.archive.org/web/20260310082933/https://fortune.com/crypto/2025/10/23/binance-changpeng-zhao-cz-pardon-president-donald-trump/"
+    },
+    {
+      "label": "Yahoo/Benzinga — three crypto felons, what each case cost",
+      "url": "https://finance.yahoo.com/news/trump-pardoned-3-crypto-felons-133109095.html",
+      "archive_url": "https://web.archive.org/web/20260317170446/https://finance.yahoo.com/news/trump-pardoned-3-crypto-felons-133109095.html"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

@@ -1,0 +1,5 @@
+---
+title: '"Deal With It" — Graduates Boo the AI Sermon'
+tag: Commencement · 2026
+---
+The class of 2026 made its feelings plain. At the University of Central Florida, real-estate executive Gloria Caulfield called AI "the next industrial revolution" — the boos started almost immediately. At Middle Tennessee State, record executive Scott Borchetta told graduates "AI is rewriting production as we sit here," and when they jeered, snapped back: "Deal with it... it's a tool." At the University of Arizona, former Google CEO Eric Schmidt was repeatedly booed, telling the crowd "I can hear you. There is a fear in your generation." The optics: comfortable, late-career figures lecturing indebted graduates that the technology hollowing out entry-level jobs is exciting — to an audience entering the worst graduate market in years. A Gallup report the same month found excitement about AI dwindling among young people while anger rises. The booing is what the displacement statistics sound like in a room.

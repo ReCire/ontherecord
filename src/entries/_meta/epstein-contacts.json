@@ -1,0 +1,20 @@
+{
+  "slug": "epstein-contacts",
+  "section": "pardons",
+  "region": "us",
+  "status": "context",
+  "date": "2024-01-03T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "NPR — Epstein files release breeds more conspiracy theories",
+      "url": "https://www.npr.org/2026/01/02/nx-s1-5662638/epstein-files-release-trump-conspiracy-2026",
+      "archive_url": "https://web.archive.org/web/20260530055021/https://www.npr.org/2026/01/02/nx-s1-5662638/epstein-files-release-trump-conspiracy-2026"
+    },
+    {
+      "label": "Britannica — The Epstein Files: a timeline",
+      "url": "https://www.britannica.com/topic/The-Epstein-Files-A-Timeline",
+      "archive_url": "https://web.archive.org/web/20260523052857/https://www.britannica.com/topic/The-Epstein-Files-A-Timeline"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

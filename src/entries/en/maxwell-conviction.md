@@ -1,0 +1,5 @@
+---
+title: Ghislaine Maxwell — The One Major Conviction
+tag: Convicted · 20 years
+---
+Ghislaine Maxwell, Epstein's longtime associate, is the one principal to face a full criminal reckoning. In December 2021 a Manhattan jury convicted her on five of six counts — including sex trafficking of a minor and related conspiracies — for recruiting and grooming girls for Epstein's abuse between 1994 and 2004. In June 2022 she was sentenced to 20 years and fined $750,000. Her appeal — arguing in part that Epstein's 2007 non-prosecution agreement should have shielded her — was rejected, and in October 2025 the Supreme Court declined to hear it, leaving the conviction final. As of late 2025 a whistleblower told House Democrats that Maxwell was seeking a sentence commutation from President Trump (a former acquaintance of both her and Epstein) and allegedly receiving preferential prison treatment; the White House said Trump had not considered it. Status: convicted, upheld, serving — with the commutation question marked ongoing.

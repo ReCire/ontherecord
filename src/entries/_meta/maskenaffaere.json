@@ -1,0 +1,20 @@
+{
+  "slug": "maskenaffaere",
+  "section": "deutschland",
+  "region": "de",
+  "status": "report",
+  "date": "2021-03-08T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "Übersicht der Maskenaffäre (mit Einzelnachweisen)",
+      "url": "https://de.wikipedia.org/wiki/Maskenaff%C3%A4re_(CDU/CSU)",
+      "archive_url": "https://web.archive.org/web/20260602190444/https://de.wikipedia.org/wiki/Maskenaff%C3%A4re_(CDU/CSU)"
+    },
+    {
+      "label": "Euronews — Löbel tritt zurück",
+      "url": "https://www.euronews.com/2021/03/08/german-mp-resigns-amid-claims-he-used-pandemic-to-enrich-himself",
+      "archive_url": "https://web.archive.org/web/20260602215804/https://www.euronews.com/2021/03/08/german-mp-resigns-amid-claims-he-used-pandemic-to-enrich-himself"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

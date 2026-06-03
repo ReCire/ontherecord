@@ -1,0 +1,5 @@
+---
+title: '"Stakeholder Capitalism" — Corporate Power in a Friendlier Font'
+tag: Debate · structural
+---
+The WEF's signature idea, promoted by founder Klaus Schwab since the 1970s, is "stakeholder capitalism" — the notion that companies should serve employees, customers, society and the planet, not just shareholders. It sounds humane, and the 2020 "Davos Manifesto" framed it as a "better kind of capitalism." The structural critique, made by analysts across the spectrum: the WEF's actual blueprint — the post-2008 Global Redesign Initiative, a 600-page plan for global governance — envisions a "multi-stakeholder" model in which, in the WEF's own words, "the government voice would be one among many, without always being the final arbiter." Critics including UMass governance scholar Harris Gleckman argue this quietly hands corporations a formal seat in global decisions historically reserved for elected governments — concentrating power rather than distributing it. Filed as a debate: defenders see voluntary corporate responsibility; critics see democratic authority diluted in favour of unelected corporate "stakeholders."

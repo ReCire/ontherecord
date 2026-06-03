@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ i18n.title }}</title>
+  <meta name="description" content="{{ i18n.tagline }}">
+  <meta property="og:title" content="{{ i18n.title }}">
+  <meta property="og:description" content="{{ i18n.tagline }}">
+  <meta property="og:image" content="{{ site.ogImage }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ site.url }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
+  <script src="/assets/filter.js" defer></script>
+</head>
+<body class="no-js">
+<script>
+  // Progressive enhancement: add js class when JS is available
+  document.documentElement.classList.remove('no-js');
+  document.documentElement.classList.add('js');
+</script>
+
+{{ content | safe }}
+
+<script>
+  // Inline search index for instant load (fallback to /search-index.json)
+  window.__SEARCH_INDEX__ = {{ searchIndex | safe }};
+</script>
+
+</body>
+</html>

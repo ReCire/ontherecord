@@ -1,0 +1,15 @@
+{
+  "slug": "compliance-after-exposure",
+  "section": "money",
+  "region": "global",
+  "status": "report",
+  "date": "2021-10-03T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "ICIJ — Inside the Pandora Papers dataset",
+      "url": "https://www.icij.org/investigations/pandora-papers/about-pandora-papers-leak-dataset/",
+      "archive_url": "https://web.archive.org/web/20260423062845/https://www.icij.org/investigations/pandora-papers/about-pandora-papers-leak-dataset/"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

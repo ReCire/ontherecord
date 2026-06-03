@@ -1,0 +1,20 @@
+{
+  "slug": "anthropic-settlement",
+  "section": "machine",
+  "region": "us",
+  "status": "settlement",
+  "date": "2025-09-05T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "Norton Rose Fulbright — AI copyright cases update",
+      "url": "https://www.nortonrosefulbright.com/en/knowledge/publications/ce8eaa5f/ai-in-litigation-series-an-update-on-ai-copyright-cases-in-2026",
+      "archive_url": "https://web.archive.org/web/20260418011738/https://www.nortonrosefulbright.com/en/knowledge/publications/ce8eaa5f/ai-in-litigation-series-an-update-on-ai-copyright-cases-in-2026"
+    },
+    {
+      "label": "TechCrunch — new authors' suit & the ruling explained",
+      "url": "https://techcrunch.com/2025/12/23/john-carreyrou-and-other-authors-bring-new-lawsuit-against-six-major-ai-companies/",
+      "archive_url": "https://web.archive.org/web/20260215032707/https://techcrunch.com/2025/12/23/john-carreyrou-and-other-authors-bring-new-lawsuit-against-six-major-ai-companies/"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "weinstein",
+  "section": "abuse",
+  "region": "us",
+  "status": "ruling",
+  "date": "2025-06-11T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "The 19th — Weinstein convicted in 2025 retrial",
+      "url": "https://19thnews.org/2025/06/harvey-weinstein-convicted-retrial/",
+      "archive_url": "https://web.archive.org/web/20260327021908/https://19thnews.org/2025/06/harvey-weinstein-convicted-retrial/"
+    },
+    {
+      "label": "CBS News — 2020 conviction overturned, retrial ordered",
+      "url": "https://www.cbsnews.com/amp/newyork/news/harvey-weinstein-rape-conviction-overturned-appeal-new-york",
+      "archive_url": "https://web.archive.org/web/20240510103900/https://www.cbsnews.com/amp/newyork/news/harvey-weinstein-rape-conviction-overturned-appeal-new-york/"
+    },
+    {
+      "label": "NBC News — overturned conviction & what came next",
+      "url": "https://www.nbcnews.com/news/us-news/harvey-weinstein-conviction-overturned-what-next-rcna149526",
+      "archive_url": "https://web.archive.org/web/20260105091701/https://www.nbcnews.com/news/us-news/harvey-weinstein-conviction-overturned-what-next-rcna149526"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

@@ -1,0 +1,5 @@
+---
+title: 'Davos — Lecturing on Climate, Arriving by Private Jet'
+tag: Greenpeace report
+---
+Each January the World Economic Forum gathers the global elite in Davos to discuss climate and inequality — and each January roughly 1,000 private jets fly in to do it. A Greenpeace International analysis (by consultancy CE Delft) found private flights serving Davos during the 2022 forum emitted ~9,700 tonnes of CO2, quadrupling normal private-jet traffic for that week — equivalent to putting ~350,000 cars on the road. Nearly half the flights covered under 900 km; Davos has a perfectly good railway station 21 km away. The WEF points to Sustainable Aviation Fuel, but SAF is under 0.1% of global jet fuel — what critics call greenwashing. As Greenpeace put it, with 80% of humanity having never flown yet bearing the climate consequences, the annual jet bonanza is a "masterclass in hypocrisy." Access itself is gated: partner badges reportedly run into the hundreds of thousands of francs.

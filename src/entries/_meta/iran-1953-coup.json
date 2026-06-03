@@ -1,0 +1,24 @@
+{
+  "slug": "iran-1953-coup",
+  "section": "empire",
+  "region": "mena",
+  "status": "report",
+  "date": "1953-08-19T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "CNN — CIA acknowledges role in 1953 coup (declassified)",
+      "url": "https://www.cnn.com/2013/08/19/politics/cia-iran-1953-coup",
+      "archive_url": "https://web.archive.org/web/20260410131346/https://www.cnn.com/2013/08/19/politics/cia-iran-1953-coup/"
+    },
+    {
+      "label": "Foreign Policy — 64 years later, CIA releases the details",
+      "url": "https://foreignpolicy.com/2017/06/20/64-years-later-cia-finally-releases-details-of-iran-tehran-oil/"
+    },
+    {
+      "label": "National Security Archive / mohammadmossadegh.com — declassified document collection (primary)",
+      "url": "https://www.mohammadmossadegh.com/news/central-intelligence-agency/cia-documents-iran/",
+      "archive_url": "https://web.archive.org/web/20260208112441/https://mohammadmossadegh.com/news/central-intelligence-agency/cia-documents-iran/"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

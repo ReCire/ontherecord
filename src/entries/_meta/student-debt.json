@@ -1,0 +1,25 @@
+{
+  "slug": "student-debt",
+  "section": "underclass",
+  "region": "us",
+  "status": "report",
+  "date": "2026-01-15T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "LendingTree — US student loan debt statistics",
+      "url": "https://www.lendingtree.com/student/student-loan-debt-statistics/",
+      "archive_url": "https://web.archive.org/web/20260528124040/https://www.lendingtree.com/student/student-loan-debt-statistics/"
+    },
+    {
+      "label": "EducationData.org — economic impact analysis",
+      "url": "https://educationdata.org/student-loan-debt-economic-impact",
+      "archive_url": "https://web.archive.org/web/20260403063437/https://educationdata.org/student-loan-debt-economic-impact"
+    },
+    {
+      "label": "Council on Foreign Relations — is rising student debt harming the economy?",
+      "url": "https://www.cfr.org/backgrounders/us-student-loan-debt-trends-economic-impact",
+      "archive_url": "https://web.archive.org/web/20260319175540/https://www.cfr.org/backgrounders/us-student-loan-debt-trends-economic-impact"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

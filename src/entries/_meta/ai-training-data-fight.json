@@ -1,0 +1,20 @@
+{
+  "slug": "ai-training-data-fight",
+  "section": "machine",
+  "region": "us",
+  "status": "ongoing",
+  "date": "2025-12-23T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "Tracker — status of all 51 AI copyright suits",
+      "url": "https://chatgptiseatingtheworld.com/2025/10/08/status-of-all-51-copyright-lawsuits-v-ai-oct-8-2025-no-more-decisions-on-fair-use-in-2025/",
+      "archive_url": "https://web.archive.org/web/20260531005637/https://chatgptiseatingtheworld.com/2025/10/08/status-of-all-51-copyright-lawsuits-v-ai-oct-8-2025-no-more-decisions-on-fair-use-in-2025/"
+    },
+    {
+      "label": "Engadget — NYT reporter sues AI companies",
+      "url": "https://www.engadget.com/ai/new-york-times-reporter-files-lawsuit-against-ai-companies-161624268.html",
+      "archive_url": "https://web.archive.org/web/20260225180218/https://www.engadget.com/ai/new-york-times-reporter-files-lawsuit-against-ai-companies-161624268.html"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

@@ -1,0 +1,20 @@
+{
+  "slug": "meta-onavo",
+  "section": "surveillance",
+  "region": "us",
+  "status": "report",
+  "date": "2019-02-21T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "TechCrunch — Facebook shuts down spyware VPN Onavo",
+      "url": "https://techcrunch.com/2019/02/21/facebook-removes-onavo/",
+      "archive_url": "https://web.archive.org/web/20260331183237/https://techcrunch.com/2019/02/21/facebook-removes-onavo/"
+    },
+    {
+      "label": "Gizmodo — the data-harvesting VPN",
+      "url": "https://gizmodo.com/facebook-is-shutting-down-its-sneaky-data-harvesting-v-1832814616",
+      "archive_url": "https://web.archive.org/web/20240402152436/https://gizmodo.com/facebook-is-shutting-down-its-sneaky-data-harvesting-v-1832814616"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

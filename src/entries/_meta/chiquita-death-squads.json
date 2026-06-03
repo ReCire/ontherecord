@@ -1,0 +1,24 @@
+{
+  "slug": "chiquita-death-squads",
+  "section": "corruption",
+  "region": "global",
+  "status": "ruling",
+  "date": "2024-06-10T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "National Security Archive — Chiquita found liable (the Chiquita Papers, primary docs)",
+      "url": "https://nsarchive.gwu.edu/news/colombia-chiquita-papers/2024-06-10/chiquita-found-liable-colombia-paramilitary-killings",
+      "archive_url": "https://web.archive.org/web/20260422033357/https://nsarchive.gwu.edu/news/colombia-chiquita-papers/2024-06-10/chiquita-found-liable-colombia-paramilitary-killings"
+    },
+    {
+      "label": "EarthRights International — verdict upheld, motion to reduce rejected",
+      "url": "https://earthrights.org/media_release/u-s-court-upholds-landmark-jury-verdict-for-victims-of-paramilitary-violence-in-colombia-against-chiquita/",
+      "archive_url": "https://web.archive.org/web/20260206221757/https://earthrights.org/media_release/u-s-court-upholds-landmark-jury-verdict-for-victims-of-paramilitary-violence-in-colombia-against-chiquita/"
+    },
+    {
+      "label": "Washington Post — jury finds Chiquita liable",
+      "url": "https://www.washingtonpost.com/business/2024/06/11/chiquita-colombia-death-squads-jury-verdict/f8145c74-281d-11ef-835a-2a6acac1f8a6_story.html"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

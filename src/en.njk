@@ -1,17 +1,21 @@
 ---
-layout: base.njk
+layout: layout.njk
+lang: en
+permalink: /
 ---
+{% set entries = resolvedEntries.en %}
+{% set searchIndex = searchIndexData %}
 <header>
-  <div class="kicker">A documented ledger · with primary sources</div>
-  <h1>On The<br>Record</h1>
-  <p class="standfirst">{{ site.tagline }}</p>
+  <div class="kicker">{{ i18n.kicker }}</div>
+  <h1>{{ i18n.title }}</h1>
+  <p class="standfirst">{{ i18n.tagline }}</p>
   <div class="meta">
     Every claim links to a court filing, government report, or primary investigation.<br>
     No anonymous allegations. Read the sources. Verify everything.
   </div>
   <nav class="quick-nav">
     <a href="#sources">About</a>
-    <a href="#contact">Suggest</a>
+    <a href="#contact">{{ i18n.suggestEntry }}</a>
     <a href="#footer">Author</a>
   </nav>
 </header>
@@ -19,84 +23,87 @@ layout: base.njk
 <div class="filters" id="filters">
   <div class="filter-bar-head">
     <button class="filter-toggle" id="filter-toggle" aria-expanded="false" aria-controls="filter-body">
-      <span class="filter-toggle-label">Filter</span>
+      <span class="filter-toggle-label">{{ i18n.filterToggle }}</span>
       <span class="filter-toggle-arrow" aria-hidden="true">▾</span>
     </button>
     <div class="search-wrap js-only">
-      <label for="search-input" class="sr-only">Search the record</label>
+      <label for="search-input" class="sr-only">{{ i18n.searchPlaceholder }}</label>
       <input type="search" id="search-input" class="search-input"
-        placeholder="Search the record…" autocomplete="off"
-        aria-label="Search entries" spellcheck="false">
+        placeholder="{{ i18n.searchPlaceholder }}" autocomplete="off"
+        aria-label="{{ i18n.searchPlaceholder }}" spellcheck="false">
       <button type="button" id="search-clear" class="search-clear" aria-label="Clear search" hidden>✕</button>
     </div>
-    <button type="button" id="expand-all" class="expand-all-btn js-only" aria-label="Collapse all sections">Collapse all</button>
+    <button type="button" id="expand-all" class="expand-all-btn js-only" aria-label="{{ i18n.collapseAll }}">{{ i18n.collapseAll }}</button>
     <span class="filter-meta inline-meta">
-      <span id="result-count" aria-live="polite" aria-atomic="true"></span><span id="active-hint"></span> · <a href="#" id="clear-filters">clear all</a>
+      <span id="result-count" aria-live="polite" aria-atomic="true"></span><span id="active-hint"></span> · <a href="#" id="clear-filters">{{ i18n.clearAll }}</a>
     </span>
   </div>
   <div class="filter-body" id="filter-body" hidden>
     <div class="filter-group">
       <span class="filter-label">Topic</span>
       {% for s in site.sections %}
-      <button class="chip" data-filter="section" data-value="{{ s.key }}">{{ s.label }}</button>
+      <button class="chip" data-filter="section" data-value="{{ s.key }}">{{ i18n.sections[s.key] }}</button>
       {% endfor %}
     </div>
     <div class="filter-group">
       <span class="filter-label">Region</span>
       {% for r in site.regions %}
-      <button class="chip" data-filter="region" data-value="{{ r.key }}">{{ r.label }}</button>
+      <button class="chip" data-filter="region" data-value="{{ r.key }}">{{ i18n.regions[r.key] }}</button>
       {% endfor %}
     </div>
     <div class="filter-group">
       <span class="filter-label">Status</span>
       {% for st in site.statuses %}
-      <button class="chip" data-filter="status" data-value="{{ st.key }}">{{ st.label }}</button>
+      <button class="chip" data-filter="status" data-value="{{ st.key }}">{{ i18n.statuses[st.key] }}</button>
       {% endfor %}
     </div>
   </div>
 </div>
 
 {% for s in site.sections %}
-<section id="{{ s.key }}" data-section-block="{{ s.key }}" data-section-label="{{ s.label }}">
+<section id="{{ s.key }}" data-section-block="{{ s.key }}" data-section-label="{{ i18n.sections[s.key] }}">
   <div class="sec-head" role="button" tabindex="0"
     aria-expanded="true" aria-controls="sec-content-{{ s.key }}"
     data-sec-toggle>
     <span class="sec-num">{{ s.num }}</span>
-    <h2>{{ s.label }}</h2>
+    <h2>{{ i18n.sections[s.key] }}</h2>
     <span class="sec-caret" aria-hidden="true">▾</span>
   </div>
   <div class="sec-content" id="sec-content-{{ s.key }}">
-    {% if site.sectionIntros[s.key] %}
-    <p class="sec-sub">{{ site.sectionIntros[s.key] }}</p>
+    {% if i18n.sectionIntros[s.key] %}
+    <p class="sec-sub">{{ i18n.sectionIntros[s.key] }}</p>
     {% endif %}
     {%- set count = 0 -%}
-    {% for entry in collections.entries %}
-      {%- if entry.data.section == s.key -%}
+    {% for entry in entries %}
+      {%- if entry.section == s.key -%}
         {%- set count = count + 1 -%}
         <article class="entry"
-          data-section="{{ entry.data.section }}"
-          data-region="{{ entry.data.region }}"
-          data-status="{{ entry.data.status }}"
-          data-year="{{ entry.data.date | year }}">
+          data-section="{{ entry.section }}"
+          data-region="{{ entry.region }}"
+          data-status="{{ entry.status }}"
+          data-year="{{ entry.date | year }}">
+          {% if not entry.translated %}
+          <div class="translation-note">{{ i18n.translationNote }}</div>
+          {% endif %}
           <h3>
-            {% if entry.data.tag %}<span class="tag">{{ entry.data.tag }}</span>{% endif %}
-            {{ entry.data.title }}
+            {% if entry.tag %}<span class="tag">{{ entry.tag }}</span>{% endif %}
+            {{ entry.title }}
           </h3>
-          <div class="body">{{ entry.templateContent | safe }}</div>
-          {% if entry.data.sources and entry.data.sources.length %}
+          <div class="body">{{ entry.bodyBlocks | renderBlocks | safe }}</div>
+          {% if entry.sources and entry.sources.length %}
           <div class="sources">
-            {% for src in entry.data.sources %}
-            <span class="src"><span class="label{% if src.video %} vid{% endif %}">{% if src.video %}▶ VIDEO{% else %}SRC{% endif %}</span><a href="{{ src.url }}" target="_blank" rel="noopener">{{ src.label }}</a>{% if src.archive_url %} <span class="src-sep">·</span> <a class="archive-link" href="{{ src.archive_url }}" target="_blank" rel="noopener" title="Permanent snapshot — Wayback Machine">archived</a>{% endif %}</span>
+            {% for src in entry.sources %}
+            <span class="src"><span class="label{% if src.video %} vid{% endif %}">{% if src.video %}{{ i18n.video }}{% else %}{{ i18n.src }}{% endif %}</span><a href="{{ src.url }}" target="_blank" rel="noopener">{{ src.label }}</a>{% if src.archive_url %} <span class="src-sep">·</span> <a class="archive-link" href="{{ src.archive_url }}" target="_blank" rel="noopener" title="Permanent snapshot — Wayback Machine">{{ i18n.archived }}</a>{% endif %}</span>
             {% endfor %}
           </div>
           {% endif %}
-          {% if entry.data.last_verified %}<div class="verified">Sources last verified {{ entry.data.last_verified }}</div>{% endif %}
+          {% if entry.last_verified %}<div class="verified">{{ i18n.lastVerified }} {{ entry.last_verified }}</div>{% endif %}
         </article>
       {%- endif -%}
     {% endfor %}
-    {% if count == 0 %}<p class="sec-empty">No entries yet in this section.</p>{% endif %}
-    {% if site.pullquotes[s.key] %}
-    <p class="pullquote">{{ site.pullquotes[s.key] }}</p>
+    {% if count == 0 %}<p class="sec-empty">{{ i18n.sectionEmpty }}</p>{% endif %}
+    {% if i18n.pullquotes[s.key] %}
+    <p class="pullquote">{{ i18n.pullquotes[s.key] }}</p>
     {% endif %}
   </div>
 </section>
@@ -105,7 +112,7 @@ layout: base.njk
 <section id="sources">
   <div class="sec-head">
     <span class="sec-num">§</span>
-    <h2>How To Use This</h2>
+    <h2>{{ i18n.howToUseThis }}</h2>
   </div>
   <p class="sec-sub">A ledger is only as good as its sources.</p>
   <div class="entry">
@@ -122,7 +129,7 @@ layout: base.njk
 <section class="contact" id="contact">
   <div class="sec-head">
     <span class="sec-num">+</span>
-    <h2>Suggest an Entry</h2>
+    <h2>{{ i18n.suggestEntry }}</h2>
   </div>
   <p class="sec-sub">Know a documented case that belongs here? Send it — anonymously if you like. Include a primary source if you have one.</p>
 
@@ -151,7 +158,7 @@ layout: base.njk
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     {% endif %}
 
-    <button type="submit" id="submit-btn">Send Suggestion</button>
+    <button type="submit" id="submit-btn">{{ i18n.contactSubmit }}</button>
     <div id="form-status"></div>
   </form>
   <p class="form-note">
@@ -169,12 +176,11 @@ layout: base.njk
 </section>
 
 <footer id="footer">
-  <strong>{{ site.title | upper }}</strong> — an open ledger of documented corporate &amp; political harm.<br>
+  <strong>{{ i18n.title | upper }}</strong> — an open ledger of documented corporate &amp; political harm.<br>
   Compiled from public court filings, government reports and investigative journalism.
   <div class="disclaim">
     This page documents wrongdoing and points to evidence. It is a tool for accountability through
-    information, organizing and the law — not a call for harm against any person. The people speak
-    openly, in daylight, with the record in hand. That is the point.
+    information, organizing and the law — not a call for harm against any person. {{ i18n.disclaimer }}
   </div>
   Verify everything. Cite your sources. Share freely.<br>
   <a href="https://ericoake.com" target="_blank" rel="noopener">Eric Oake</a>

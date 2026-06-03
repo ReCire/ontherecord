@@ -1,0 +1,20 @@
+{
+  "slug": "cum-ex",
+  "section": "deutschland",
+  "region": "de",
+  "status": "ruling",
+  "date": "2021-07-28T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "CORRECTIV — CumEx-Files",
+      "url": "https://correctiv.org/themen/cum-ex-steuerbetrug/",
+      "archive_url": "https://web.archive.org/web/20260213065317/https://correctiv.org/themen/cum-ex-steuerbetrug/"
+    },
+    {
+      "label": "Finanzwende — CumEx-Chronik",
+      "url": "https://www.finanzwende.de/themen/cumex/chronik-von-cumex",
+      "archive_url": "https://web.archive.org/web/20260411110427/https://www.finanzwende.de/themen/cumex/chronik-von-cumex"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

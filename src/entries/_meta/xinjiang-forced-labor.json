@@ -1,0 +1,20 @@
+{
+  "slug": "xinjiang-forced-labor",
+  "section": "slavery",
+  "region": "global",
+  "status": "report",
+  "date": "2022-06-01T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "The Exodus Road — Slavery in Supply Chains",
+      "url": "https://theexodusroad.com/slavery-in-supply-chains/",
+      "archive_url": "https://web.archive.org/web/20260216043045/https://theexodusroad.com/slavery-in-supply-chains/"
+    },
+    {
+      "label": "LegalClarity — Forced Labor & U.S. Law",
+      "url": "https://legalclarity.org/chinese-slavery-history-forced-labor-and-u-s-law/",
+      "archive_url": "https://web.archive.org/web/20260602192322/https://legalclarity.org/chinese-slavery-history-forced-labor-and-u-s-law/"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "defense-contractor-profits",
+  "section": "money",
+  "region": "global",
+  "status": "report",
+  "date": "2025-10-21T00:00:00.000Z",
+  "sources": [
+    {
+      "label": "Brown University Costs of War — Profits of War 2020–2024 (primary)",
+      "url": "https://costsofwar.watson.brown.edu/sites/default/files/papers/Profits-of-War_Hartung-Semler_Costs-of-War_Quincy-FINAL.pdf",
+      "archive_url": "https://web.archive.org/web/20260416070154/https://costsofwar.watson.brown.edu/sites/default/files/papers/Profits-of-War_Hartung-Semler_Costs-of-War_Quincy-FINAL.pdf"
+    },
+    {
+      "label": "Reuters/AOL — Ukraine & Middle East conflicts boost arms makers' profits",
+      "url": "https://www.aol.com/articles/ukraine-middle-east-conflicts-boost-154348993.html",
+      "archive_url": "https://web.archive.org/web/20260602214727/https://www.aol.com/articles/ukraine-middle-east-conflicts-boost-154348993.html"
+    },
+    {
+      "label": "Newsweek — contractor stocks jumped after Oct 7",
+      "url": "https://www.newsweek.com/military-contractor-stocks-skyrocketed-since-israel-war-started-1834884",
+      "archive_url": "https://web.archive.org/web/20260602214808/https://www.newsweek.com/military-contractor-stocks-skyrocketed-since-israel-war-started-1834884"
+    }
+  ],
+  "last_verified": "2026-06-02T00:00:00.000Z"
+}
