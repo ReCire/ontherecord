@@ -1,8 +1,10 @@
 module.exports = {
   // Site metadata
   title: "On The Record",
+  titleSuffix: "A Documented Ledger",
+  ogLocale: "en_US",
   tagline: "The people ask only for what is necessary. The powerful aspire to everything. Below: what was done, who did it, and where it is written down.",
-  kicker: "A documented ledger of corporate & political harm, with primary sources.",
+  kicker: "A documented ledger · with primary sources",
   disclaimer: "The people speak openly, in daylight, with the record in hand.",
 
   // Section labels (language-specific)

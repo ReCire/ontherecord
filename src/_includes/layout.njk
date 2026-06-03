@@ -1,34 +1,64 @@
 <!DOCTYPE html>
 <html lang="{{ lang }}">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ i18n.title }}</title>
-  <meta name="description" content="{{ i18n.tagline }}">
-  <meta property="og:title" content="{{ i18n.title }}">
-  <meta property="og:description" content="{{ i18n.tagline }}">
-  <meta property="og:image" content="{{ site.ogImage }}">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ site.url }}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/style.css">
-  <script src="/assets/filter.js" defer></script>
-</head>
-<body class="no-js">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ i18n.title }} — {{ i18n.titleSuffix }}</title>
+<meta name="description" content="{{ i18n.tagline }}">
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+<!-- OpenGraph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ site.url }}{{ page.url }}">
+<meta property="og:title" content="{{ i18n.title }} — {{ i18n.titleSuffix }}">
+<meta property="og:description" content="{{ i18n.tagline }}">
+{% if site.ogImage %}<meta property="og:image" content="{{ site.url }}{{ site.ogImage }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">{% endif %}
+<meta property="og:locale" content="{{ i18n.ogLocale }}">
+<meta property="og:site_name" content="{{ i18n.title }}">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ i18n.title }} — {{ i18n.titleSuffix }}">
+<meta name="twitter:description" content="{{ i18n.tagline }}">
+{% if site.ogImage %}<meta name="twitter:image" content="{{ site.url }}{{ site.ogImage }}">{% endif %}
+
+<!-- Indexing -->
+<meta name="robots" content="index, follow">
+
+<!-- hreflang alternates (safe now; de/es resolve once those builds exist) -->
+<link rel="alternate" hreflang="en" href="{{ site.url }}/">
+<link rel="alternate" hreflang="de" href="{{ site.url }}/de/">
+<link rel="alternate" hreflang="es" href="{{ site.url }}/es/">
+<link rel="alternate" hreflang="x-default" href="{{ site.url }}/">
+
+<style>
+  /* Self-hosted fonts — no third-party requests, no visitor IP leakage. */
+  @font-face {
+    font-family: 'JetBrains Mono'; font-weight: 400 800; font-display: swap;
+    src: url('/assets/fonts/jetbrains-mono.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Newsreader'; font-weight: 400 500; font-display: swap;
+    src: url('/assets/fonts/newsreader.woff2') format('woff2');
+  }
+</style>
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="stylesheet" href="/assets/style.css">
 <script>
-  // Progressive enhancement: add js class when JS is available
   document.documentElement.classList.remove('no-js');
   document.documentElement.classList.add('js');
 </script>
+<script src="/assets/filter.js" defer></script>
+</head>
+<body class="no-js">
 
 <div class="wrap">
 {{ content | safe }}
 </div>
 
 <script>
-  // Inline search index for instant load (fallback to /search-index.json)
   window.__SEARCH_INDEX__ = {{ searchIndex | safe }};
 </script>
 
