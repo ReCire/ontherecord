@@ -226,6 +226,27 @@ section { margin-bottom: 64px; scroll-margin-top: 120px; }
   .sec-caret { transition: none; }
 }
 
+/* Mobile filter bar layout (< 600px) */
+@media (max-width: 599px) {
+  .filter-bar-head {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .filter-toggle,
+  .expand-all-btn {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+  .search-wrap {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+  .filter-meta.inline-meta {
+    flex: 1 1 100%;
+    margin-top: 8px;
+  }
+}
+
 .sec-num { font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 13px; color: var(--red); }
 h2 {
   font-family: 'JetBrains Mono', monospace; font-weight: 800;
