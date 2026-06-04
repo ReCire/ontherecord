@@ -1,0 +1,12 @@
+{
+  "slug": "spacex-retirement-ipo",
+  "section": "money",
+  "region": "us",
+  "status": "ongoing",
+  "date": "2026-05-20",
+  "sources": [
+    { "label": "SEC — SpaceX Form S-1 registration (primary filing)", "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&company=space+exploration+technologies&type=S-1" },
+    { "label": "Moneywise — how the index-rule changes pull SpaceX into 401(k)s", "url": "https://moneywise.com/news/top-stories/elon-musk-spacex-ipo-crsp-vti-ftse-russell-nasdaq-401k" },
+    { "label": "Common Dreams — the IPO engineered to force index-fund buying", "url": "https://www.commondreams.org/news/spacex-ipo-elon-musk" }
+  ]
+}
