@@ -35,6 +35,7 @@
   var viewNarrativeBtn = document.getElementById("view-narrative");
   var viewRecentBtn    = document.getElementById("view-recent");
   var viewTimelineBtn  = document.getElementById("view-timeline");
+  var clearBtn         = document.getElementById("clear-filters");
 
   // =========================================================================
   // SEARCH INDEX — built once, never re-read DOM per keystroke
@@ -709,6 +710,15 @@
     }
 
     updateHint();
+    // -- Enable / disable "Clear filters" based solely on facet state (not query or view)
+    if (clearBtn) {
+      var anyFacet = active.section.size > 0 || active.region.size > 0 || active.status.size > 0;
+      if (anyFacet) {
+        clearBtn.removeAttribute("aria-disabled");
+      } else {
+        clearBtn.setAttribute("aria-disabled", "true");
+      }
+    }
     updateExpandAllLabel();
   }
 
@@ -739,12 +749,13 @@
     });
   });
 
-  var clearBtn = document.getElementById("clear-filters");
   if (clearBtn) {
     clearBtn.addEventListener("click", function (e) {
       e.preventDefault();
+      if (clearBtn.getAttribute("aria-disabled") === "true") return; // no-op when nothing to clear
       Object.keys(active).forEach(function (t) { active[t].clear(); });
       document.querySelectorAll(".chip.active").forEach(function (c) { c.classList.remove("active"); });
+      // intentionally does NOT clear query or change viewMode
       render();
     });
   }

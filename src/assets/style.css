@@ -125,6 +125,9 @@ h1 {
 .filter-meta a { color: var(--red); text-decoration: none; border-bottom: 1px solid transparent; }
 .filter-meta a:hover { border-bottom-color: var(--red); }
 .filter-meta.inline-meta { margin-top: 0; }
+#clear-filters[aria-disabled="true"] {
+  opacity: 0.4; pointer-events: none; cursor: default; border-bottom-color: transparent;
+}
 
 /* ---- Row 2 — search full width ---- */
 .filter-row-search .search-wrap {

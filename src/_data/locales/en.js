@@ -92,7 +92,7 @@ module.exports = {
   filterToggle: "Filters",
   expandAll: "Expand all",
   collapseAll: "Collapse all",
-  clearAll: "Clear all",
+  clearAll: "Clear filters",
   searchPlaceholder: "Search entries...",
   searchEmpty: "No results found",
   searchResults: "results",
