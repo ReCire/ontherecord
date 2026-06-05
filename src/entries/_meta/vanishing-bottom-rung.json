@@ -4,6 +4,7 @@
   "region": "us",
   "status": "report",
   "date": "2025-09-04T00:00:00.000Z",
+  "added": "2026-06-03",
   "sources": [
     {
       "label": "Fortune — Stanford & Harvard findings",
@@ -12,7 +13,8 @@
     },
     {
       "label": "CNBC — SignalFire 50% decline",
-      "url": "https://www.cnbc.com/2025/09/07/ai-entry-level-jobs-hiring-careers.html"
+      "url": "https://www.cnbc.com/2025/09/07/ai-entry-level-jobs-hiring-careers.html",
+      "archive_url": "https://web.archive.org/web/20260603070256/https://www.cnbc.com/2025/09/07/ai-entry-level-jobs-hiring-careers.html"
     },
     {
       "label": "Washington Monthly — how AI broke the entry-level job",
@@ -20,5 +22,5 @@
       "archive_url": "https://web.archive.org/web/20260601170341/https://washingtonmonthly.com/2026/05/29/ai-entry-level-jobs-college-graduates/"
     }
   ],
-  "last_verified": "2026-06-02T00:00:00.000Z"
+  "last_verified": "2026-06-04"
 }

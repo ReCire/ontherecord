@@ -4,9 +4,22 @@
   "region": "us",
   "status": "ongoing",
   "date": "2026-05-20",
+  "added": "2026-06-04",
   "sources": [
-    { "label": "SEC — SpaceX Form S-1 registration (primary filing)", "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&company=space+exploration+technologies&type=S-1" },
-    { "label": "Moneywise — how the index-rule changes pull SpaceX into 401(k)s", "url": "https://moneywise.com/news/top-stories/elon-musk-spacex-ipo-crsp-vti-ftse-russell-nasdaq-401k" },
-    { "label": "Common Dreams — the IPO engineered to force index-fund buying", "url": "https://www.commondreams.org/news/spacex-ipo-elon-musk" }
-  ]
+    {
+      "label": "SEC — SpaceX Form S-1 registration (primary filing)",
+      "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&company=space+exploration+technologies&type=S-1"
+    },
+    {
+      "label": "Moneywise — how the index-rule changes pull SpaceX into 401(k)s",
+      "url": "https://moneywise.com/news/top-stories/elon-musk-spacex-ipo-crsp-vti-ftse-russell-nasdaq-401k",
+      "archive_url": "https://web.archive.org/web/20260604181701/https://moneywise.com/news/top-stories/elon-musk-spacex-ipo-crsp-vti-ftse-russell-nasdaq-401k"
+    },
+    {
+      "label": "Common Dreams — the IPO engineered to force index-fund buying",
+      "url": "https://www.commondreams.org/news/spacex-ipo-elon-musk",
+      "archive_url": "https://web.archive.org/web/20260530060948/https://www.commondreams.org/news/spacex-ipo-elon-musk"
+    }
+  ],
+  "last_verified": "2026-06-05"
 }

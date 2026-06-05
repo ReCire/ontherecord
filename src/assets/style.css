@@ -41,6 +41,11 @@ h1 {
   font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.1em;
   color: var(--faint); margin-top: 30px; text-transform: uppercase; line-height: 1.9;
 }
+.ledger-updated {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--faint); margin-top: 6px;
+}
 
 /* ---- Quick nav ---- */
 .quick-nav {
@@ -72,8 +77,11 @@ h1 {
   border-bottom: 1px solid var(--line);
   padding: 10px 0; margin-bottom: 40px;
 }
-.filter-bar-head {
-  display: flex; align-items: center; gap: 16px;
+.filter-bar {
+  display: flex; flex-direction: column; gap: 8px;
+}
+.filter-row {
+  align-items: center;
 }
 .filter-toggle {
   font-family: 'JetBrains Mono', monospace; font-size: 11px;
@@ -117,6 +125,20 @@ h1 {
 .filter-meta a { color: var(--red); text-decoration: none; border-bottom: 1px solid transparent; }
 .filter-meta a:hover { border-bottom-color: var(--red); }
 .filter-meta.inline-meta { margin-top: 0; }
+
+/* ---- Row 2 — search full width ---- */
+.filter-row-search .search-wrap {
+  max-width: none;
+  flex: 1 1 auto;
+}
+
+/* ---- Row 3 — controls + status ---- */
+.filter-row-controls {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+}
+.filter-controls-left {
+  display: flex; align-items: center; gap: 8px;
+}
 
 /* ---- Search box ---- */
 .search-wrap {
@@ -225,6 +247,48 @@ section { margin-bottom: 64px; scroll-margin-top: 120px; }
   color: var(--faint);
 }
 
+/* ---- View toggle (Narrative | Recent | Timeline) ---- */
+/* Parent row (.filter-row-views) carries js-only; .view-toggle itself is always flex */
+.view-toggle { display: flex; width: 100%; }
+.view-btn {
+  flex: 1 1 0; /* equal-width segments */
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  background: transparent; color: var(--ink);
+  border: 1px solid var(--line); padding: 6px 10px;
+  cursor: pointer; white-space: nowrap; text-align: center;
+  position: relative; /* for z-index overlap on active state */
+  transition: all .12s;
+}
+/* Collapse shared inner borders for adjacent segments */
+.view-btn + .view-btn { margin-left: -1px; }
+.view-btn:hover:not([aria-pressed="true"]) { border-color: var(--ink); color: var(--ink); z-index: 1; }
+.view-btn[aria-pressed="true"] {
+  background: var(--red); color: var(--paper); border-color: var(--red); z-index: 1;
+}
+.view-btn:focus-visible {
+  outline: 2px solid var(--red); outline-offset: 2px; z-index: 2;
+}
+@media (prefers-reduced-motion: reduce) {
+  .view-btn { transition: none; }
+}
+
+/* Mobile filter bar — 360 / 390 / 414 / 768px */
+@media (max-width: 599px) {
+  /* Row 1: equal-width segments already fill the column; ensure 44px tap target */
+  .view-btn { min-height: 44px; }
+
+  /* Row 3: allow FILTERS+COLLAPSE / status to wrap to two lines on tight widths */
+  .filter-row-controls { flex-wrap: wrap; gap: 6px; }
+  .filter-controls-left { flex: 1 1 auto; }
+  .filter-meta { flex: 1 1 100%; }
+
+  /* Ensure no horizontal scroll from search or any row element */
+  .filter-row-search,
+  .filter-row-views,
+  .filter-row-controls { max-width: 100%; overflow: hidden; }
+}
+
 /* sec-content: no height animation — just snap (clean for long pages) */
 .sec-content[hidden] { display: none; }
 
@@ -232,26 +296,6 @@ section { margin-bottom: 64px; scroll-margin-top: 120px; }
   .sec-caret { transition: none; }
 }
 
-/* Mobile filter bar layout (< 600px) */
-@media (max-width: 599px) {
-  .filter-bar-head {
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .filter-toggle,
-  .expand-all-btn {
-    flex: 1 1 auto;
-    text-align: center;
-  }
-  .search-wrap {
-    flex: 1 1 100%;
-    max-width: 100%;
-  }
-  .filter-meta.inline-meta {
-    flex: 1 1 100%;
-    margin-top: 8px;
-  }
-}
 
 .sec-num { font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 13px; color: var(--red); }
 h2 {

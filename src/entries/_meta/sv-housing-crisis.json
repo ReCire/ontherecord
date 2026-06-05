@@ -4,10 +4,12 @@
   "region": "us",
   "status": "report",
   "date": "2025-01-01T00:00:00.000Z",
+  "added": "2026-06-03",
   "sources": [
     {
       "label": "Bracing for a Permanent Underclass (compiles Pain Index data)",
-      "url": "https://medium.com/newsarticulated/silicon-valley-is-bracing-for-a-permanent-underclass-should-you-be-worried-too-71c7336a7d6c"
+      "url": "https://medium.com/newsarticulated/silicon-valley-is-bracing-for-a-permanent-underclass-should-you-be-worried-too-71c7336a7d6c",
+      "archive_url": "https://web.archive.org/web/20260604181727/https://medium.com/newsarticulated/silicon-valley-is-bracing-for-a-permanent-underclass-should-you-be-worried-too-71c7336a7d6c"
     },
     {
       "label": "Joint Venture SV Index — housing & homelessness",
@@ -15,5 +17,5 @@
       "archive_url": "https://web.archive.org/web/20250312033035/https://www.almanacnews.com/housing/2025/03/11/report-silicon-valley-in-flux-and-uncertainty-as-inequality-rises/"
     }
   ],
-  "last_verified": "2026-06-02T00:00:00.000Z"
+  "last_verified": "2026-06-05"
 }

@@ -45,9 +45,14 @@ function resolveForLang(lang = "en") {
     // Compile Markdown body to blocks
     const bodyBlocks = parseMarkdownToBlocks(parsed.content, slug);
 
-    // Merge neutral + translatable
+    // Merge neutral + translatable.
+    // `added` is the date the entry was added to this site (populated by
+    // scripts/backfill-added.js). Fall back to the event date string so the
+    // field is always present for the template and client sort.
+    const addedDate = meta.added || String(meta.date || "").slice(0, 10) || new Date().toISOString().slice(0, 10);
     entries.push({
       ...meta,
+      added: addedDate,
       title: parsed.data.title,
       tag: parsed.data.tag || null,
       bodyBlocks,

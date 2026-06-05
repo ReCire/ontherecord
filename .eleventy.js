@@ -66,11 +66,18 @@ module.exports = function (eleventyConfig) {
         region: entry.region,
         status: entry.status,
         year: new Date(entry.date).getFullYear(),
+        date: entry.date ? String(entry.date).slice(0, 10) : "",
+        added: entry.added || "",
         text: blocksToPlaintext(entry.bodyBlocks),
       }));
       const searchIndexPath = path.join(__dirname, "_site", lang === "en" ? "" : lang, "search-index.json");
       fs.writeFileSync(searchIndexPath, JSON.stringify(searchIndex, null, 2));
     }
+  });
+
+  // Build date: computed once at build time, exposed to templates as "June 2026"
+  eleventyConfig.addGlobalData("buildDate", function () {
+    return new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" });
   });
 
   // Add search index as global data for templates
@@ -99,6 +106,8 @@ module.exports = function (eleventyConfig) {
       region: entry.region,
       status: entry.status,
       year: new Date(entry.date).getFullYear(),
+      date: entry.date ? String(entry.date).slice(0, 10) : "",
+      added: entry.added || "",
       text: blocksToPlaintext(entry.bodyBlocks),
     }));
 

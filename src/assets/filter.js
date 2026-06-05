@@ -18,6 +18,7 @@
   // =========================================================================
   var active  = { section: new Set(), region: new Set(), status: new Set() };
   var query   = "";                 // current search query string
+  var viewMode = "narrative";       // "narrative" | "recent" | "timeline"
   var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   // section collapse state: key → true (expanded) | false (collapsed)
   var sectionExpanded = {};
@@ -25,12 +26,15 @@
   // =========================================================================
   // DOM REFERENCES
   // =========================================================================
-  var entryEls      = Array.prototype.slice.call(document.querySelectorAll(".entry[data-section]"));
-  var sectionBlocks = Array.prototype.slice.call(document.querySelectorAll("[data-section-block]"));
-  var countEl       = document.getElementById("result-count");
-  var activeHint    = document.getElementById("active-hint");
-  var searchInput   = document.getElementById("search-input");
-  var searchClear   = document.getElementById("search-clear");
+  var entryEls        = Array.prototype.slice.call(document.querySelectorAll(".entry[data-section]"));
+  var sectionBlocks   = Array.prototype.slice.call(document.querySelectorAll("[data-section-block]"));
+  var countEl         = document.getElementById("result-count");
+  var activeHint      = document.getElementById("active-hint");
+  var searchInput     = document.getElementById("search-input");
+  var searchClear     = document.getElementById("search-clear");
+  var viewNarrativeBtn = document.getElementById("view-narrative");
+  var viewRecentBtn    = document.getElementById("view-recent");
+  var viewTimelineBtn  = document.getElementById("view-timeline");
 
   // =========================================================================
   // SEARCH INDEX — built once, never re-read DOM per keystroke
@@ -551,55 +555,81 @@
   }
 
   // =========================================================================
-  // CORE RENDER — single path for both facets and search
+  // CORE RENDER — single path for facets, search, narrative, and timeline
   // =========================================================================
-  var _searchActive = false;
+  var _flatActive = false; // true when either search or timeline flat mode is on
 
   function render() {
     var tokens = query.trim().toLowerCase().split(/\s+/).filter(function (t) { return t && t.trim(); });
     var hasQuery = tokens.length > 0;
+    // Flat mode is wanted for search (score sort) OR any non-narrative view.
+    // Active search always wins the sort key; clearing search resumes the active view's sort.
+    var wantFlat = hasQuery || viewMode !== "narrative";
 
     // -- Compute scores & visibility
-    var results = [];
     index.forEach(function (rec) {
       var passesFacets = matchesFacets(rec.el);
       var s = hasQuery ? score(rec, tokens) : 1;
-      var visible = passesFacets && s > 0;
       rec._score   = s;
-      rec._visible = visible;
+      rec._visible = passesFacets && s > 0;
     });
 
-    // -- Switch layout mode
-    if (hasQuery && !_searchActive) {
-      _searchActive = true;
+    // -- Switch layout mode (flat ↔ grouped)
+    // enterFlatMode / exitFlatMode are reused unchanged from the search path.
+    if (wantFlat && !_flatActive) {
+      _flatActive = true;
       enterFlatMode();
-    } else if (!hasQuery && _searchActive) {
-      _searchActive = false;
+    } else if (!wantFlat && _flatActive) {
+      _flatActive = false;
       exitFlatMode();
       restoreOrder();
       index.forEach(function (rec) { removeEyebrow(rec); });
       clearAllHighlights();
-      // Re-enable expand-all button when search is cleared
-      if (expandAllBtn) {
-        expandAllBtn.disabled = false;
-        expandAllBtn.removeAttribute("aria-disabled");
-      }
     }
 
-    if (hasQuery) {
-      // Disable expand-all button during search
+    if (wantFlat) {
+      // Disable expand-all in flat mode (no sections visible to expand/collapse)
       if (expandAllBtn) {
         expandAllBtn.disabled = true;
         expandAllBtn.setAttribute("aria-disabled", "true");
       }
 
-      // Flat mode: sort visible by score desc, originalIndex asc (stable)
       var visible = index.filter(function (r) { return r._visible; });
-      visible.sort(function (a, b) {
-        return b._score - a._score || a.originalIndex - b.originalIndex;
-      });
 
-      // Show/hide + eyebrows
+      if (hasQuery) {
+        // Search mode: sort by score desc, stable by originalIndex asc
+        visible.sort(function (a, b) {
+          return b._score - a._score || a.originalIndex - b.originalIndex;
+        });
+      } else if (viewMode === "recent") {
+        // Recent mode: sort by add date desc (when entry was added to this site).
+        // Same-day tiebreaker: event date desc, then stable original index.
+        // Uses data-added (YYYY-MM-DD) and data-date; both are ISO strings, so
+        // lexicographic comparison is correct for descending date sort.
+        visible.sort(function (a, b) {
+          var aa = a.el.getAttribute("data-added") || "0000-01-01";
+          var ab = b.el.getAttribute("data-added") || "0000-01-01";
+          if (ab > aa) return 1;
+          if (ab < aa) return -1;
+          // Same add date: tiebreak by event date desc
+          var da = a.el.getAttribute("data-date") || (a.el.getAttribute("data-year") || "0000") + "-01-01";
+          var db = b.el.getAttribute("data-date") || (b.el.getAttribute("data-year") || "0000") + "-01-01";
+          if (db > da) return 1;
+          if (db < da) return -1;
+          return a.originalIndex - b.originalIndex;
+        });
+      } else {
+        // Timeline mode: sort by event date desc (ISO string, day-level), stable by originalIndex asc.
+        visible.sort(function (a, b) {
+          var da = a.el.getAttribute("data-date") || (a.el.getAttribute("data-year") || "0000") + "-01-01";
+          var db = b.el.getAttribute("data-date") || (b.el.getAttribute("data-year") || "0000") + "-01-01";
+          if (db > da) return 1;
+          if (db < da) return -1;
+          return a.originalIndex - b.originalIndex;
+        });
+      }
+
+      // Show/hide + eyebrows (same for both search and timeline flat modes)
       index.forEach(function (rec) {
         rec.el.style.display = rec._visible ? "" : "none";
         if (rec._visible) {
@@ -609,30 +639,35 @@
         }
       });
 
-      // Reorder visible entries in DOM
+      // Reorder visible entries in DOM via shared reorderEntries()
       if (visible.length) {
         reorderEntries(visible.map(function (r) { return r.el; }));
       }
 
-      // Highlight AFTER reorder (Fix D)
+      // Highlights: only for search queries; clear (restore) in timeline mode
       index.forEach(function (rec) {
-        applyHighlight(rec, rec._visible ? tokens : []);
+        applyHighlight(rec, rec._visible && hasQuery ? tokens : []);
       });
 
-      // Section blocks: show first block as container, hide rest
+      // Section blocks: show first block as flat container, hide the rest
       sectionBlocks.forEach(function (block, i) {
         block.style.display = i === 0 ? "" : "none";
       });
 
-      // Empty state
-      if (visible.length === 0) {
+      // Empty state: only shown for search queries (timeline with all filtered = 0 count is enough)
+      if (visible.length === 0 && hasQuery) {
         showEmpty(query.trim());
       } else {
         hideEmpty();
       }
 
     } else {
-      // Grouped mode
+      // Grouped narrative mode (unchanged)
+      if (expandAllBtn) {
+        expandAllBtn.disabled = false;
+        expandAllBtn.removeAttribute("aria-disabled");
+      }
+
       var totalVisible = 0;
       sectionBlocks.forEach(function (block) {
         var key = block.getAttribute("data-section-block");
@@ -649,9 +684,9 @@
               if (rec._visible) { blockVisible++; totalVisible++; }
             }
           });
-          // Task 3: force section open if it has matching entries
+          // Force section open if it has matching entries
           if (blockVisible > 0) ensureSectionOpen(block);
-          // Task 4: hide the section's pullquote if 0 entries are visible
+          // Hide the section's pullquote if 0 entries are visible
           var pq = block.querySelector(".pullquote");
           if (pq) pq.style.display = blockVisible > 0 ? "" : "none";
         }
@@ -775,6 +810,27 @@
   });
 
   // =========================================================================
+  // VIEW TOGGLE — NARRATIVE / RECENT / TIMELINE
+  // =========================================================================
+  function setViewMode(mode) {
+    viewMode = mode;
+    if (viewNarrativeBtn) viewNarrativeBtn.setAttribute("aria-pressed", mode === "narrative" ? "true" : "false");
+    if (viewRecentBtn)    viewRecentBtn.setAttribute("aria-pressed",    mode === "recent"    ? "true" : "false");
+    if (viewTimelineBtn)  viewTimelineBtn.setAttribute("aria-pressed",  mode === "timeline"  ? "true" : "false");
+    render();
+  }
+
+  if (viewNarrativeBtn) {
+    viewNarrativeBtn.addEventListener("click", function () { setViewMode("narrative"); });
+  }
+  if (viewRecentBtn) {
+    viewRecentBtn.addEventListener("click",    function () { setViewMode("recent"); });
+  }
+  if (viewTimelineBtn) {
+    viewTimelineBtn.addEventListener("click",  function () { setViewMode("timeline"); });
+  }
+
+  // =========================================================================
   // COLLAPSIBLE FILTER PANEL
   // =========================================================================
   var toggleBtn  = document.getElementById("filter-toggle");
@@ -833,5 +889,33 @@
   // =========================================================================
   // INIT
   // =========================================================================
+  // Cookie-based first-visit / returning-visitor default + optional ?view= override.
+  //
+  // Priority (highest first):
+  //   1. ?view=narrative|recent|timeline in URL → use that, no cookie logic
+  //   2. Cookie `otr_returning=1` present → returning visitor → default to Recent
+  //   3. No cookie → first visit → stay Narrative, set cookie for next visit
+  //
+  // The switch is client-side; the server always renders Narrative (SSR default),
+  // so crawlers and no-JS users always see Narrative. No FOUC of missing content.
+  (function initViewDefault() {
+    var paramMatch = window.location.search.match(/[?&]view=(narrative|recent|timeline)/);
+    if (paramMatch) {
+      viewMode = paramMatch[1];
+    } else {
+      var hasCookie = /(?:^|;)\s*otr_returning=1/.test(document.cookie);
+      if (hasCookie) {
+        viewMode = "recent";
+      } else {
+        // Set cookie now so the NEXT load is detected as a return visit
+        document.cookie = "otr_returning=1; max-age=" + (180 * 24 * 60 * 60) + "; path=/; SameSite=Lax";
+      }
+    }
+    // Sync button aria-pressed to match resolved viewMode (before first render)
+    if (viewNarrativeBtn) viewNarrativeBtn.setAttribute("aria-pressed", viewMode === "narrative" ? "true" : "false");
+    if (viewRecentBtn)    viewRecentBtn.setAttribute("aria-pressed",    viewMode === "recent"    ? "true" : "false");
+    if (viewTimelineBtn)  viewTimelineBtn.setAttribute("aria-pressed",  viewMode === "timeline"  ? "true" : "false");
+  })();
+
   render();
 })();

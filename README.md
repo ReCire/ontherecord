@@ -159,7 +159,8 @@ metadata, text, and (at runtime) the DOM element for search.
 | `section` | `_meta` | yes | Section key. Must exist in `site.js` `sections`. |
 | `region` | `_meta` | yes | Region key. Must exist in `site.js` `regions`. |
 | `status` | `_meta` | yes | Tier/credibility key. Must exist in `site.js` `statuses`. See Editorial standard. |
-| `date` | `_meta` | yes | ISO `YYYY-MM-DD`. Drives sort (newest first) + date filter. |
+| `date` | `_meta` | yes | ISO `YYYY-MM-DD`. **Event date** (when the event happened). Drives Timeline sort + date filter. |
+| `added` | `_meta` | yes | ISO `YYYY-MM-DD`. **Site add date** (when this entry was added here). Drives Recent sort. Backfilled via `npm run backfill`; set manually for new entries. |
 | `sources` | `_meta` | no | `[{ label, url, video?, archive_url? }]`. `archive_url` is written by the archive script. |
 | `last_verified` | `_meta` | auto | Written by `npm run archive`. |
 | `title` | `en/*.md` | yes | The entry headline. |
@@ -196,6 +197,107 @@ documents, lead with the perpetrator's own admitted record where it exists, and
 never overstate what a court actually decided. For the highest-stakes categories
 (genocide, abuse, naming individuals) the tier label is the firewall that
 protects the whole project — get it exactly right or don't publish the entry.
+
+---
+
+## Views: Narrative, Recent, and Timeline
+
+The sticky filter bar exposes a **NARRATIVE | RECENT | TIMELINE** toggle (JS-only;
+no-JS users always see the full grouped Narrative ledger).
+
+### Narrative (default for first-time visitors and crawlers)
+Sections rendered in editorial order, entries grouped under their headings.
+This is the front door — the argument as it was intended to be read.
+
+### Recent — "what's new since I last looked"
+All entries in one flat list, **sorted by the date the entry was *added to this
+site***, newest addition on top. Same-day tiebreaker: event date descending, then
+stable original order. This is the retention feed: returning visitors land here
+by default (see Cookie default below) so they can see new entries immediately
+without hunting through sections.
+
+### Timeline — "when did this happen"
+All entries in one flat list, **sorted by the date the event occurred**, newest
+event on top. Historical chronology: a 1953 coup appears near the bottom; a 2024
+conviction near the top.
+
+### The add-date / event-date distinction — critical to understand
+
+These are two entirely different questions and both views are correct for their purpose:
+
+| | `data-added` | `data-date` |
+|---|---|---|
+| **What it is** | Date added to *this site* | Date the event happened |
+| **Field** | `added` in `_meta/*.json` | `date` in `_meta/*.json` |
+| **View that uses it** | Recent | Timeline |
+| **Example** | Entry about a 1953 coup added yesterday → **tops Recent**, **bottoms Timeline** |
+
+This distinction is intentional and must not be collapsed. A researcher checking
+"what did this site add this week" needs Recent. A journalist building a timeline
+needs Timeline. Both sorts are correct.
+
+### Cookie-based first-visit / returning-visitor default
+
+- **First visit (no cookie):** Narrative is shown (it's the SSR default). The
+  cookie `otr_returning=1` is **set** (180-day expiry) so the next visit is detected
+  as a return.
+- **Returning visit (cookie present):** Recent is switched in client-side after
+  paint. This is intentional: Narrative is always the no-JS/crawler default, so
+  there is no FOUC of missing content — only a re-sort for users who are logged in
+  (cookiewise).
+- **`?view=` URL param:** `?view=narrative`, `?view=recent`, or `?view=timeline`
+  overrides the cookie. Use this for shareable links to a specific view.
+- **Crawlers / no-JS:** always Narrative. No JS-redirect, no cloaking.
+
+### Composing views with search and chips
+- **Any view + facet chips**: chips filter first; the active view then sorts what passes.
+- **Any view + active search query**: search score-sort overrides the view sort
+  (relevance wins). Clearing the query resumes the active view's sort.
+- **Switching among all three**: restores section headings, pullquotes, and collapse
+  state cleanly — all three share the same `enterFlatMode` / `exitFlatMode` /
+  `restoreOrder` path; no parallel render logic.
+- **Expand-all**: disabled in Recent and Timeline (no sections visible), re-enabled
+  in Narrative.
+
+### Filter bar layout (3 rows)
+```
+Row 1  [ NARRATIVE   |   RECENT   |   TIMELINE ]   ← view toggle (js-only)
+Row 2  [______ search input ______________ ×  ]    ← full column width (js-only)
+Row 3  [FILTERS ▾] [COLLAPSE ALL]     N · M · Clear ← controls left, status right
+```
+The whole three-row stack is sticky (`position: sticky; top: 0`).
+
+---
+
+## `added` field and backfill script
+
+Every `_meta/{slug}.json` has an `added` field (ISO `YYYY-MM-DD`) recording when
+the entry was added to this site. This is separate from `date` (the event date).
+
+**Backfilling existing entries:**
+```
+node scripts/backfill-added.js          # fills missing `added` from git first-add
+node scripts/backfill-added.js --force  # overwrites all (yearly refresh)
+```
+The script uses `git log --diff-filter=A --follow --format=%aI` to find the commit
+that first added the file; takes the date portion; falls back to file mtime (warns)
+if the file is uncommitted. Idempotent — re-run safely.
+
+**New entries:** set `added` at authoring time alongside `date`. If absent, the
+resolver falls back to the event `date` string so the build never crashes — but you
+will lose the distinction between add-date and event-date for that entry.
+
+---
+
+## Ledger updated stamp
+
+A small `Ledger updated [Month Year]` line appears in the header. It is computed at
+**build time** via `eleventyConfig.addGlobalData("buildDate", …)` — reflecting when
+`npm run build` (or the Vercel deploy) last ran.
+
+This stamp gives returning visitors an "is this maintained?" signal in Narrative
+view, where a newly-added entry about an old event lands far down the page with no
+other visible recency indicator.
 
 ---
 
@@ -362,6 +464,13 @@ A 60-second smoke test that catches the regressions seen during development:
 - Search → clear → different search: no stale results or leftover highlights.
 - Collapse a section, run a search that matches inside it → it auto-opens; clear
   → returns to its prior state.
+- Toggle RECENT → `przewalski-horse-rewilding` (added 2026-06-05) and
+  `spacex-retirement-ipo` (added 2026-06-04) appear at the top of the list.
+  Toggle TIMELINE → oldest event (1953) near the bottom. Toggle NARRATIVE →
+  grouped sections return, expand-all re-enables.
+- First visit (no cookie): delete `otr_returning` cookie, reload → Narrative shown,
+  cookie gets set. Reload again → Recent shown.
+- `?view=timeline` in URL → Timeline regardless of cookie.
 
 ---
 

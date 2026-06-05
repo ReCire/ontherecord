@@ -13,6 +13,7 @@ permalink: /
     Every claim links to a court filing, government report, or primary investigation.<br>
     No anonymous allegations. Read the sources. Verify everything.
   </div>
+  <p class="ledger-updated">Ledger updated {{ buildDate }}</p>
   <nav class="quick-nav">
     <a href="#sources">About</a>
     <a href="#contact">{{ i18n.suggestEntry }}</a>
@@ -21,22 +22,38 @@ permalink: /
 </header>
 
 <div class="filters" id="filters">
-  <div class="filter-bar-head">
-    <button class="filter-toggle" id="filter-toggle" aria-expanded="false" aria-controls="filter-body">
-      <span class="filter-toggle-label">{{ i18n.filterToggle }}</span>
-      <span class="filter-toggle-arrow" aria-hidden="true">▾</span>
-    </button>
-    <div class="search-wrap js-only">
-      <label for="search-input" class="sr-only">{{ i18n.searchPlaceholder }}</label>
-      <input type="search" id="search-input" class="search-input"
-        placeholder="{{ i18n.searchPlaceholder }}" autocomplete="off"
-        aria-label="{{ i18n.searchPlaceholder }}" spellcheck="false">
-      <button type="button" id="search-clear" class="search-clear" aria-label="Clear search" hidden>✕</button>
+  <div class="filter-bar">
+    <!-- Row 1: view toggle (js-only) -->
+    <div class="filter-row filter-row-views js-only">
+      <div class="view-toggle" role="group" aria-label="View mode">
+        <button type="button" id="view-narrative" class="view-btn" aria-pressed="true">Narrative</button>
+        <button type="button" id="view-recent" class="view-btn" aria-pressed="false">Recent</button>
+        <button type="button" id="view-timeline" class="view-btn" aria-pressed="false">Timeline</button>
+      </div>
     </div>
-    <button type="button" id="expand-all" class="expand-all-btn js-only" aria-label="{{ i18n.collapseAll }}">{{ i18n.collapseAll }}</button>
-    <span class="filter-meta inline-meta">
-      <span id="result-count" aria-live="polite" aria-atomic="true"></span><span id="active-hint"></span> · <a href="#" id="clear-filters">{{ i18n.clearAll }}</a>
-    </span>
+    <!-- Row 2: search input full width (js-only) -->
+    <div class="filter-row filter-row-search js-only">
+      <label for="search-input" class="sr-only">{{ i18n.searchPlaceholder }}</label>
+      <div class="search-wrap">
+        <input type="search" id="search-input" class="search-input"
+          placeholder="{{ i18n.searchPlaceholder }}" autocomplete="off"
+          aria-label="{{ i18n.searchPlaceholder }}" spellcheck="false">
+        <button type="button" id="search-clear" class="search-clear" aria-label="Clear search" hidden>✕</button>
+      </div>
+    </div>
+    <!-- Row 3: controls left + status right (always visible) -->
+    <div class="filter-row filter-row-controls">
+      <div class="filter-controls-left">
+        <button class="filter-toggle" id="filter-toggle" aria-expanded="false" aria-controls="filter-body">
+          <span class="filter-toggle-label">{{ i18n.filterToggle }}</span>
+          <span class="filter-toggle-arrow" aria-hidden="true">▾</span>
+        </button>
+        <button type="button" id="expand-all" class="expand-all-btn js-only" aria-label="{{ i18n.collapseAll }}">{{ i18n.collapseAll }}</button>
+      </div>
+      <span class="filter-meta">
+        <span id="result-count" aria-live="polite" aria-atomic="true"></span><span id="active-hint"></span> · <a href="#" id="clear-filters">{{ i18n.clearAll }}</a>
+      </span>
+    </div>
   </div>
   <div class="filter-body" id="filter-body" hidden>
     <div class="filter-group">
@@ -82,7 +99,9 @@ permalink: /
           data-section="{{ entry.section }}"
           data-region="{{ entry.region }}"
           data-status="{{ entry.status }}"
-          data-year="{{ entry.date | year }}">
+          data-year="{{ entry.date | year }}"
+          data-date="{{ entry.date }}"
+          data-added="{{ entry.added }}">
           {% if not entry.translated %}
           <div class="translation-note">{{ i18n.translationNote }}</div>
           {% endif %}

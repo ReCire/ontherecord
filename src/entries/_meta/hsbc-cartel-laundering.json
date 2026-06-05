@@ -4,10 +4,12 @@
   "region": "global",
   "status": "settlement",
   "date": "2012-12-11T00:00:00.000Z",
+  "added": "2026-06-03",
   "sources": [
     {
       "label": "ICIJ — HSBC moved vast sums of dirty money (the boxes, the $881M, the impunity)",
-      "url": "https://www.icij.org/investigations/fincen-files/hsbc-moved-vast-sums-of-dirty-money-after-paying-record-laundering-fine/"
+      "url": "https://www.icij.org/investigations/fincen-files/hsbc-moved-vast-sums-of-dirty-money-after-paying-record-laundering-fine/",
+      "archive_url": "https://web.archive.org/web/20260603065419/https://www.icij.org/investigations/fincen-files/hsbc-moved-vast-sums-of-dirty-money-after-paying-record-laundering-fine/"
     },
     {
       "label": "Sen. Grassley — DOJ's failure to prosecute is inexcusable (cites Senate report)",
@@ -19,5 +21,5 @@
       "url": "https://www.cnbc.com/2016/07/12/top-us-officials-rejected-push-to-prosecute-hsbc.html"
     }
   ],
-  "last_verified": "2026-06-03T00:00:00.000Z"
+  "last_verified": "2026-06-04"
 }

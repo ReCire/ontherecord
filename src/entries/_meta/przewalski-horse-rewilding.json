@@ -1,0 +1,29 @@
+{
+  "slug": "przewalski-horse-rewilding",
+  "section": "wins",
+  "region": "global",
+  "status": "win",
+  "date": "2025-08-07",
+  "added": "2026-06-05",
+  "sources": [
+    {
+      "label": "Xinhua — China's Przewalski's horse population tops 900, a third of global total",
+      "url": "https://english.news.cn/20250807/3dff86b46d58424f806f76bbc27dd867/c.html",
+      "archive_url": "https://web.archive.org/web/20260605083238/https://english.news.cn/20250807/3dff86b46d58424f806f76bbc27dd867/c.html"
+    },
+    {
+      "label": "China Daily — the cross-border reintroduction effort & founder animals",
+      "url": "https://global.chinadaily.com.cn/a/202603/05/WS69a8bb0ca310d6866eb3bb73.html",
+      "archive_url": "https://web.archive.org/web/20260306064840/https://global.chinadaily.com.cn/a/202603/05/WS69a8bb0ca310d6866eb3bb73.html"
+    },
+    {
+      "label": "ScienceDirect — Reintroduction of Przewalski's horse in Xinjiang: status & experience (peer-reviewed)",
+      "url": "https://www.sciencedirect.com/science/article/abs/pii/S0006320714002481"
+    },
+    {
+      "label": "Prague Zoo: Return of the Wild Horses & International Studbook",
+      "url": "https://www.zoopraha.cz/en/about-zoo/conservation/przewalski-s-horse"
+    }
+  ],
+  "last_verified": "2026-06-05"
+}
