@@ -101,6 +101,9 @@ module.exports = {
   entryShown: "entry shown",
   sectionEmpty: "No entries yet in this section.",
 
+  // About / colophon
+  spiritNote: "The counter to division isn't agreement — it's understanding what actually happened. This is a record of who did what, and where it is written down.",
+
   // Meta sections
   howToUseThis: "How To Use This",
   suggestEntry: "Suggest an Entry",

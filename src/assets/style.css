@@ -307,6 +307,12 @@ h2 {
   letter-spacing: -0.01em; line-height: 1.05;
 }
 .sec-sub { font-size: 16px; color: var(--faint); font-style: italic; margin: 14px 0 30px; }
+.spirit-note {
+  font-family: 'Newsreader', Georgia, serif; font-style: italic;
+  font-size: 19px; line-height: 1.55; color: var(--ink);
+  margin: -14px 0 36px; /* pulls up to sit flush under sec-sub */
+  max-width: 640px;
+}
 .sec-empty {
   font-family: 'JetBrains Mono', monospace; font-size: 12px;
   color: var(--faint); padding: 12px 0; font-style: normal;
