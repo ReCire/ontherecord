@@ -110,6 +110,9 @@ module.exports = {
   src: "SRC",
   video: "▶ VIDEO",
 
+  // Cookie disclosure (About section fine print)
+  cookieNote: "This site sets one local cookie to remember your chosen view. It is never transmitted, never used to identify you, and tells us nothing — there is no server and no analytics.",
+
   // Translation note
   translationNote: "Translated from English / not yet translated",
 
