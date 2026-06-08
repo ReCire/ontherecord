@@ -1,0 +1,24 @@
+{
+  "slug": "ontario-resale-law",
+  "section": "spectacle",
+  "region": "global",
+  "status": "ongoing",
+  "date": "2026-04-01",
+  "sources": [
+    {
+      "label": "Al Jazeera — Toronto World Cup tickets resold at face value after FIFA complies",
+      "url": "https://www.aljazeera.com/sports/2026/5/7/toronto-world-cup-tickets-to-be-resold-for-face-value-on-fifa-marketplace",
+      "archive_url": "https://web.archive.org/web/20260507164419/https://www.aljazeera.com/sports/2026/5/7/toronto-world-cup-tickets-to-be-resold-for-face-value-on-fifa-marketplace"
+    },
+    {
+      "label": "CBC — FIFA reconfigures resale platform to comply with Ontario cap",
+      "url": "https://www.cbc.ca/news/canada/toronto/fifa-world-cup-tickets-price-cap-rule-9.7180161",
+      "archive_url": "https://web.archive.org/web/20260520095450/https://www.cbc.ca/news/canada/toronto/fifa-world-cup-tickets-price-cap-rule-9.7180161"
+    },
+    {
+      "label": "CP24 — Ontario warns FIFA over alleged non-compliance, raises fines",
+      "url": "https://www.cp24.com/politics/queens-park/2026/06/02/ontario-gives-fifa-a-warning-over-alleged-non-compliance-with-its-new-ticket-resale-law/"
+    }
+  ],
+  "last_verified": "2026-06-08"
+}

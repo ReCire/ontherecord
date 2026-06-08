@@ -1,0 +1,24 @@
+{
+  "slug": "live-nation-monopoly",
+  "section": "money",
+  "region": "us",
+  "status": "ruling",
+  "date": "2026-04-15",
+  "sources": [
+    {
+      "label": "NPR — jury finds Live Nation and Ticketmaster acted as a monopoly",
+      "url": "https://www.npr.org/2026/04/15/nx-s1-5786715/live-nation-ticketmaster-antitrust-verdict-monopoly",
+      "archive_url": "https://web.archive.org/web/20260524035353/https://www.npr.org/2026/04/15/nx-s1-5786715/live-nation-ticketmaster-antitrust-verdict-monopoly"
+    },
+    {
+      "label": "New Hampshire DOJ — the antitrust verdict (state AG primary statement)",
+      "url": "https://www.doj.nh.gov/news-and-media/live-nation-and-ticketmaster-antitrust-verdict"
+    },
+    {
+      "label": "PBS NewsHour — states continued the case after DOJ settled",
+      "url": "https://www.pbs.org/newshour/nation/states-continue-antitrust-case-against-live-nation-and-ticketmaster-after-doj-settles",
+      "archive_url": "https://web.archive.org/web/20260402234923/https://www.pbs.org/newshour/nation/states-continue-antitrust-case-against-live-nation-and-ticketmaster-after-doj-settles"
+    }
+  ],
+  "last_verified": "2026-06-08"
+}

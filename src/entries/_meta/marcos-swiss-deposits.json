@@ -8,7 +8,8 @@
   "sources": [
     {
       "label": "Supreme Court of the Philippines — G.R. No. 152154 (primary ruling)",
-      "url": "https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/1/45143"
+      "url": "https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/1/45143",
+      "archive_url": "https://web.archive.org/web/20260605082545/https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/1/45143"
     },
     {
       "label": "VERA Files — fact-check confirming the forfeiture and figures",
@@ -18,5 +19,6 @@
       "label": "GMA News — the Supreme Court's rulings on Marcos ill-gotten wealth",
       "url": "https://www.gmanetwork.com/news/topstories/specialreports/626576/the-supreme-court-s-rulings-on-the-marcoses-ill-gotten-wealth/story/"
     }
-  ]
+  ],
+  "last_verified": "2026-06-08"
 }
