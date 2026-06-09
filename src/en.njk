@@ -119,7 +119,13 @@ permalink: /
           </div>
           {% endif %}
           {% if entry.last_verified %}<div class="verified">{{ i18n.lastVerified }} {{ entry.last_verified }}</div>{% endif %}
-          <a class="share-card js-only" href="/cards/{{ entry.slug }}-portrait.png" download="ontherecord-{{ entry.slug }}.png">{{ i18n.shareCard }}</a>
+          <span class="entry-share js-only" data-slug="{{ entry.slug }}" data-title="{{ entry.title }}">
+            <button type="button" class="share-native" hidden>{{ i18n.shareLabel }}</button>
+            <span class="share-download">
+              <a download="ontherecord-{{ entry.slug }}-portrait.png" href="/cards/{{ entry.slug }}-portrait.png">{{ i18n.cardPortrait }}</a>
+              <a download="ontherecord-{{ entry.slug }}-wide.png" href="/cards/{{ entry.slug }}-og.png">{{ i18n.cardWide }}</a>
+            </span>
+          </span>
         </article>
       {%- endif -%}
     {% endfor %}

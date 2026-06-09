@@ -415,6 +415,34 @@ stance above.
 so they're produced fresh on each deploy and never committed. Run `npm run cards`
 locally any time you want to preview or hand-post a card.
 
+### Sharing a card (capability-aware, no SDKs)
+
+Each entry has a JS-only share affordance that adapts to the device (wired in the
+`initShareAffordances()` block of `filter.js`; both affordances are `.js-only`, so
+nothing shows with JS off — the cards are still at stable URLs):
+
+- **Mobile / Web Share supported** (iOS Safari, Android Chrome) → a quiet
+  **"Share"** button opens the native OS share sheet with the **portrait** card
+  file attached. That's the dominant case (posting to Instagram et al. from a
+  phone). Share text is the entry title + `ontherecord.me`.
+- **Desktop / no Web Share** → two small download links, **"card (portrait)"** and
+  **"card (wide)"**, so you grab the ratio that fits the destination.
+
+**Why one file on share, two on download:** the Web Share API can't offer an
+in-sheet ratio choice or know the destination app, so we share exactly **one**
+file — portrait, the common case. Ratio choice lives on the **download** path,
+where it's actually useful. We never multi-file share (apps handle it
+inconsistently; Instagram treats multiple files as a carousel). `shareCard()`
+re-checks `navigator.canShare({ files })` at click time and falls back to a
+plain download if the browser can't share files; user-cancel (`AbortError`) is
+swallowed silently.
+
+**Why no per-platform buttons / no tracking:** Instagram has no web image-share
+endpoint, and X/Facebook "intent" URLs share **links, not images** — so a row of
+brand buttons would either not work or just paste a link. We deliberately ship
+zero platform SDKs and zero tracking: the native sheet (mobile) and direct
+download (desktop) cover real use without leaking anything.
+
 ### Anchor links per entry
 
 Each entry article carries `id="entry-{slug}"`, so any entry is directly

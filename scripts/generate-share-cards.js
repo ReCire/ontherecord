@@ -194,6 +194,7 @@ function buildCard(opts) {
     teaser,
     sourceCount,
     markUri,
+    markInset,
   } = opts;
 
   const topRow = el(
@@ -214,7 +215,17 @@ function buildCard(opts) {
         },
         text(tierLabel)
       ),
-      { type: "img", props: { src: markUri, width: markSize, height: markSize } },
+      // Inset the mark from the frame edge — the favicon glyph sits flush to its
+      // own right/top edge, so a margin gives it even breathing room in the corner.
+      {
+        type: "img",
+        props: {
+          src: markUri,
+          width: markSize,
+          height: markSize,
+          style: { marginRight: markInset || 0, marginTop: Math.round((markInset || 0) / 2) },
+        },
+      },
     ]
   );
 
@@ -417,6 +428,7 @@ async function main() {
       framePad: 64,
       tierSize: 26,
       markSize: 84,
+      markInset: 32,
       titleSize: fitTitleSize(card.title, PORTRAIT_TITLE_BUCKETS),
       titleGap: 36,
       teaserSize: 34,
@@ -435,6 +447,7 @@ async function main() {
       framePad: 48,
       tierSize: 22,
       markSize: 64,
+      markInset: 24,
       titleSize: fitTitleSize(card.title, OG_TITLE_BUCKETS),
       titleGap: 22,
       teaserSize: 24,

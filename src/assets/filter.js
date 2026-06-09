@@ -898,6 +898,76 @@
   }
 
   // =========================================================================
+  // SHARE — native Web Share (mobile) vs dual download links (desktop)
+  // =========================================================================
+  // Rationale (fixed): Web Share can't offer an in-sheet ratio choice or know the
+  // destination app, so we share exactly ONE file — the portrait card, the common
+  // case (posting to Instagram et al. from a phone). Ratio choice lives on the
+  // DOWNLOAD path, where it's useful. Never multi-file share (apps handle it
+  // inconsistently; IG treats multiple files as a carousel).
+  function triggerDownload(url, filename) {
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = filename || "";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+
+  function shareCard(slug, title) {
+    var url = "/cards/" + slug + "-portrait.png";
+    // Called synchronously from the click handler (preserves the user gesture);
+    // the local PNG fetch is fast enough to keep transient activation alive.
+    return fetch(url)
+      .then(function (resp) { return resp.blob(); })
+      .then(function (blob) {
+        var file = new File([blob], slug + ".png", { type: "image/png" });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          return navigator.share({
+            files: [file],
+            title: title || "On The Record",
+            text: title ? (title + " \u2014 ontherecord.me") : "ontherecord.me",
+          });
+        }
+        // Can't share files on this browser — fall back to downloading portrait.
+        triggerDownload(url, slug + ".png");
+      })
+      .catch(function (e) {
+        // User cancelled (AbortError) → do nothing. Other errors → fall back.
+        if (e && e.name === "AbortError") return;
+        triggerDownload(url, slug + ".png");
+      });
+  }
+
+  (function initShareAffordances() {
+    var shares = document.querySelectorAll(".entry-share");
+    if (!shares.length) return;
+
+    // Feature-detect once. Optimistically prefer the native sheet when present;
+    // shareCard() re-checks canShare({files}) and downloads if it can't.
+    var canShareFiles = !!(navigator.canShare && navigator.share);
+    if (canShareFiles) {
+      shares.forEach(function (wrap) {
+        var nativeBtn = wrap.querySelector(".share-native");
+        var dl        = wrap.querySelector(".share-download");
+        if (nativeBtn) nativeBtn.hidden = false;
+        if (dl) dl.hidden = true;
+      });
+    }
+
+    // One delegated handler for all native-share buttons.
+    document.addEventListener("click", function (e) {
+      var btn = e.target && e.target.closest ? e.target.closest(".share-native") : null;
+      if (!btn) return;
+      var wrap = btn.closest(".entry-share");
+      if (!wrap) return;
+      var slug = wrap.getAttribute("data-slug");
+      if (!slug) return;
+      shareCard(slug, wrap.getAttribute("data-title") || "");
+    });
+  })();
+
+  // =========================================================================
   // INIT
   // =========================================================================
   // Cookie-based first-visit / returning-visitor default + optional ?view= override.
