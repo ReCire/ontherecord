@@ -318,7 +318,7 @@ h2 {
   color: var(--faint); padding: 12px 0; font-style: normal;
 }
 
-.entry { padding: 22px 0; border-bottom: 1px solid var(--line); }
+.entry { padding: 22px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 90px; }
 .entry:last-child { border-bottom: none; }
 .entry h3 {
   font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 16px;
@@ -351,6 +351,17 @@ h2 {
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint);
   margin-top: 10px;
 }
+
+/* Subtle, JS-only "download share card" link — styled like a faint source link */
+a.share-card {
+  width: fit-content;
+  margin-top: 8px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--faint); text-decoration: none;
+  border-bottom: 1px dotted var(--faint); padding-bottom: 1px;
+}
+a.share-card:hover { color: var(--red); border-bottom-color: var(--red); }
 
 .pullquote {
   font-family: 'JetBrains Mono', monospace; font-weight: 700;

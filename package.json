@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "A documented ledger of corporate & political harm, with primary sources.",
   "scripts": {
-    "build": "eleventy",
+    "build": "eleventy && node scripts/generate-share-cards.js",
+    "cards": "node scripts/generate-share-cards.js",
     "serve": "eleventy --serve",
     "start": "eleventy --serve",
     "archive": "node scripts/archive-sources.js",
@@ -12,7 +13,11 @@
   "license": "MIT",
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
+    "@resvg/resvg-js": "^2.6.2",
     "gray-matter": "^4.0.3",
-    "js-yaml": "^4.1.0"
+    "js-yaml": "^4.1.0",
+    "satori": "^0.26.0",
+    "subset-font": "^2.5.0",
+    "wawoff2": "^2.0.1"
   }
 }

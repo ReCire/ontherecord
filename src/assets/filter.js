@@ -929,4 +929,26 @@
   })();
 
   render();
+
+  // =========================================================================
+  // DEEP LINK — #entry-{slug}
+  // =========================================================================
+  // Honor an entry hash on load by scrolling that entry into view AFTER the
+  // initial render() — which may reorder the DOM for the Recent/Timeline views.
+  // This mirrors the ?q= deep-link guard (which already wins via search sort)
+  // and extends it to #entry- hashes, so the returning-visitor Recent switch
+  // can't scroll past or lose the linked entry.
+  (function honorEntryHash() {
+    var m = window.location.hash.match(/^#(entry-[A-Za-z0-9_-]+)$/);
+    if (!m) return;
+    var target = document.getElementById(m[1]);
+    if (!target) return;
+    // Two rAFs: let the (possibly reordered) layout settle before scrolling,
+    // overriding any native hash scroll that targeted the pre-reorder position.
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        target.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+      });
+    });
+  })();
 })();

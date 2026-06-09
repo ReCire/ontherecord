@@ -112,6 +112,7 @@ module.exports = {
   lastVerified: "Sources last verified",
   src: "SRC",
   video: "▶ VIDEO",
+  shareCard: "↓ Share card",
 
   // Cookie disclosure (About section fine print)
   cookieNote: "This site sets one local cookie to remember your chosen view. It is never transmitted, never used to identify you, and tells us nothing — there is no server and no analytics.",

@@ -84,7 +84,9 @@ src/
 │   ├── markdown-blocks.js     # Markdown→typed-blocks compiler + shared HTML renderer
 │   └── fonts/                # self-hosted woff2 (you add these)
 └── scripts/
-    └── archive-sources.js    # Wayback snapshots → _meta (run locally, see below)
+    ├── archive-sources.js        # Wayback snapshots → _meta (run locally, see below)
+    ├── backfill-added.js         # populate `added` dates from git history
+    └── generate-share-cards.js   # build-time social share cards + apple-touch-icon
 ```
 
 ### Why this model
@@ -377,6 +379,61 @@ archivable primary source (a court PDF over a paywalled write-up). **Commit the
 
 > Run this **locally**, not on Vercel — the deploy filesystem is ephemeral so
 > writes wouldn't persist, and Save Page Now is too slow for a build step.
+
+---
+
+## Share cards (social images) + anchor links
+
+Every entry gets **two share-card PNGs**, generated at build time and styled to
+match the site (paper bg, Newsreader title, JetBrains Mono tier label in red,
+OTR mark, teaser, `ontherecord.me` footer):
+
+| File | Size | Use |
+|------|------|-----|
+| `_site/cards/{slug}-portrait.png` | 1080×1350 | Instagram / portrait posts |
+| `_site/cards/{slug}-og.png` | 1200×630 | X / Facebook / OpenGraph landscape |
+
+```
+npm run cards          # generate cards into _site/cards/ (and apple-touch-icon)
+npm run build          # eleventy + cards together (what Vercel runs)
+```
+
+**How it works** — `scripts/generate-share-cards.js` reads the resolved entries,
+derives a 1–2 sentence teaser from the body plaintext (never cut mid-word), and
+renders each card with **[Satori](https://github.com/vercel/satori)** (element
+tree → SVG) then **[resvg](https://github.com/yisibl/resvg-js)** (SVG → PNG). No
+headless browser, no client-side canvas.
+
+**Fonts stay self-hosted.** The script reads the same woff2 files from
+`src/assets/fonts/`, decompresses them with `wawoff2`, and pins their variable
+axes to static instances with `subset-font` (Satori can't parse variable-font
+`fvar` tables). **No font CDN, no network fetch** — consistent with the privacy
+stance above.
+
+**Build-time generation is the default** (`npm run build` runs it; Vercel's
+`buildCommand` is `npm run build`). Cards land in `_site/` which is gitignored,
+so they're produced fresh on each deploy and never committed. Run `npm run cards`
+locally any time you want to preview or hand-post a card.
+
+### Anchor links per entry
+
+Each entry article carries `id="entry-{slug}"`, so any entry is directly
+linkable: `https://ontherecord.me/#entry-{slug}`. On load, `filter.js` honors an
+`#entry-` hash by scrolling that entry into view **after** the initial render —
+so the returning-visitor Recent-view reorder can't lose the target (this mirrors
+the existing `?q=` deep-link guard). The site stays single-page; anchors only.
+
+> **Note (not built yet):** a hash URL can't carry its own OG image, so social
+> link-previews of `/#entry-{slug}` still show the site default. Per-entry OG
+> previews need real per-entry pages (`/entry/{slug}/`) with their own OG tags
+> pointing at `/cards/{slug}-og.png`. Those cards already exist at build, keyed
+> by slug, so adding such pages later is wiring — no card rework.
+
+### Apple touch icon
+
+The card script also emits `src/assets/apple-touch-icon.png` (180×180, OTR mark),
+linked from `layout.njk`'s `<head>` as `<link rel="apple-touch-icon">`. Passthrough
+copies `src/assets`, so it resolves at `/assets/apple-touch-icon.png`.
 
 ---
 

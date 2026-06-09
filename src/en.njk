@@ -95,6 +95,7 @@ permalink: /
       {%- if entry.section == s.key -%}
         {%- set count = count + 1 -%}
         <article class="entry"
+          id="entry-{{ entry.slug }}"
           data-slug="{{ entry.slug }}"
           data-section="{{ entry.section }}"
           data-region="{{ entry.region }}"
@@ -118,6 +119,7 @@ permalink: /
           </div>
           {% endif %}
           {% if entry.last_verified %}<div class="verified">{{ i18n.lastVerified }} {{ entry.last_verified }}</div>{% endif %}
+          <a class="share-card js-only" href="/cards/{{ entry.slug }}-portrait.png" download="ontherecord-{{ entry.slug }}.png">{{ i18n.shareCard }}</a>
         </article>
       {%- endif -%}
     {% endfor %}
