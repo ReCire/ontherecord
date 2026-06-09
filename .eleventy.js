@@ -80,6 +80,24 @@ module.exports = function (eleventyConfig) {
     return new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" });
   });
 
+  // Cache-busting asset version: a short content hash of the client CSS + JS.
+  // Appended to /assets/style.css and /assets/filter.js as ?v=… so a deploy that
+  // changes either file yields a brand-new URL no browser or CDN can serve stale.
+  // (The unversioned paths were cached long-term by Safari/Arc while the HTML
+  // revalidated, leaving new markup styled by old CSS / run by old JS.)
+  eleventyConfig.addGlobalData("assetVersion", function () {
+    const crypto = require("crypto");
+    const fs = require("fs");
+    try {
+      const hash = crypto.createHash("sha1");
+      hash.update(fs.readFileSync("./src/assets/style.css"));
+      hash.update(fs.readFileSync("./src/assets/filter.js"));
+      return hash.digest("hex").slice(0, 10);
+    } catch (e) {
+      return String(Date.now());
+    }
+  });
+
   // Add search index as global data for templates
   eleventyConfig.addGlobalData("searchIndex", function () {
     const resolvedEntriesData = require("./src/_data/resolvedEntries");
