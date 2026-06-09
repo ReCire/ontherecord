@@ -417,16 +417,20 @@ locally any time you want to preview or hand-post a card.
 
 ### Sharing a card (capability-aware, no SDKs)
 
-Each entry has a JS-only share affordance that adapts to the device (wired in the
-`initShareAffordances()` block of `filter.js`; both affordances are `.js-only`, so
+Each entry has a JS-only share affordance, wired in the `initShareAffordances()`
+block of `filter.js`. It reads as one quiet row — `share · card (portrait) ·
+card (wide)` — and is **additive, not either/or** (everything is `.js-only`, so
 nothing shows with JS off — the cards are still at stable URLs):
 
-- **Mobile / Web Share supported** (iOS Safari, Android Chrome) → a quiet
-  **"Share"** button opens the native OS share sheet with the **portrait** card
-  file attached. That's the dominant case (posting to Instagram et al. from a
-  phone). Share text is the entry title + `ontherecord.me`.
-- **Desktop / no Web Share** → two small download links, **"card (portrait)"** and
-  **"card (wide)"**, so you grab the ratio that fits the destination.
+- **Download links are ALWAYS shown** — **"card (portrait)"** and **"card
+  (wide)"** — so you can always grab the exact ratio the destination wants.
+- **A native "Share" button is ADDED when Web Share with files is supported.**
+  This includes **desktop** (macOS Safari, Chrome/Edge open the OS share sheet —
+  AirDrop, Messages, Mail), not just mobile. Tapping it shares the **portrait**
+  card file with text = entry title + `ontherecord.me`.
+
+Never hide the downloads just because a share sheet exists — desktop Web Share is
+common, and the ratio choice only lives on the download path.
 
 **Why one file on share, two on download:** the Web Share API can't offer an
 in-sheet ratio choice or know the destination app, so we share exactly **one**

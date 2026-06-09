@@ -943,15 +943,16 @@
     var shares = document.querySelectorAll(".entry-share");
     if (!shares.length) return;
 
-    // Feature-detect once. Optimistically prefer the native sheet when present;
-    // shareCard() re-checks canShare({files}) and downloads if it can't.
+    // Feature-detect once. Web Share with files is supported on desktop too
+    // (macOS Safari, Chrome/Edge), so the affordance is ADDITIVE: when supported
+    // we REVEAL the native button but always keep the download links — never
+    // remove the ratio choice just because a share sheet exists. shareCard()
+    // re-checks canShare({files}) and falls back to download if it can't.
     var canShareFiles = !!(navigator.canShare && navigator.share);
     if (canShareFiles) {
       shares.forEach(function (wrap) {
         var nativeBtn = wrap.querySelector(".share-native");
-        var dl        = wrap.querySelector(".share-download");
         if (nativeBtn) nativeBtn.hidden = false;
-        if (dl) dl.hidden = true;
       });
     }
 

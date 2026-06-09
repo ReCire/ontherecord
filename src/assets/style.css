@@ -352,14 +352,25 @@ h2 {
   margin-top: 10px;
 }
 
-/* JS-only share affordances — native share sheet (mobile) OR two download links
-   (desktop). Both styled like the faint mono source links; both .js-only so
-   nothing shows pre-JS. JS reveals exactly one, so there's no layout shift. */
+/* JS-only share affordances, styled like the faint mono source links. The two
+   download links are ALWAYS shown; the native share button is ADDED (revealed by
+   JS) when Web Share with files is supported — desktop included. Both wrappers
+   are .js-only so nothing shows pre-JS; only .share-native toggles, so revealing
+   it doesn't shift the always-present downloads. */
+/* One quiet row: share · card (portrait) · card (wide). Downloads are ALWAYS
+   shown; the native button is added (revealed by JS) when Web Share is supported
+   — desktop included. */
 .entry-share {
   align-items: center;
+  gap: 10px;
   margin-top: 8px;
   font-family: 'JetBrains Mono', monospace; font-size: 10px;
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint);
+}
+/* Middot between the native button and the download links — only when the
+   button is actually shown, so the row reads as one group, not two blocks. */
+.share-native:not([hidden]) + .share-download::before {
+  content: "\00b7"; margin-right: 10px; color: var(--faint);
 }
 /* Native share button: a quiet text affordance, not a CTA. 44px tap target. */
 .share-native {
