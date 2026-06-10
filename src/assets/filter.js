@@ -950,9 +950,10 @@
     // re-checks canShare({files}) and falls back to download if it can't.
     var canShareFiles = !!(navigator.canShare && navigator.share);
     if (canShareFiles) {
-      shares.forEach(function (wrap) {
-        var nativeBtn = wrap.querySelector(".share-native");
-        if (nativeBtn) nativeBtn.hidden = false;
+      // Reveal every native share button. Downloads are always visible by default —
+      // never touched here. Only .share-native toggles via the hidden attribute.
+      document.querySelectorAll(".share-native").forEach(function (btn) {
+        btn.removeAttribute("hidden");
       });
     }
 

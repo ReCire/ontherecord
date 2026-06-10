@@ -361,6 +361,7 @@ h2 {
    shown; the native button is added (revealed by JS) when Web Share is supported
    — desktop included. */
 .entry-share {
+  display: flex;
   align-items: center;
   gap: 10px;
   margin-top: 8px;
@@ -385,7 +386,7 @@ h2 {
 .share-native:hover { color: var(--red); }
 /* Explicit display rules above would otherwise beat the [hidden] attribute the
    JS toggles, so restore it (matches .filter-body[hidden] / .sec-content[hidden]). */
-.share-native[hidden], .share-download[hidden] { display: none; }
+.share-native[hidden] { display: none; }
 /* Desktop: two inline download links separated by a thin middot. */
 .share-download { display: inline-flex; align-items: center; }
 .share-download a {

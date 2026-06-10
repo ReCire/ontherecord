@@ -1,0 +1,12 @@
+{
+  "slug": "wealth-gap-tax",
+  "section": "money",
+  "region": "global",
+  "status": "report",
+  "date": "2026-05-01",
+  "sources": [
+    { "label": "Oxfam / ITUC — Top CEO pay rose 20x faster than workers' pay in 2025 (primary)", "url": "https://www.oxfam.org/en/press-releases/top-ceo-pay-increased-20-times-faster-workers-pay-2025" },
+    { "label": "ProPublica — The Secret IRS Files: how the wealthiest avoid income tax (the \"true tax rate\")", "url": "https://www.propublica.org/article/the-secret-irs-files-trove-of-never-before-seen-records-reveal-how-the-wealthiest-avoid-income-tax" },
+    { "label": "White House CEA (Leiserson & Yagan, 2021) — average federal income tax rate on the wealthiest 400 families (primary, archived)", "url": "https://www.whitehouse.gov/cea/written-materials/2021/09/23/what-is-the-average-federal-individual-income-tax-rate-on-the-wealthiest-americans/", "archive_url": "https://web.archive.org/web/20230116201010/https://www.whitehouse.gov/cea/written-materials/2021/09/23/what-is-the-average-federal-individual-income-tax-rate-on-the-wealthiest-americans/" }
+  ]
+}
