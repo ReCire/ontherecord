@@ -415,6 +415,17 @@ h2 {
   content: "\00b7"; margin-right: 12px;
   color: var(--faint); border-bottom: 0;
 }
+/* Copy-link affordance: a real <a> to the entry page (works with no JS); JS
+   intercepts it to copy the URL and flash a "copied" confirmation. */
+.entry-share .share-link {
+  color: var(--faint); text-decoration: none;
+  border-bottom: 1px dotted var(--faint); padding-bottom: 1px;
+}
+.entry-share .share-link:hover { color: var(--red); border-bottom-color: var(--red); }
+.entry-share .share-link.is-copied { color: var(--red); border-bottom-color: transparent; }
+.share-download + .share-link::before {
+  content: "\00b7"; margin-right: 10px; color: var(--faint);
+}
 
 .pullquote {
   font-family: 'JetBrains Mono', monospace; font-weight: 700;
@@ -460,5 +471,49 @@ footer .disclaim {
   border: 1px solid var(--line); padding: 18px 20px; margin: 24px 0;
   text-transform: none; line-height: 1.7;
 }
+
+/* ---- Per-entry pages (/entry/{slug}/, /de/eintrag/{slug}/) — slim, static.
+   Reuses .entry / .tag / .sources / .body / .verified from the list pages. ---- */
+.entry-page-head { padding: 48px 0 18px; }
+.entry-page-head .home-link {
+  display: inline-block; margin-bottom: 8px;
+  font-family: 'Newsreader', serif; font-size: 22px;
+  color: var(--ink); text-decoration: none; border-bottom: 1px solid transparent;
+}
+.entry-page-head .home-link:hover { color: var(--red); border-bottom-color: var(--red); }
+.entry-single-wrap { padding-bottom: 30px; }
+.entry-tier {
+  font-family: 'JetBrains Mono', monospace; font-weight: 700;
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 10px;
+}
+.entry-single-title {
+  font-family: 'Newsreader', serif; font-weight: 500;
+  font-size: clamp(28px, 5vw, 44px); line-height: 1.1;
+  color: var(--ink); margin: 0 0 18px;
+}
+.entry-share-static {
+  display: inline-flex; align-items: center; gap: 10px; margin-top: 14px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint);
+}
+.entry-share-static a {
+  color: var(--faint); text-decoration: none;
+  border-bottom: 1px dotted var(--faint); padding-bottom: 1px;
+}
+.entry-share-static a:hover { color: var(--red); border-bottom-color: var(--red); }
+.entry-share-static a + a::before {
+  content: "\00b7"; margin-right: 10px; color: var(--faint); border-bottom: 0;
+}
+.back-to-ledger {
+  margin: 28px 0 10px;
+  font-family: 'JetBrains Mono', monospace; font-size: 12px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+}
+.back-to-ledger a {
+  color: var(--red); text-decoration: none;
+  border-bottom: 1px solid transparent; padding-bottom: 2px;
+}
+.back-to-ledger a:hover { border-bottom-color: var(--red); }
 
 ::selection { background: var(--red); color: var(--paper); }

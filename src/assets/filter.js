@@ -914,8 +914,11 @@
     document.body.removeChild(a);
   }
 
-  function shareCard(slug, title) {
-    var url = "/cards/" + slug + "-portrait.png";
+  function shareCard(slug, title, portraitUrl, entryUrl) {
+    var url = portraitUrl || ("/cards/" + slug + "-portrait.png");
+    // Absolute entry-page URL travels in the share payload so the OS sheet can
+    // offer "copy link"/messaging targets a real destination, not just the file.
+    var shareUrl = entryUrl ? (window.location.origin + entryUrl) : window.location.href;
     // Called synchronously from the click handler (preserves the user gesture);
     // the local PNG fetch is fast enough to keep transient activation alive.
     return fetch(url)
@@ -927,6 +930,7 @@
             files: [file],
             title: title || "On The Record",
             text: title ? (title + " \u2014 ontherecord.me") : "ontherecord.me",
+            url: shareUrl,
           });
         }
         // Can't share files on this browser — fall back to downloading portrait.
@@ -938,6 +942,37 @@
         triggerDownload(url, slug + ".png");
       });
   }
+
+  // Copy the (absolute) entry-page URL to the clipboard with a tiny inline
+  // "copied" confirmation. Progressive enhancement: the .share-link is a real
+  // <a href> to the entry page, so without JS (or without clipboard support)
+  // it just navigates there — never a dead control.
+  function initCopyLink() {
+    if (!navigator.clipboard || !navigator.clipboard.writeText) return;
+    document.addEventListener("click", function (e) {
+      var link = e.target && e.target.closest ? e.target.closest(".share-link") : null;
+      if (!link) return;
+      e.preventDefault();
+      var href = link.getAttribute("href") || "";
+      var abs = href.indexOf("http") === 0 ? href : (window.location.origin + href);
+      navigator.clipboard.writeText(abs).then(function () {
+        if (link.dataset.copying) return;
+        var original = link.textContent;
+        link.dataset.copying = "1";
+        link.textContent = link.getAttribute("data-copied-label") || "copied";
+        link.classList.add("is-copied");
+        setTimeout(function () {
+          link.textContent = original;
+          link.classList.remove("is-copied");
+          delete link.dataset.copying;
+        }, 1600);
+      }).catch(function () {
+        // Clipboard refused (permissions/secure-context) → let the link navigate.
+        window.location.href = abs;
+      });
+    });
+  }
+  initCopyLink();
 
   (function initShareAffordances() {
     var shares = document.querySelectorAll(".entry-share");
@@ -965,7 +1000,12 @@
       if (!wrap) return;
       var slug = wrap.getAttribute("data-slug");
       if (!slug) return;
-      shareCard(slug, wrap.getAttribute("data-title") || "");
+      shareCard(
+        slug,
+        wrap.getAttribute("data-title") || "",
+        wrap.getAttribute("data-portrait") || "",
+        wrap.getAttribute("data-entry-url") || ""
+      );
     });
   })();
 

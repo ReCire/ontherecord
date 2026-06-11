@@ -2,14 +2,20 @@
 /**
  * generate-share-cards.js — Build-time social share-card generator.
  *
- * For every entry, renders TWO PNG share cards that match the site's
- * samizdat aesthetic (paper bg, Newsreader + JetBrains Mono, red accents):
+ * For every entry, in EVERY language, renders TWO PNG share cards that match
+ * the site's samizdat aesthetic (paper bg, Newsreader + JetBrains Mono, red):
  *
- *   _site/cards/{slug}-portrait.png   1080×1350  (Instagram portrait)
- *   _site/cards/{slug}-og.png         1200×630   (X / Facebook / OG landscape)
+ *   _site/cards/{lang}/{slug}-portrait.png   1080×1350  (Instagram portrait)
+ *   _site/cards/{lang}/{slug}-og.png         1200×630   (X / Facebook / OG)
  *
- * Each card shows: the tier label (from status), the entry TITLE, a 1–2
- * sentence teaser of the body, the OTR mark, and "ontherecord.me".
+ * Each card shows: the tier label (from THAT locale's statuses map — URTEIL,
+ * not RULING, on German cards), the entry TITLE, a line-budget teaser of the
+ * body, the OTR mark, and "ontherecord.me" (brand, never translated).
+ *
+ * Teaser = a DYNAMIC line-budget fill from the start of the body plaintext:
+ * long titles wrap to more lines and shrink the teaser budget so nothing ever
+ * clips or collides with the footer. Bracketed tier glosses ([alleged],
+ * ["quoted"]) are stripped — they're citation apparatus, noise at card size.
  *
  * Pipeline: Satori (HTML/CSS-ish element tree → SVG) → resvg (SVG → PNG).
  * NO headless browser, NO client-side rendering, NO network/font CDN.
@@ -18,11 +24,12 @@
  * Satori cannot parse woff2 directly (Brotli-compressed), so we decompress
  * them to TTF in memory with wawoff2 — still fully offline, no CDN.
  *
- * Also emits an Apple touch icon (180×180) to src/assets/ (and _site/assets/
- * when present) so iOS home-screen saves look right.
+ * The apple-touch-icon is a hand-designed STATIC asset owned by the human
+ * (src/assets/apple-touch-icon.png, passthrough-copied). This script does NOT
+ * generate or touch it.
  *
  * Usage:
- *   npm run cards          # generate cards into _site/cards/
+ *   npm run cards          # generate cards into _site/cards/{lang}/
  *   (also runs automatically as part of `npm run build`)
  */
 
@@ -127,28 +134,45 @@ function otrMarkDataUri() {
 }
 
 // ---------------------------------------------------------------------------
-// Teaser: first 1–2 sentences of the body plaintext, never cut mid-word
+// Teaser: dynamic line-budget fill from the START of the body plaintext.
+//
+// No summarization — the first sentences ARE the hook. We estimate how many
+// characters fit per line at the teaser font size, multiply by a line budget,
+// and truncate on a word boundary with a single ellipsis. The budget is
+// DYNAMIC: a long title wraps to more lines (titles auto-fit but still wrap),
+// so each extra title line spends part of the teaser budget — nothing clips or
+// collides with the footer. Bracketed tier glosses ([alleged], ["quoted"]) are
+// stripped: they're citation apparatus, visual noise at card size.
 // ---------------------------------------------------------------------------
-function makeTeaser(text, maxSentences, maxChars) {
-  const clean = String(text || "").replace(/\s+/g, " ").trim();
+const EM_FACTOR = 0.52; // avg Newsreader glyph advance ≈ 0.52em (conservative)
+
+function stripGloss(s) {
+  return String(s || "").replace(/\[[^\]]*\]/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function lineBudgetTeaser(text, opts) {
+  const {
+    innerWidth,
+    titleText,
+    titleSize,
+    teaserSize,
+    baseLines,
+    perTitleLine,
+    minLines,
+  } = opts;
+  const clean = stripGloss(text);
   if (!clean) return "";
-  if (clean.length <= maxChars) {
-    // Short enough to use whole — but still cap sentence count.
-    const all = clean.match(/[^.!?]+[.!?]+(?:\s|$)|[^.!?]+$/g) || [clean];
-    if (all.length <= maxSentences) return clean;
-  }
 
-  const sentences = clean.match(/[^.!?]+[.!?]+(?:\s|$)|[^.!?]+$/g) || [clean];
-  let out = "";
-  for (let i = 0; i < sentences.length && i < maxSentences; i++) {
-    const candidate = (out + sentences[i]).replace(/\s+/g, " ").trim();
-    if (candidate.length > maxChars) break;
-    out = candidate;
-  }
+  const titleCpl = Math.max(8, Math.floor(innerWidth / (titleSize * EM_FACTOR)));
+  const titleLines = Math.max(1, Math.ceil((titleText || "").length / titleCpl));
 
-  if (out) return out;
+  let lines = baseLines - Math.round((titleLines - 1) * perTitleLine);
+  if (lines < minLines) lines = minLines;
 
-  // First sentence alone exceeds budget → cut on a word boundary, add ellipsis.
+  const teaserCpl = Math.max(10, Math.floor(innerWidth / (teaserSize * EM_FACTOR)));
+  const maxChars = teaserCpl * lines;
+
+  if (clean.length <= maxChars) return clean;
   const slice = clean.slice(0, maxChars + 1);
   let lastSpace = slice.lastIndexOf(" ");
   if (lastSpace <= 0) lastSpace = maxChars;
@@ -325,38 +349,6 @@ async function renderPng(satori, element, fonts, width, height) {
 }
 
 // ---------------------------------------------------------------------------
-// Apple touch icon (180×180): red field, "OTR" in paper-colored mono
-// ---------------------------------------------------------------------------
-async function buildAppleTouchIcon(satori, fonts) {
-  const size = 180;
-  const element = el(
-    "div",
-    {
-      display: "flex",
-      width: size,
-      height: size,
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundColor: RED,
-    },
-    [
-      el(
-        "div",
-        {
-          fontFamily: "JetBrains Mono",
-          fontWeight: 700,
-          fontSize: 64,
-          letterSpacing: 2,
-          color: PAPER,
-        },
-        "OTR"
-      ),
-    ]
-  );
-  return renderPng(satori, element, fonts, size, size);
-}
-
-// ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 async function main() {
@@ -365,8 +357,11 @@ async function main() {
   const satori = satoriMod.default || satoriMod;
 
   const resolvedEntries = require("../src/_data/resolvedEntries");
-  const locale = require("../src/_data/locales/en");
-  const entries = resolvedEntries.en || [];
+  const locales = {
+    en: require("../src/_data/locales/en"),
+    de: require("../src/_data/locales/de"),
+  };
+  const LANGS = ["en", "de"];
 
   const markUri = otrMarkDataUri();
   fs.mkdirSync(CARDS_OUT, { recursive: true });
@@ -386,98 +381,140 @@ async function main() {
     [Infinity, 30],
   ];
 
-  // -- Pass 1: derive each card's text content + accumulate glyph coverage so
-  //    the font subsetter keeps every character we actually render.
+  // Inner content widths (frame minus outer pad minus frame pad, both sides).
+  const PORTRAIT_INNER = 1080 - 56 * 2 - 64 * 2; // 840
+  const OG_INNER = 1200 - 40 * 2 - 48 * 2;       // 1024
+
+  // Localized "N sources" footnote (brand "ontherecord.me" stays untranslated).
+  const sourceCountText = (lang, n) => {
+    if (!n) return "";
+    if (lang === "de") return `${n} Quelle${n === 1 ? "" : "n"}`;
+    return `${n} source${n === 1 ? "" : "s"}`;
+  };
+
+  // -- Pass 1: derive every card's text content (per language) + accumulate
+  //    glyph coverage so the font subsetter keeps every character we render
+  //    across BOTH languages (German umlauts/ß included automatically).
   const coverage = new Set();
-  // Base printable ASCII + the static label glyphs and common punctuation.
   for (let c = 0x20; c <= 0x7e; c++) coverage.add(String.fromCharCode(c));
-  for (const ch of "ontherecord.me OTR source sources\u2014\u2026\u201c\u201d\u2018\u2019") {
+  for (const ch of "ontherecord.me OTR\u2014\u2026\u201c\u201d\u2018\u2019") {
     coverage.add(ch);
   }
 
-  const cards = [];
-  for (const entry of entries) {
-    if (!entry || !entry.slug) continue;
+  const cardsByLang = {};
+  for (const lang of LANGS) {
+    const locale = locales[lang];
+    const entries = resolvedEntries[lang] || [];
+    const cards = [];
+    for (const entry of entries) {
+      if (!entry || !entry.slug) continue;
 
-    const tierLabel = (locale.statuses[entry.status] || entry.status || "").toUpperCase();
-    const title = entry.title || entry.slug;
-    const plain = blocksToPlaintext(entry.bodyBlocks || []);
-    const srcN = Array.isArray(entry.sources) ? entry.sources.length : 0;
-    const sourceCount = srcN ? `${srcN} source${srcN === 1 ? "" : "s"}` : "";
-    const teaserPortrait = makeTeaser(plain, 2, 240);
-    const teaserOg = makeTeaser(plain, 2, 150);
+      const tierLabel = (locale.statuses[entry.status] || entry.status || "").toUpperCase();
+      const title = entry.title || entry.slug;
+      const plain = blocksToPlaintext(entry.bodyBlocks || []);
+      const srcN = Array.isArray(entry.sources) ? entry.sources.length : 0;
+      const sourceCount = sourceCountText(lang, srcN);
 
-    for (const s of [tierLabel, title, teaserPortrait, teaserOg, sourceCount]) {
-      for (const ch of s) coverage.add(ch);
+      const titleSizePortrait = fitTitleSize(title, PORTRAIT_TITLE_BUCKETS);
+      const titleSizeOg = fitTitleSize(title, OG_TITLE_BUCKETS);
+
+      const teaserPortrait = lineBudgetTeaser(plain, {
+        innerWidth: PORTRAIT_INNER,
+        titleText: title,
+        titleSize: titleSizePortrait,
+        teaserSize: 34,
+        baseLines: 6,
+        perTitleLine: 1.3,
+        minLines: 2,
+      });
+      const teaserOg = lineBudgetTeaser(plain, {
+        innerWidth: OG_INNER,
+        titleText: title,
+        titleSize: titleSizeOg,
+        teaserSize: 24,
+        baseLines: 3,
+        perTitleLine: 1.0,
+        minLines: 1,
+      });
+
+      for (const s of [tierLabel, title, teaserPortrait, teaserOg, sourceCount]) {
+        for (const ch of s) coverage.add(ch);
+      }
+
+      cards.push({
+        slug: entry.slug,
+        tierLabel,
+        title,
+        teaserPortrait,
+        teaserOg,
+        sourceCount,
+        titleSizePortrait,
+        titleSizeOg,
+      });
     }
-
-    cards.push({ slug: entry.slug, tierLabel, title, teaserPortrait, teaserOg, sourceCount });
+    cardsByLang[lang] = cards;
   }
 
   // -- Build static, subsetted font instances for the collected coverage.
   const coverageText = Array.from(coverage).join("");
   const fonts = await buildFonts(coverageText);
 
-  // -- Pass 2: render both card sizes per entry.
+  // -- Pass 2: render both card sizes per entry, per language. Sequential
+  //    (await each) to keep peak memory flat across ~400 PNGs.
   let made = 0;
-  for (const card of cards) {
-    const portrait = buildCard({
-      width: 1080,
-      height: 1350,
-      pad: 56,
-      framePad: 64,
-      tierSize: 26,
-      markSize: 84,
-      markInset: 32,
-      titleSize: fitTitleSize(card.title, PORTRAIT_TITLE_BUCKETS),
-      titleGap: 36,
-      teaserSize: 34,
-      footerSize: 22,
-      tierLabel: card.tierLabel,
-      title: card.title,
-      teaser: card.teaserPortrait,
-      sourceCount: card.sourceCount,
-      markUri,
-    });
+  for (const lang of LANGS) {
+    const outDir = path.join(CARDS_OUT, lang);
+    fs.mkdirSync(outDir, { recursive: true });
 
-    const og = buildCard({
-      width: 1200,
-      height: 630,
-      pad: 40,
-      framePad: 48,
-      tierSize: 22,
-      markSize: 64,
-      markInset: 24,
-      titleSize: fitTitleSize(card.title, OG_TITLE_BUCKETS),
-      titleGap: 22,
-      teaserSize: 24,
-      footerSize: 18,
-      tierLabel: card.tierLabel,
-      title: card.title,
-      teaser: card.teaserOg,
-      sourceCount: card.sourceCount,
-      markUri,
-    });
+    for (const card of cardsByLang[lang]) {
+      const portrait = buildCard({
+        width: 1080,
+        height: 1350,
+        pad: 56,
+        framePad: 64,
+        tierSize: 26,
+        markSize: 84,
+        markInset: 32,
+        titleSize: card.titleSizePortrait,
+        titleGap: 36,
+        teaserSize: 34,
+        footerSize: 22,
+        tierLabel: card.tierLabel,
+        title: card.title,
+        teaser: card.teaserPortrait,
+        sourceCount: card.sourceCount,
+        markUri,
+      });
 
-    const portraitPng = await renderPng(satori, portrait, fonts, 1080, 1350);
-    const ogPng = await renderPng(satori, og, fonts, 1200, 630);
+      const og = buildCard({
+        width: 1200,
+        height: 630,
+        pad: 40,
+        framePad: 48,
+        tierSize: 22,
+        markSize: 64,
+        markInset: 24,
+        titleSize: card.titleSizeOg,
+        titleGap: 22,
+        teaserSize: 24,
+        footerSize: 18,
+        tierLabel: card.tierLabel,
+        title: card.title,
+        teaser: card.teaserOg,
+        sourceCount: card.sourceCount,
+        markUri,
+      });
 
-    fs.writeFileSync(path.join(CARDS_OUT, `${card.slug}-portrait.png`), portraitPng);
-    fs.writeFileSync(path.join(CARDS_OUT, `${card.slug}-og.png`), ogPng);
-    made++;
+      const portraitPng = await renderPng(satori, portrait, fonts, 1080, 1350);
+      const ogPng = await renderPng(satori, og, fonts, 1200, 630);
+
+      fs.writeFileSync(path.join(outDir, `${card.slug}-portrait.png`), portraitPng);
+      fs.writeFileSync(path.join(outDir, `${card.slug}-og.png`), ogPng);
+      made++;
+    }
   }
 
-  // Apple touch icon — write to source assets (committed + passthrough) and,
-  // when the build output already exists, straight into _site/assets too.
-  const iconPng = await buildAppleTouchIcon(satori, fonts);
-  fs.writeFileSync(path.join(ASSETS_DIR, "apple-touch-icon.png"), iconPng);
-  const siteAssets = path.join(SITE_DIR, "assets");
-  if (fs.existsSync(siteAssets)) {
-    fs.writeFileSync(path.join(siteAssets, "apple-touch-icon.png"), iconPng);
-  }
-
-  console.log(`Generated ${made * 2} share cards for ${made} entries → _site/cards/`);
-  console.log("Wrote apple-touch-icon.png (180×180).");
+  console.log(`Generated ${made * 2} share cards (${made} entries × langs) → _site/cards/{en,de}/`);
 }
 
 main().catch((err) => {

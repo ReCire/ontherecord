@@ -1,0 +1,66 @@
+---
+layout: layout.njk
+entryPage: true
+pagination:
+  data: entryPages
+  size: 1
+  alias: ep
+eleventyComputed:
+  lang: "{{ ep.lang }}"
+  permalink: "{% if ep.lang == 'de' %}/de/eintrag/{{ ep.slug }}/{% else %}/entry/{{ ep.slug }}/{% endif %}"
+  ogType: article
+  pageTitle: "{{ ep.title }} — On The Record"
+  pageDescription: "{{ ep.descr }}"
+  ogImageUrl: "{{ site.url }}/cards/{{ ep.lang }}/{{ ep.slug }}-og.png"
+  hreflangEn: "{{ site.url }}/entry/{{ ep.slug }}/"
+  hreflangDe: "{{ site.url }}/de/eintrag/{{ ep.slug }}/"
+  hreflangXDefault: "{{ site.url }}/entry/{{ ep.slug }}/"
+---
+{%- set homeUrl = "/de/" if ep.lang == "de" else "/" -%}
+{%- set ledgerAnchor = homeUrl ~ "#entry-" ~ ep.slug -%}
+<header class="entry-page-head">
+  <nav class="lang-toggle" aria-label="Language">
+    {% if ep.lang == "de" %}
+    <a href="/entry/{{ ep.slug }}/" lang="en" hreflang="en">EN</a><span class="lang-sep" aria-hidden="true">/</span><span class="lang-current" aria-current="page">DE</span>
+    {% else %}
+    <span class="lang-current" aria-current="page">EN</span><span class="lang-sep" aria-hidden="true">/</span><a href="/de/eintrag/{{ ep.slug }}/" lang="de" hreflang="de">DE</a>
+    {% endif %}
+  </nav>
+  <a class="home-link" href="{{ homeUrl }}">{{ i18n.title }}</a>
+  <div class="kicker">{{ i18n.kicker }}</div>
+</header>
+
+<main class="entry-single-wrap">
+  <article class="entry single" id="entry-{{ ep.slug }}" data-slug="{{ ep.slug }}">
+    {% if not ep.translated %}
+    <div class="translation-note">{{ i18n.translationNote }}</div>
+    {% endif %}
+    <div class="entry-tier">{{ i18n.statuses[ep.status] | upper }}</div>
+    <h1 class="entry-single-title">
+      {% if ep.tag %}<span class="tag">{{ ep.tag }}</span>{% endif %}
+      {{ ep.title }}
+    </h1>
+    <div class="body">{{ ep.bodyBlocks | renderBlocks | safe }}</div>
+    {% if ep.sources and ep.sources.length %}
+    <div class="sources">
+      {% for src in ep.sources %}
+      <span class="src"><span class="label{% if src.video %} vid{% endif %}">{% if src.video %}{{ i18n.video }}{% else %}{{ i18n.src }}{% endif %}</span><a href="{{ src.url }}" target="_blank" rel="noopener">{{ src.label }}</a>{% if src.archive_url %} <span class="src-sep">·</span> <a class="archive-link" href="{{ src.archive_url }}" target="_blank" rel="noopener" title="Wayback Machine">{{ i18n.archived }}</a>{% endif %}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% if ep.last_verified %}<div class="verified">{{ i18n.lastVerified }} {{ ep.last_verified }}</div>{% endif %}
+    <span class="entry-share-static">
+      <a download="ontherecord-{{ ep.slug }}-portrait.png" href="/cards/{{ ep.lang }}/{{ ep.slug }}-portrait.png">{{ i18n.cardPortrait }}</a>
+      <a download="ontherecord-{{ ep.slug }}-wide.png" href="/cards/{{ ep.lang }}/{{ ep.slug }}-og.png">{{ i18n.cardWide }}</a>
+    </span>
+  </article>
+
+  <p class="back-to-ledger"><a href="{{ ledgerAnchor }}">{{ i18n.readInLedger }}</a></p>
+</main>
+
+<footer id="footer">
+  <strong>{{ i18n.title | upper }}</strong> — <a href="{{ homeUrl }}">{{ i18n.kicker }}</a>
+  <div class="disclaim">
+    {{ i18n.disclaimer }}
+  </div>
+</footer>
