@@ -16,7 +16,11 @@ const { blocksToPlaintext } = require("../assets/markdown-blocks");
 const LANGS = ["en", "de"];
 
 function stripGloss(s) {
-  return String(s || "").replace(/\[[^\]]*\]/g, " ").replace(/\s+/g, " ").trim();
+  return String(s || "")
+    .replace(/\[[^\]]*\]/g, " ")
+    .replace(/\s+([,.;:!?])/g, "$1") // drop space orphaned before punctuation
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function clip(s, max) {

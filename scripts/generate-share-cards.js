@@ -147,7 +147,11 @@ function otrMarkDataUri() {
 const EM_FACTOR = 0.52; // avg Newsreader glyph advance ≈ 0.52em (conservative)
 
 function stripGloss(s) {
-  return String(s || "").replace(/\[[^\]]*\]/g, " ").replace(/\s+/g, " ").trim();
+  return String(s || "")
+    .replace(/\[[^\]]*\]/g, " ")
+    .replace(/\s+([,.;:!?])/g, "$1") // drop space orphaned before punctuation
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function lineBudgetTeaser(text, opts) {
