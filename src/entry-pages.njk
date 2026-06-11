@@ -50,13 +50,13 @@ eleventyComputed:
     </div>
     {% endif %}
     {% if ep.last_verified %}<div class="verified">{{ i18n.lastVerified }} {{ ep.last_verified }}</div>{% endif %}
-    <span class="entry-share js-only" data-slug="{{ ep.slug }}" data-title="{{ ep.title }}" data-entry-url="{{ selfUrl }}" data-portrait="/cards/{{ ep.lang }}/{{ ep.slug }}-portrait.png">
-      <button type="button" class="share-native" hidden>{{ i18n.shareLabel }}</button>
-      <span class="share-download">
+    <span class="entry-actions js-only" data-slug="{{ ep.slug }}" data-title="{{ ep.title }}" data-entry-url="{{ selfUrl }}" data-portrait="/cards/{{ ep.lang }}/{{ ep.slug }}-portrait.png">
+      <button type="button" class="act-send" hidden>{{ i18n.shareLabel }}</button>
+      <span class="act-card">
         <a download="ontherecord-{{ ep.slug }}-portrait.png" href="/cards/{{ ep.lang }}/{{ ep.slug }}-portrait.png">{{ i18n.cardPortrait }}</a>
         <a download="ontherecord-{{ ep.slug }}-wide.png" href="/cards/{{ ep.lang }}/{{ ep.slug }}-og.png">{{ i18n.cardWide }}</a>
       </span>
-      <a class="share-link" href="{{ selfUrl }}" data-copied-label="{{ i18n.copied }}">{{ i18n.copyLink }}</a>
+      <a class="act-copy" href="{{ selfUrl }}" data-copied-label="{{ i18n.copied }}">{{ i18n.copyLink }}</a>
     </span>
   </article>
 

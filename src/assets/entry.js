@@ -3,9 +3,9 @@
 // per-entry pages (/entry/{slug}/, /de/eintrag/{slug}/). These pages do NOT
 // load filter.js (no list/search/view machinery), so this is the only script
 // they run. It mirrors the same DOM contract as filter.js's share code:
-//   .entry-share[data-slug][data-title][data-entry-url][data-portrait]
-//     .share-native   (revealed when Web Share with files is supported)
-//     .share-link     (real <a> to the entry page; JS upgrades to clipboard copy)
+//   .entry-actions[data-slug][data-title][data-entry-url][data-portrait]
+//     .act-send   (revealed when Web Share with files is supported)
+//     .act-copy   (real <a> to the entry page; JS upgrades to clipboard copy)
 // ============================================================================
 (function () {
   "use strict";
@@ -52,7 +52,7 @@
 
   // Reveal native share buttons when Web Share with files is supported.
   if (navigator.canShare && navigator.share) {
-    document.querySelectorAll(".share-native").forEach(function (btn) {
+    document.querySelectorAll(".act-send").forEach(function (btn) {
       btn.removeAttribute("hidden");
     });
   }
@@ -61,9 +61,9 @@
     var target = e.target;
     if (!target || !target.closest) return;
 
-    var btn = target.closest(".share-native");
+    var btn = target.closest(".act-send");
     if (btn) {
-      var wrap = btn.closest(".entry-share");
+      var wrap = btn.closest(".entry-actions");
       if (!wrap) return;
       shareCard(
         wrap.getAttribute("data-slug"),
@@ -74,7 +74,7 @@
       return;
     }
 
-    var link = target.closest(".share-link");
+    var link = target.closest(".act-copy");
     if (link && navigator.clipboard && navigator.clipboard.writeText) {
       e.preventDefault();
       var href = link.getAttribute("href") || "";

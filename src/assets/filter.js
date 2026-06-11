@@ -953,13 +953,13 @@
   }
 
   // Copy the (absolute) entry-page URL to the clipboard with a tiny inline
-  // "copied" confirmation. Progressive enhancement: the .share-link is a real
+  // "copied" confirmation. Progressive enhancement: the .act-copy is a real
   // <a href> to the entry page, so without JS (or without clipboard support)
   // it just navigates there — never a dead control.
   function initCopyLink() {
     if (!navigator.clipboard || !navigator.clipboard.writeText) return;
     document.addEventListener("click", function (e) {
-      var link = e.target && e.target.closest ? e.target.closest(".share-link") : null;
+      var link = e.target && e.target.closest ? e.target.closest(".act-copy") : null;
       if (!link) return;
       e.preventDefault();
       var href = link.getAttribute("href") || "";
@@ -984,7 +984,7 @@
   initCopyLink();
 
   (function initShareAffordances() {
-    var shares = document.querySelectorAll(".entry-share");
+    var shares = document.querySelectorAll(".entry-actions");
     if (!shares.length) return;
 
     // Feature-detect once. Web Share with files is supported on desktop too
@@ -995,17 +995,17 @@
     var canShareFiles = !!(navigator.canShare && navigator.share);
     if (canShareFiles) {
       // Reveal every native share button. Downloads are always visible by default —
-      // never touched here. Only .share-native toggles via the hidden attribute.
-      document.querySelectorAll(".share-native").forEach(function (btn) {
+      // never touched here. Only .act-send toggles via the hidden attribute.
+      document.querySelectorAll(".act-send").forEach(function (btn) {
         btn.removeAttribute("hidden");
       });
     }
 
     // One delegated handler for all native-share buttons.
     document.addEventListener("click", function (e) {
-      var btn = e.target && e.target.closest ? e.target.closest(".share-native") : null;
+      var btn = e.target && e.target.closest ? e.target.closest(".act-send") : null;
       if (!btn) return;
-      var wrap = btn.closest(".entry-share");
+      var wrap = btn.closest(".entry-actions");
       if (!wrap) return;
       var slug = wrap.getAttribute("data-slug");
       if (!slug) return;
