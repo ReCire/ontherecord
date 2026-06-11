@@ -381,16 +381,18 @@ h2 {
 .entry-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 4px;
   margin-top: 8px;
   font-family: 'JetBrains Mono', monospace; font-size: 10px;
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint);
 }
-/* Middot between the native button and the download links — only when the
-   button is actually shown, so the row reads as one group, not two blocks. */
-.act-send:not([hidden]) + .act-card::before {
-  content: "\00b7"; margin-right: 10px; color: var(--faint);
-  display: inline-flex; align-items: center;
+/* Middot separator — standalone flex child for proper vertical centering */
+.entry-actions .sep {
+  color: var(--faint);
+}
+/* Hide first middot when share button is hidden */
+.act-send[hidden] + .sep {
+  display: none;
 }
 /* Native share button: a quiet text affordance, not a CTA. 44px tap target. */
 .act-send {
@@ -406,19 +408,12 @@ h2 {
 /* Explicit display rules above would otherwise beat the [hidden] attribute the
    JS toggles, so restore it (matches .filter-body[hidden] / .sec-content[hidden]). */
 .act-send[hidden] { display: none; }
-/* Desktop: two inline download links separated by a thin middot. */
-.act-card { display: inline-flex; align-items: center; }
-.act-card a {
+/* Card download links */
+.entry-actions a[download] {
   color: var(--faint); text-decoration: none;
   border-bottom: 1px dotted var(--faint); padding-bottom: 1px;
 }
-.act-card a:hover { color: var(--red); border-bottom-color: var(--red); }
-.act-card a + a { margin-left: 12px; }
-.act-card a + a::before {
-  content: "\00b7"; margin-right: 12px;
-  color: var(--faint); border-bottom: 0;
-  display: inline-flex; align-items: center;
-}
+.entry-actions a[download]:hover { color: var(--red); border-bottom-color: var(--red); }
 /* Copy-link affordance: a real <a> to the entry page (works with no JS); JS
    intercepts it to copy the URL and flash a "copied" confirmation. */
 .entry-actions .act-copy {
@@ -427,10 +422,6 @@ h2 {
 }
 .entry-actions .act-copy:hover { color: var(--red); border-bottom-color: var(--red); }
 .entry-actions .act-copy.is-copied { color: var(--red); border-bottom-color: transparent; }
-.act-card + .act-copy::before {
-  content: "\00b7"; margin-right: 10px; color: var(--faint);
-  display: inline-flex; align-items: center;
-}
 
 .pullquote {
   font-family: 'JetBrains Mono', monospace; font-weight: 700;

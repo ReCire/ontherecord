@@ -130,8 +130,8 @@ module.exports = {
   video: "▶ VIDEO",
   // Share affordances (JS-only): native share sheet on mobile, download links on desktop
   shareLabel: "Share",
-  cardPortrait: "card (portrait)",
-  cardWide: "card (wide)",
+  cardPortrait: "card portrait",
+  cardWide: "card wide",
   copyLink: "copy link",
   copied: "copied",
   readInLedger: "→ Read in the full ledger",

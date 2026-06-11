@@ -123,10 +123,11 @@ permalink: /
           {% if entry.last_verified %}<div class="verified">{{ i18n.lastVerified }} {{ entry.last_verified }}</div>{% endif %}
           <span class="entry-actions js-only" data-slug="{{ entry.slug }}" data-title="{{ entry.title }}" data-entry-url="/entry/{{ entry.slug }}/" data-portrait="/cards/en/{{ entry.slug }}-portrait.png">
             <button type="button" class="act-send" hidden>{{ i18n.shareLabel }}</button>
-            <span class="act-card">
-              <a download="ontherecord-{{ entry.slug }}-portrait.png" href="/cards/en/{{ entry.slug }}-portrait.png">{{ i18n.cardPortrait }}</a>
-              <a download="ontherecord-{{ entry.slug }}-wide.png" href="/cards/en/{{ entry.slug }}-og.png">{{ i18n.cardWide }}</a>
-            </span>
+            <span class="sep">·</span>
+            <a download="ontherecord-{{ entry.slug }}-portrait.png" href="/cards/en/{{ entry.slug }}-portrait.png">{{ i18n.cardPortrait }}</a>
+            <span class="sep">·</span>
+            <a download="ontherecord-{{ entry.slug }}-wide.png" href="/cards/en/{{ entry.slug }}-og.png">{{ i18n.cardWide }}</a>
+            <span class="sep">·</span>
             <a class="act-copy" href="/entry/{{ entry.slug }}/" data-copied-label="{{ i18n.copied }}">{{ i18n.copyLink }}</a>
           </span>
         </article>

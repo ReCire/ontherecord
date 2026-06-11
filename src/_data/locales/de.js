@@ -135,8 +135,8 @@ module.exports = {
   video: "▶ VIDEO",
   // Share affordances (JS-only): native share sheet on mobile, download links on desktop
   shareLabel: "Teilen",
-  cardPortrait: "Karte (hoch)",
-  cardWide: "Karte (breit)",
+  cardPortrait: "Karte hoch",
+  cardWide: "Karte breit",
   copyLink: "Link kopieren",
   copied: "kopiert",
   readInLedger: "→ Im vollständigen Verzeichnis lesen",
