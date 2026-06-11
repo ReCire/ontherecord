@@ -386,6 +386,11 @@ h2 {
   font-family: 'JetBrains Mono', monospace; font-size: 10px;
   letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint);
 }
+@media (max-width: 600px) {
+  .entry-actions {
+    justify-content: space-between;
+  }
+}
 /* Middot separator — standalone flex child for proper vertical centering */
 .entry-actions .sep {
   color: var(--faint);
