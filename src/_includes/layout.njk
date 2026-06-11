@@ -6,7 +6,8 @@
 {#- Per-page overrides (entry pages set these); defaults keep the list pages intact. -#}
 {%- set metaTitle = pageTitle or (i18n.title ~ " — " ~ i18n.titleSuffix) -%}
 {%- set metaDescription = pageDescription or i18n.tagline -%}
-{%- set ogImageAbs = ogImageUrl or (site.url ~ site.ogImage) -%}
+{%- set defaultOg = site.ogImageEn if lang == 'en' else site.ogImageDe -%}
+{%- set ogImageAbs = ogImageUrl or (site.url ~ defaultOg) -%}
 {%- set altEn = hreflangEn or (site.url ~ "/") -%}
 {%- set altDe = hreflangDe or (site.url ~ "/de/") -%}
 {%- set altDefault = hreflangXDefault or (site.url ~ "/") -%}

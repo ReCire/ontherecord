@@ -1,6 +1,8 @@
 module.exports = {
   url: "https://ontherecord.me",
   ogImage: "/assets/og-image.png", // 1200×630px image — add to src/assets/
+  ogImageEn: "/assets/og-image-en.png", // default OG for English list page
+  ogImageDe: "/assets/og-image-de.png", // default OG for German list page
 
   // Web3Forms access key. Get a free key at https://web3forms.com (just enter
   // your email, no account). Paste it here to activate the contact form.
