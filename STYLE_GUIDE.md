@@ -115,3 +115,56 @@ Two sizes, two languages: `cards/{en,de}/{slug}-{portrait(1080×1350),og(1200×6
 - Card title is Mono UPPER; teaser is Newsreader.
 - No `fonts.googleapis.com` / `gstatic.com`.
 - Mobile + desktop sizes come from the `clamp()` ramps / fixed px above.
+
+---
+
+<!-- Append these two subsections to STYLE_GUIDE.md, under a new "## Gotchas / hard-won rules" heading near the end (before the final checklist), or wherever fits. -->
+
+## Gotchas / hard-won rules
+
+### Affordance class names must avoid `share` / `social` / `download`
+
+Ad-blockers (uBlock Origin, Brave Shields, Ghostery) hide elements by matching
+class-name patterns — anything containing `share`, `social`, `download`,
+`sponsor`, etc. gets stripped from the DOM, even when it's our own first-party,
+no-tracking markup. This already bit us once: the per-entry share row
+(`.entry-share`, `.share-native`, `.share-download`, `.share-link`) rendered
+locally but vanished on the deployed site for anyone running a blocker.
+
+**Rule:** never name an interactive/affordance class with `share`, `social`,
+`download`, or similar tracker-adjacent words. The sharing controls are named
+neutrally instead:
+
+| Purpose | Class (use this) | Never |
+|---------|------------------|-------|
+| Share-controls wrapper | `.entry-actions` | `.entry-share` |
+| Native share button | `.act-send` | `.share-native` |
+| Card download links | `.act-card` | `.share-download` |
+| Copy-link affordance | `.act-copy` | `.share-link` |
+
+If you add a new affordance, keep the `.act-*` / neutral-noun convention. This is
+a maintenance trap, not a one-time fix: a future class named `.social-buttons`
+would silently reintroduce the bug for blocked users only — invisible in local
+testing.
+
+### `.js-only` depends on a `.js` class that must be set before any deferred script
+
+Progressive-enhancement elements (the share/copy row, etc.) carry `.js-only` and
+are hidden by default; CSS reveals them only when `html.js` is present. That
+`.js` class must be set **independently of which page script loads**, because
+different pages load different bundles (`filter.js` on list pages, `entry.js` on
+entry pages, possibly neither on a future page). Relying on a specific script to
+set it is fragile — that's how the entry-page share row went missing until
+`entry.js` was patched to also set `.js`.
+
+**Rule:** the `.js` class is set by a single inline snippet at the very top of
+`<head>` in `layout.njk`, before any other script:
+
+```html
+<script>document.documentElement.className += ' js';</script>
+```
+
+Individual scripts (`filter.js`, `entry.js`, future ones) must **not** be
+responsible for setting `.js`. If you see a script adding `.js`, that's a smell —
+remove it and trust the head snippet. This runs synchronously before paint, so
+there's no flash of hidden affordances.

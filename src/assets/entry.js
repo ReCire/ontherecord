@@ -10,10 +10,6 @@
 (function () {
   "use strict";
 
-  // Enable .js-only affordances
-  document.documentElement.classList.remove("no-js");
-  document.documentElement.classList.add("js");
-
   function triggerDownload(url, filename) {
     var a = document.createElement("a");
     a.href = url;
