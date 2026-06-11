@@ -8,8 +8,8 @@ module.exports = {
   title: "On The Record",
   titleSuffix: "Ein dokumentiertes Verzeichnis",
   ogLocale: "de_DE",
-  tagline: "Das Volk verlangt nur das Notwendigste. Die Machthaber beanspruchen alles. Hier: was getan wurde, wer es getan hat und wo es niedergeschrieben steht.",
-  kicker: "Ein dokumentiertes Verzeichnis · mit Primärquellen",
+  tagline: "Das Volk verlangt nur das Notwendigste. Die Machthaber beanspruchen alles. Hier: was getan wurde, wer es getan hat und wo es geschrieben steht.",
+  kicker: "Ein Verzeichnis · mit Primärquellen",
   disclaimer: "Das Volk spricht offen, bei Tageslicht, mit den Belegen in der Hand.",
 
   // Section labels (language-specific)
@@ -102,8 +102,13 @@ module.exports = {
   searchEmpty: "Keine Treffer",
   searchResults: "Treffer",
   searchResult: "Treffer",
+  searchFor: "für",
   entriesShown: "Einträge angezeigt",
   entryShown: "Eintrag angezeigt",
+  entriesTotal: "Einträge gesamt",
+  activeSuffix: "aktiv",
+  noMatch: "Keine Einträge passen zu",
+  tryFewer: "Weniger Wörter versuchen oder Suche zurücksetzen.",
   sectionEmpty: "Noch keine Einträge in diesem Abschnitt.",
 
   // View toggle + filter group labels

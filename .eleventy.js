@@ -98,6 +98,7 @@ module.exports = function (eleventyConfig) {
       const hash = crypto.createHash("sha1");
       hash.update(fs.readFileSync("./src/assets/style.css"));
       hash.update(fs.readFileSync("./src/assets/filter.js"));
+      hash.update(fs.readFileSync("./src/assets/entry.js"));
       return hash.digest("hex").slice(0, 10);
     } catch (e) {
       return String(Date.now());

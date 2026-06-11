@@ -59,8 +59,9 @@
   document.documentElement.classList.remove('no-js');
   document.documentElement.classList.add('js');
 </script>
-{# Entry pages are static destinations — no filter/search/view JS. #}
-{% if not entryPage %}<script src="/assets/filter.js?v={{ assetVersion }}" defer></script>{% endif %}
+{# List pages get the full filter/search/view IIFE; static entry pages get only
+   the tiny share + copy-link helper. #}
+{% if entryPage %}<script src="/assets/entry.js?v={{ assetVersion }}" defer></script>{% else %}<script src="/assets/filter.js?v={{ assetVersion }}" defer></script>{% endif %}
 </head>
 <body class="no-js">
 
@@ -70,6 +71,19 @@
 
 {% if not entryPage %}<script>
   window.__SEARCH_INDEX__ = {{ searchIndex[lang] | safe }};
+  window.__I18N__ = {
+    expandAll: {{ i18n.expandAll | dump | safe }},
+    collapseAll: {{ i18n.collapseAll | dump | safe }},
+    searchResult: {{ i18n.searchResult | dump | safe }},
+    searchResults: {{ i18n.searchResults | dump | safe }},
+    searchFor: {{ i18n.searchFor | dump | safe }},
+    entryShown: {{ i18n.entryShown | dump | safe }},
+    entriesShown: {{ i18n.entriesShown | dump | safe }},
+    entriesTotal: {{ i18n.entriesTotal | dump | safe }},
+    activeSuffix: {{ i18n.activeSuffix | dump | safe }},
+    noMatch: {{ i18n.noMatch | dump | safe }},
+    tryFewer: {{ i18n.tryFewer | dump | safe }}
+  };
 </script>{% endif %}
 
 </body>

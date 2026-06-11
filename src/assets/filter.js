@@ -24,6 +24,15 @@
   var sectionExpanded = {};
 
   // =========================================================================
+  // CLIENT I18N — localized chrome strings inlined by layout.njk as
+  // window.__I18N__ (per page language). English fallbacks keep it safe if the
+  // global is ever missing. This is what stops filter.js from overwriting the
+  // server-rendered German labels with hardcoded English on first render.
+  // =========================================================================
+  var I18N = (typeof window !== "undefined" && window.__I18N__) || {};
+  function t(key, fallback) { return I18N[key] || fallback; }
+
+  // =========================================================================
   // DOM REFERENCES
   // =========================================================================
   var entryEls        = Array.prototype.slice.call(document.querySelectorAll(".entry[data-section]"));
@@ -302,8 +311,8 @@
 
   function showEmpty(q) {
     emptyState.style.display = "";
-    emptyState.innerHTML = "No entries match \u201c" + q.replace(/</g, "&lt;") + "\u201d. "
-      + "<a href='#' id='empty-clear'>Try fewer words or clear search.</a>";
+    emptyState.innerHTML = t("noMatch", "No entries match") + " \u201c" + q.replace(/</g, "&lt;") + "\u201d. "
+      + "<a href='#' id='empty-clear'>" + t("tryFewer", "Try fewer words or clear search.") + "</a>";
     var lnk = document.getElementById("empty-clear");
     if (lnk) lnk.addEventListener("click", function (e) { e.preventDefault(); clearSearch(); });
   }
@@ -362,11 +371,11 @@
     // Label describes the ACTION (what clicking will do) — if any collapsed,
     // clicking will expand all; otherwise clicking will collapse all.
     if (anyCollapsed) {
-      expandAllBtn.textContent = "Expand all";
-      expandAllBtn.setAttribute("aria-label", "Expand all sections");
+      expandAllBtn.textContent = t("expandAll", "Expand all");
+      expandAllBtn.setAttribute("aria-label", t("expandAll", "Expand all"));
     } else {
-      expandAllBtn.textContent = "Collapse all";
-      expandAllBtn.setAttribute("aria-label", "Collapse all sections");
+      expandAllBtn.textContent = t("collapseAll", "Collapse all");
+      expandAllBtn.setAttribute("aria-label", t("collapseAll", "Collapse all"));
     }
   }
 
@@ -700,12 +709,12 @@
       var anyFilter = active.section.size || active.region.size || active.status.size;
       if (hasQuery) {
         var n = index.filter(function (r) { return r._visible; }).length;
-        countEl.textContent = n + " " + (n === 1 ? "result" : "results") + " for \u201c" + query.trim() + "\u201d";
+        countEl.textContent = n + " " + (n === 1 ? t("searchResult", "result") : t("searchResults", "results")) + " " + t("searchFor", "for") + " \u201c" + query.trim() + "\u201d";
       } else if (anyFilter) {
         var shown = index.filter(function (r) { return r._visible; }).length;
-        countEl.textContent = shown + " " + (shown === 1 ? "entry" : "entries") + " shown";
+        countEl.textContent = shown + " " + (shown === 1 ? t("entryShown", "entry shown") : t("entriesShown", "entries shown"));
       } else {
-        countEl.textContent = index.length + " entries total";
+        countEl.textContent = index.length + " " + t("entriesTotal", "entries total");
       }
     }
 
@@ -728,7 +737,7 @@
   function updateHint() {
     if (!activeHint) return;
     var total = active.section.size + active.region.size + active.status.size;
-    activeHint.textContent = total > 0 ? " \u00b7 " + total + " active" : "";
+    activeHint.textContent = total > 0 ? " \u00b7 " + total + " " + t("activeSuffix", "active") : "";
   }
 
   // =========================================================================

@@ -154,6 +154,8 @@ function stripGloss(s) {
     .trim();
 }
 
+const MONO_EM = 0.6;  // JetBrains Mono is monospaced — fixed advance ≈ 0.6em
+
 function lineBudgetTeaser(text, opts) {
   const {
     innerWidth,
@@ -163,17 +165,19 @@ function lineBudgetTeaser(text, opts) {
     baseLines,
     perTitleLine,
     minLines,
+    titleEm = MONO_EM,   // card titles are now mono uppercase (wider than serif)
+    teaserEm = EM_FACTOR, // teaser stays Newsreader serif
   } = opts;
   const clean = stripGloss(text);
   if (!clean) return "";
 
-  const titleCpl = Math.max(8, Math.floor(innerWidth / (titleSize * EM_FACTOR)));
+  const titleCpl = Math.max(8, Math.floor(innerWidth / (titleSize * titleEm)));
   const titleLines = Math.max(1, Math.ceil((titleText || "").length / titleCpl));
 
   let lines = baseLines - Math.round((titleLines - 1) * perTitleLine);
   if (lines < minLines) lines = minLines;
 
-  const teaserCpl = Math.max(10, Math.floor(innerWidth / (teaserSize * EM_FACTOR)));
+  const teaserCpl = Math.max(10, Math.floor(innerWidth / (teaserSize * teaserEm)));
   const maxChars = teaserCpl * lines;
 
   if (clean.length <= maxChars) return clean;
@@ -264,10 +268,12 @@ function buildCard(opts) {
       el(
         "div",
         {
-          fontFamily: "Newsreader",
-          fontWeight: 500,
+          fontFamily: "JetBrains Mono",
+          fontWeight: 700,
           fontSize: titleSize,
-          lineHeight: 1.08,
+          letterSpacing: -1,
+          textTransform: "uppercase",
+          lineHeight: 1.14,
           color: INK,
           marginBottom: titleGap,
         },
@@ -370,19 +376,22 @@ async function main() {
   const markUri = otrMarkDataUri();
   fs.mkdirSync(CARDS_OUT, { recursive: true });
 
+  // Mono uppercase is much wider than serif, so these run smaller than a
+  // serif scale would. Tuned against the inner widths below (portrait 840,
+  // og 1024) so a typical title wraps to 2–3 lines without overflowing.
   const PORTRAIT_TITLE_BUCKETS = [
-    [28, 96],
-    [45, 80],
-    [70, 66],
-    [100, 54],
-    [Infinity, 46],
+    [22, 64],
+    [40, 54],
+    [60, 46],
+    [85, 40],
+    [Infinity, 34],
   ];
   const OG_TITLE_BUCKETS = [
-    [28, 60],
-    [45, 50],
-    [70, 42],
-    [100, 34],
-    [Infinity, 30],
+    [28, 46],
+    [45, 40],
+    [70, 34],
+    [100, 30],
+    [Infinity, 26],
   ];
 
   // Inner content widths (frame minus outer pad minus frame pad, both sides).
@@ -401,7 +410,10 @@ async function main() {
   //    across BOTH languages (German umlauts/ß included automatically).
   const coverage = new Set();
   for (let c = 0x20; c <= 0x7e; c++) coverage.add(String.fromCharCode(c));
-  for (const ch of "ontherecord.me OTR\u2014\u2026\u201c\u201d\u2018\u2019") {
+  // Static extras: brand, punctuation, and German umlauts in BOTH cases — card
+  // titles are uppercased at render (textTransform), so "Löhne" needs "Ö" even
+  // though the source text only carries the lowercase form.
+  for (const ch of "ontherecord.me OTR\u2014\u2026\u201c\u201d\u2018\u2019\u00c4\u00d6\u00dc\u00e4\u00f6\u00fc\u00df\u1e9e") {
     coverage.add(ch);
   }
 

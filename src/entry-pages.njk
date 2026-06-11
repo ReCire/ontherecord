@@ -17,6 +17,7 @@ eleventyComputed:
   hreflangXDefault: "{{ site.url }}/entry/{{ ep.slug }}/"
 ---
 {%- set homeUrl = "/de/" if ep.lang == "de" else "/" -%}
+{%- set selfUrl = ("/de/eintrag/" ~ ep.slug ~ "/") if ep.lang == "de" else ("/entry/" ~ ep.slug ~ "/") -%}
 {%- set ledgerAnchor = homeUrl ~ "#entry-" ~ ep.slug -%}
 <header class="entry-page-head">
   <nav class="lang-toggle" aria-label="Language">
@@ -26,8 +27,8 @@ eleventyComputed:
     <span class="lang-current" aria-current="page">EN</span><span class="lang-sep" aria-hidden="true">/</span><a href="/de/eintrag/{{ ep.slug }}/" lang="de" hreflang="de">DE</a>
     {% endif %}
   </nav>
-  <a class="home-link" href="{{ homeUrl }}">{{ i18n.title }}</a>
   <div class="kicker">{{ i18n.kicker }}</div>
+  <a class="home-link" href="{{ homeUrl }}">{{ i18n.title }}</a>
 </header>
 
 <main class="entry-single-wrap">
@@ -36,7 +37,7 @@ eleventyComputed:
     <div class="translation-note">{{ i18n.translationNote }}</div>
     {% endif %}
     <div class="entry-tier">{{ i18n.statuses[ep.status] | upper }}</div>
-    <h1 class="entry-single-title">
+    <h1>
       {% if ep.tag %}<span class="tag">{{ ep.tag }}</span>{% endif %}
       {{ ep.title }}
     </h1>
@@ -49,9 +50,13 @@ eleventyComputed:
     </div>
     {% endif %}
     {% if ep.last_verified %}<div class="verified">{{ i18n.lastVerified }} {{ ep.last_verified }}</div>{% endif %}
-    <span class="entry-share-static">
-      <a download="ontherecord-{{ ep.slug }}-portrait.png" href="/cards/{{ ep.lang }}/{{ ep.slug }}-portrait.png">{{ i18n.cardPortrait }}</a>
-      <a download="ontherecord-{{ ep.slug }}-wide.png" href="/cards/{{ ep.lang }}/{{ ep.slug }}-og.png">{{ i18n.cardWide }}</a>
+    <span class="entry-share js-only" data-slug="{{ ep.slug }}" data-title="{{ ep.title }}" data-entry-url="{{ selfUrl }}" data-portrait="/cards/{{ ep.lang }}/{{ ep.slug }}-portrait.png">
+      <button type="button" class="share-native" hidden>{{ i18n.shareLabel }}</button>
+      <span class="share-download">
+        <a download="ontherecord-{{ ep.slug }}-portrait.png" href="/cards/{{ ep.lang }}/{{ ep.slug }}-portrait.png">{{ i18n.cardPortrait }}</a>
+        <a download="ontherecord-{{ ep.slug }}-wide.png" href="/cards/{{ ep.lang }}/{{ ep.slug }}-og.png">{{ i18n.cardWide }}</a>
+      </span>
+      <a class="share-link" href="{{ selfUrl }}" data-copied-label="{{ i18n.copied }}">{{ i18n.copyLink }}</a>
     </span>
   </article>
 

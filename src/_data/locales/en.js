@@ -97,8 +97,13 @@ module.exports = {
   searchEmpty: "No results found",
   searchResults: "results",
   searchResult: "result",
+  searchFor: "for",
   entriesShown: "entries shown",
   entryShown: "entry shown",
+  entriesTotal: "entries total",
+  activeSuffix: "active",
+  noMatch: "No entries match",
+  tryFewer: "Try fewer words or clear search.",
   sectionEmpty: "No entries yet in this section.",
 
   // View toggle + filter group labels
