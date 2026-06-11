@@ -1,0 +1,5 @@
+---
+title: Konfliktmineralien & der M23-Krieg im Kongo
+tag: UN-Berichte
+---
+Jahrzehntelanger Krieg im Osten der DR Kongo wird zum Teil durch Mineralien (bestimmte Metalle und Erze – im Fokus stehen hier meist die sogenannten "3TGs" (Zinn, Tantal, Wolfram und Gold)) finanziert. UN-Experten und Menschenrechtsgruppen sagen, dass Ruanda die bewaffnete Gruppe M23 unterstützt, die 2024 die Rubaya-Mine beschlagnahmte – etwa 15 % des weltweiten Coltans – und schätzungsweise 800.000 US-Dollar pro Monat an Steuern einnimmt. Die DR Kongo und Ruanda liefern zusammen etwa die Hälfte des weltweiten Coltans, des Erzes, aus dem das Tantal in Telefonen und Laptops gewonnen wird. Ein UN-Bericht von 2025 nannte einen ruandischen Exporteur als Käufer von geschmuggelten kongolesischen Mineralien; eine Untersuchung von Global Witness verfolgte Konfliktcoltan in Richtung des EU-Rohstoffhändlers Traxys (der bestreitet, dass sein ruandisches Coltan aus Rubaya stammt). Die Kette verläuft von der Gräueltat bis zum Gerät in Ihrer Hand.

@@ -1,0 +1,5 @@
+---
+title: Operation Ajax — Wie die CIA Irans Regierung für Öl stürzte
+tag: Freigegeben · 2013 eingestanden
+---
+Im Jahr 1951 verstaatlichte Irans demokratisch gewählter Premierminister Mohammad Mossadegh die britisch kontrollierte Anglo-Iranian Oil Company (die spätere BP). Als Reaktion darauf organisierten die CIA und der britische MI6 seinen Sturz – unter dem Codenamen TPAJAX – finanziert mit rund 1 Million US-Dollar für bestochene Beamte, "gemietete" Menschenmengen, platzierte Medienberichte und militärische Überläufer. Am 19. August 1953 gelang der Putsch; Mossadegh wurde inhaftiert und die Macht des Schahs wiederhergestellt, was das iranische Öl wieder für westliche Firmen öffnete. Die CIA räumte ihre Rolle in freigegebenen Dokumenten [declassified documents], die 2013 und 2017 veröffentlicht wurden, formell ein [formally acknowledged]. Die eigenen Historiker der Behörde nannten es die Vorlage für Regimewechsel im Kalten Krieg – und es nährte die antiwestliche Gegenreaktion, die in der Revolution von 1979 gipfelte. Dies ist keine Theorie; es sind die eigenen Aufzeichnungen der Behörde.

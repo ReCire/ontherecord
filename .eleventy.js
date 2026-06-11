@@ -31,10 +31,11 @@ module.exports = function (eleventyConfig) {
     const resolvedEntriesData = require("./src/_data/resolvedEntries");
 
     // For each language, emit JSON files
-    const languages = ["en"];
+    const languages = ["en", "de"];
     const site = require("./src/_data/site");
     const i18n = {
       en: require("./src/_data/locales/en"),
+      de: require("./src/_data/locales/de"),
     };
 
     for (const lang of languages) {
@@ -80,6 +81,11 @@ module.exports = function (eleventyConfig) {
     return new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" });
   });
 
+  // German-formatted build date for /de/ ("Juni 2026")
+  eleventyConfig.addGlobalData("buildDateDe", function () {
+    return new Date().toLocaleDateString("de-DE", { month: "long", year: "numeric" });
+  });
+
   // Cache-busting asset version: a short content hash of the client CSS + JS.
   // Appended to /assets/style.css and /assets/filter.js as ?v=… so a deploy that
   // changes either file yields a brand-new URL no browser or CDN can serve stale.
@@ -98,43 +104,51 @@ module.exports = function (eleventyConfig) {
     }
   });
 
-  // Add search index as global data for templates
+  // Search index as global data, one escaped-JSON string per language. The
+  // layout inlines searchIndex[lang], so /de/ searches GERMAN titles/bodies —
+  // search must match what the user actually sees on that page.
   eleventyConfig.addGlobalData("searchIndex", function () {
     const resolvedEntriesData = require("./src/_data/resolvedEntries");
     const site = require("./src/_data/site");
     const i18n = {
       en: require("./src/_data/locales/en"),
+      de: require("./src/_data/locales/de"),
     };
 
-    const entries = resolvedEntriesData.en;
-    const i18nData = i18n.en;
+    const out = {};
+    for (const lang of Object.keys(i18n)) {
+      const entries = resolvedEntriesData[lang];
+      if (!entries) continue;
+      const i18nData = i18n[lang];
 
-    // Build section label lookup
-    const sectionLabels = {};
-    site.sections.forEach(s => {
-      sectionLabels[s.key] = i18nData.sections[s.key];
-    });
+      // Build section label lookup
+      const sectionLabels = {};
+      site.sections.forEach(s => {
+        sectionLabels[s.key] = i18nData.sections[s.key];
+      });
 
-    const indexArray = entries.map(entry => ({
-      slug: entry.slug,
-      title: entry.title,
-      tag: entry.tag,
-      sectionKey: entry.section,
-      sectionLabel: sectionLabels[entry.section] || entry.section,
-      region: entry.region,
-      status: entry.status,
-      year: new Date(entry.date).getFullYear(),
-      date: entry.date ? String(entry.date).slice(0, 10) : "",
-      added: entry.added || "",
-      text: blocksToPlaintext(entry.bodyBlocks),
-    }));
+      const indexArray = entries.map(entry => ({
+        slug: entry.slug,
+        title: entry.title,
+        tag: entry.tag,
+        sectionKey: entry.section,
+        sectionLabel: sectionLabels[entry.section] || entry.section,
+        region: entry.region,
+        status: entry.status,
+        year: new Date(entry.date).getFullYear(),
+        date: entry.date ? String(entry.date).slice(0, 10) : "",
+        added: entry.added || "",
+        text: blocksToPlaintext(entry.bodyBlocks),
+      }));
 
-    // Stringify to JSON and escape to prevent </script> injection
-    const json = JSON.stringify(indexArray);
-    return json
-      .replace(/</g, '\\u003c')
-      .replace(/>/g, '\\u003e')
-      .replace(/&/g, '\\u0026');
+      // Stringify to JSON and escape to prevent </script> injection
+      const json = JSON.stringify(indexArray);
+      out[lang] = json
+        .replace(/</g, '\\u003c')
+        .replace(/>/g, '\\u003e')
+        .replace(/&/g, '\\u0026');
+    }
+    return out;
   });
 
   // Format an ISO date as e.g. "Nov 2024" for display.

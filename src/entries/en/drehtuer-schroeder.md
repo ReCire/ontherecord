@@ -1,5 +1,5 @@
 ---
-title: Vom Amt in den Aufsichtsrat — Schröder & Co.
-tag: Drehtür-Effekt
+title: From Office to the Supervisory Board — Schröder & Co.
+tag: Revolving Door Effect
 ---
-Wochen nach dem Ende seiner Kanzlerschaft 2005 wechselte Gerhard Schröder zur Gazprom-kontrollierten Nord Stream AG — ein Pipeline-Projekt, das er als Kanzler gemeinsam mit Putin massiv gefördert hatte. Später Aufsichtsratschef bei Rosneft. Er steht sinnbildlich für die „Drehtür": Eckart von Klaeden (Kanzleramt → Daimler), Ronald Pofalla (Kanzleramtschef → Cheflobbyist Deutsche Bahn), Kurt Beck (Ministerpräsident → Berater Boehringer Ingelheim) und weitere folgten demselben Muster. Die Fälle lösten Debatten über strengere Karenzzeiten aus.
+Weeks after the end of his chancellorship in 2005, Gerhard Schröder moved to the Gazprom-controlled Nord Stream AG — a pipeline project he had massively promoted alongside Putin while chancellor. Later, chairman of the supervisory board at Rosneft. He stands as the emblem of the "revolving door": Eckart von Klaeden (Chancellery → Daimler), Ronald Pofalla (Head of the Chancellery → Chief Lobbyist Deutsche Bahn), Kurt Beck (Minister-President → Advisor Boehringer Ingelheim) and others followed the same pattern. The cases triggered debates about stricter cooling-off periods [Karenzzeiten].

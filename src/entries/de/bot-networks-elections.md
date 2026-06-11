@@ -1,0 +1,5 @@
+---
+title: 'Bots, Fake Accounts & KI-Inhalte — Die Fabrikation politischen Konsenses'
+tag: Einflussoperationen
+---
+Koordinierte inauthentische Netzwerke nutzen automatisierte Konten und KI-generierte Medien, um den Anschein von Basisunterstützung vorzutäuschen und den politischen Diskurs zu lenken. Vor der Bundestagswahl in Deutschland im Februar 2025 dokumentierten Forscher ~48 Kernkonten auf X, die durch über 6.000 weiterverbreitende Konten verstärkt wurden – in einem Fall landeten alle 202 Reposts einer falschen Behauptung über eine Bombendrohung in derselben Minute. Branchenberichte schätzen, dass automatisierter Datenverkehr im Jahr 2024 die Hälfte des gesamten Web-Traffics überstieg. Meta gibt an, im Jahr 2024 ~20 verdeckte Einflussoperationen (meist mit Verbindungen nach Russland, Iran und China) gestört zu haben, und argumentiert, dass generative KI nur "bescheidene" ["modest"] Auswirkungen auf Wahlen gehabt habe – eine Behauptung, die Forscher mit Vorsicht behandeln, da das Fehlen eines viralen Deepfakes nicht gleichbedeutend mit dem Fehlen anhaltender Manipulation ist.

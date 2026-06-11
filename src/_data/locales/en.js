@@ -57,7 +57,7 @@ module.exports = {
   // Section intros (language-specific)
   sectionIntros: {
     surveillance: "From harvesting teenagers' phones to robot dogs at the stadium gate — the machinery of watching, and who builds it.",
-    machine: "The platforms and models built on other people's work — and the human costs socialized while the gains concentrate. (This ledger was assembled with help from an AI built by Anthropic, one of the companies named below. Read that tension however you like.)",
+    machine: "The platforms and models built on other people's work — and the human costs socialized while the gains concentrate.",
     corruption: "Documented settlements and guilty pleas. Not allegations — admissions and convictions, with the paperwork attached.",
     slavery: "Lawsuits and government findings on coerced labor inside the supply chains of household-name brands.",
     climate: "They knew. Internal documents, surfaced through lawsuits and congressional subpoenas, prove it.",
@@ -101,6 +101,17 @@ module.exports = {
   entryShown: "entry shown",
   sectionEmpty: "No entries yet in this section.",
 
+  // View toggle + filter group labels
+  viewNarrative: "Narrative",
+  viewRecent: "Recent",
+  viewTimeline: "Timeline",
+  filterTopic: "Topic",
+  filterRegion: "Region",
+  filterStatus: "Status",
+
+  // Ledger-updated stamp
+  ledgerUpdated: "Ledger updated",
+
   // About / colophon
   spiritNote: "The counter to division isn't agreement — it's understanding what actually happened. This is a record of who did what, and where it is written down.",
 
@@ -116,6 +127,9 @@ module.exports = {
   shareLabel: "Share",
   cardPortrait: "card (portrait)",
   cardWide: "card (wide)",
+  copyLink: "copy link",
+  copied: "copied",
+  readInLedger: "→ Read in the full ledger",
 
   // Cookie disclosure (About section fine print)
   cookieNote: "This site sets one local cookie to remember your chosen view. It is never transmitted, never used to identify you, and tells us nothing — there is no server and no analytics.",

@@ -74,7 +74,7 @@ function resolveForLang(lang = "en") {
 // Eleventy data source: returns the resolved entries object
 module.exports = {
   en: resolveForLang("en"),
+  de: resolveForLang("de"),
   // For future languages:
-  // de: resolveForLang("de"),
   // es: resolveForLang("es"),
 };

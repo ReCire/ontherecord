@@ -1,0 +1,5 @@
+---
+title: 'Anthropic, das Pentagon & die Leitplanken'
+tag: Nuance · 2025–26
+---
+Die populäre Kurzform – "Anthropic hat OpenAI einen Militärdeal überlassen" – entspricht nicht ganz den Fakten. Anthropic hielt einen Pentagon-Vertrag über 200 Millionen US-Dollar (Claude war das erste Frontier-Modell in klassifizierten Netzwerken). Als das Pentagon die Formulierung "jegliche rechtmäßige Nutzung" ["any lawful use"] verlangte – was Anthropics Verbote der Nutzung von Claude für inländische Massenüberwachung und vollautonome Waffen aufgehoben hätte – weigerte sich Anthropic. Die Regierung setzte das Unternehmen daraufhin als "Lieferkettenrisiko" ["supply chain risk"] auf eine schwarze Liste (ein Label, das zuvor ausländischen Gegnern vorbehalten war), und OpenAI übernahm den Deal für klassifizierte Systeme, wobei dessen eigener CEO Sam Altman das Timing als "opportunistisch und schlampig" ["opportunistic and sloppy"] bezeichnete. Ein Bundesrichter blockierte diese Einstufung später. Man mag den Streit um die Leitplanken deuten, wie man will – die Weigerung ist der dokumentierte Teil.

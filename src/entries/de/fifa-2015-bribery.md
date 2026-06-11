@@ -1,0 +1,5 @@
+---
+title: FIFA — Der 150-Millionen-Dollar-Bestechungsring
+tag: DOJ-Anklage · 2015
+---
+Am 27. Mai 2015 entsiegelte das US-Justizministerium (DOJ) eine 47 Anklagepunkte und 164 Seiten umfassende Anklageschrift [indictment], in der sieben FIFA-Führungskräfte beschuldigt wurden, über mehr als zwei Jahrzehnte hinweg rund 150 Millionen US-Dollar an Schmiergeldern angenommen zu haben; sie wurden bei Razzien im Morgengrauen in einem Zürcher Hotel verhaftet. Das DOJ machte geltend [alleged], dass "zwei Generationen von Fußballfunktionären" ["two generations of soccer officials"] die FIFA in ein korruptes Racketeering-Unternehmen verwandelt hätten, das auf Bestechungsgeldern für TV- und Vermarktungsrechte aufbaute. In den folgenden Jahren klagten US-Staatsanwälte mehr als 45 Personen und Einrichtungen wegen über 90 Straftaten an, bei denen es um Bestechungsgelder in Höhe von mehr als 200 Millionen US-Dollar ging. Präsident Sepp Blatter – der Tage nach den Verhaftungen wiedergewählt worden war – trat im selben Juni zurück und wurde später für den Fußball gesperrt. Die Fäulnis war strukturell, gerichtlich festgestellt [adjudicated] und reichte Jahrzehnte tief.

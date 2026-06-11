@@ -1,0 +1,15 @@
+{
+  "slug": "palantir-europe",
+  "section": "surveillance",
+  "region": "global",
+  "status": "ruling",
+  "date": "2023-02-16",
+  "added": "2026-06-11",
+  "sources": [
+    { "label": "Bundesverfassungsgericht — Urteil zur automatisierten Datenanalyse (Palantir), Feb. 2023", "url": "https://www.bundesverfassungsgericht.de/SharedDocs/Pressemitteilungen/DE/2023/bvg23-016.html" },
+    { "label": "House of Commons Science, Innovation and Technology Committee — call to terminate NHS Palantir contract (June 2026)", "url": "https://www.lowdownnhs.info/topics/accountablility/palantir-the-controversy-the-contracts-and-the-campaign/" },
+    { "label": "The Nerve / Medact — investigation into UK Palantir contracts (£670M, no-tender MoD deal, NHS FDP)", "url": "https://www.medact.org/2026/resources/briefings/briefing-palantir-fdp/" },
+    { "label": "Amnesty International UK — No Palantir in our NHS", "url": "https://www.amnesty.org.uk/issues/international-crisis/no-palantir-in-our-nhs/" }
+  ],
+  "last_verified": "2026-06-11"
+}

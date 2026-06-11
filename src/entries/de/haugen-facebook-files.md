@@ -1,0 +1,5 @@
+---
+title: 'Frances Haugen & die Facebook Files — Sie untersuchten den Schaden, dann begruben sie ihn'
+tag: Whistleblowerin · 2021
+---
+Frances Haugen, eine ehemalige Facebook-Produktmanagerin, kündigte im Jahr 2021 und nahm Zehntausende von internen Dokumenten mit sich – die Grundlage der "Facebook Files" des Wall Street Journal. (Sie verließ das Unternehmen aus eigenen Stücken und reichte mindestens acht SEC-Beschwerden ein; sie wurde nicht gefeuert.) Die Dokumente zeigten, dass die *eigenen* Forscher des Unternehmens herausgefunden hatten [found], dass Instagram Probleme mit dem Körperbild bei jedem dritten Teenager-Mädchen verschlimmerte, dass 13,5 % der britischen Teenager-Mädchen sagten, es verschlimmere Suizidgedanken, und 17 % sagten, es verschlimmere Essstörungen. Die Führung wusste es – und machte weiter, einschließlich eines geplanten "Instagram für Kinder", das nach dem Leak pausiert wurde. Haugens zentraler Vorwurf: Das Unternehmen entschied sich wiederholt für Profit statt für Sicherheit und versteckte die Beweise, anstatt danach zu handeln.

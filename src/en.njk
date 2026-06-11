@@ -4,8 +4,10 @@ lang: en
 permalink: /
 ---
 {% set entries = resolvedEntries.en %}
-{% set searchIndex = searchIndexData %}
 <header>
+  <nav class="lang-toggle" aria-label="Language">
+    <span class="lang-current" aria-current="page">EN</span><span class="lang-sep" aria-hidden="true">/</span><a href="/de/" lang="de" hreflang="de">DE</a>
+  </nav>
   <div class="kicker">{{ i18n.kicker }}</div>
   <h1>{{ i18n.title }}</h1>
   <p class="standfirst">{{ i18n.tagline }}</p>
@@ -13,7 +15,7 @@ permalink: /
     Every claim links to a court filing, government report, or primary investigation.<br>
     No anonymous allegations. Read the sources. Verify everything.
   </div>
-  <p class="ledger-updated">Ledger updated {{ buildDate }}</p>
+  <p class="ledger-updated">{{ i18n.ledgerUpdated }} {{ buildDate }}</p>
   <nav class="quick-nav">
     <a href="#sources">About</a>
     <a href="#contact">{{ i18n.suggestEntry }}</a>
@@ -26,9 +28,9 @@ permalink: /
     <!-- Row 1: view toggle (js-only) -->
     <div class="filter-row filter-row-views js-only">
       <div class="view-toggle" role="group" aria-label="View mode">
-        <button type="button" id="view-narrative" class="view-btn" aria-pressed="true">Narrative</button>
-        <button type="button" id="view-recent" class="view-btn" aria-pressed="false">Recent</button>
-        <button type="button" id="view-timeline" class="view-btn" aria-pressed="false">Timeline</button>
+        <button type="button" id="view-narrative" class="view-btn" aria-pressed="true">{{ i18n.viewNarrative }}</button>
+        <button type="button" id="view-recent" class="view-btn" aria-pressed="false">{{ i18n.viewRecent }}</button>
+        <button type="button" id="view-timeline" class="view-btn" aria-pressed="false">{{ i18n.viewTimeline }}</button>
       </div>
     </div>
     <!-- Row 2: search input full width (js-only) -->
@@ -57,19 +59,19 @@ permalink: /
   </div>
   <div class="filter-body" id="filter-body" hidden>
     <div class="filter-group">
-      <span class="filter-label">Topic</span>
+      <span class="filter-label">{{ i18n.filterTopic }}</span>
       {% for s in site.sections %}
       <button class="chip" data-filter="section" data-value="{{ s.key }}">{{ i18n.sections[s.key] }}</button>
       {% endfor %}
     </div>
     <div class="filter-group">
-      <span class="filter-label">Region</span>
+      <span class="filter-label">{{ i18n.filterRegion }}</span>
       {% for r in site.regions %}
       <button class="chip" data-filter="region" data-value="{{ r.key }}">{{ i18n.regions[r.key] }}</button>
       {% endfor %}
     </div>
     <div class="filter-group">
-      <span class="filter-label">Status</span>
+      <span class="filter-label">{{ i18n.filterStatus }}</span>
       {% for st in site.statuses %}
       <button class="chip" data-filter="status" data-value="{{ st.key }}">{{ i18n.statuses[st.key] }}</button>
       {% endfor %}

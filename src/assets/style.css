@@ -47,6 +47,22 @@ h1 {
   color: var(--faint); margin-top: 6px;
 }
 
+/* ---- Language toggle (EN / DE) — samizdat-quiet, plain links, no JS.
+   Current language is non-linked; deliberately no auto-redirect by browser
+   language: no sniffing, no surprise. ---- */
+.lang-toggle {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--faint); margin-bottom: 14px;
+}
+.lang-toggle a {
+  color: var(--faint); text-decoration: none;
+  border-bottom: 1px dotted var(--faint); padding-bottom: 1px;
+}
+.lang-toggle a:hover { color: var(--red); border-bottom-color: var(--red); }
+.lang-toggle .lang-current { color: var(--red); }
+.lang-toggle .lang-sep { margin: 0 6px; }
+
 /* ---- Quick nav ---- */
 .quick-nav {
   margin-top: 20px;

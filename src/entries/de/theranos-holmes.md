@@ -1,0 +1,5 @@
+---
+title: Elizabeth Holmes & Theranos — Betrug im Gewand der Innovation
+tag: Verurteilt · 11+ Jahre
+---
+Theranos versprach eine Revolution – Hunderte von medizinischen Tests aus einem einzigen Blutstropfen – und wurde auf seinem Höhepunkt mit 9 Milliarden US-Dollar bewertet. Die Technologie funktionierte nicht. Im Januar 2022 verurteilte [convicted] eine Jury die Gründerin Elizabeth Holmes in einem Anklagepunkt wegen Verschwörung und in drei Anklagepunkten wegen Betrugs an Investoren [defrauding investors] über Überweisungen in Höhe von insgesamt über 140 Millionen US-Dollar; im November 2022 wurde sie zu 135 Monaten (11 Jahre, 3 Monate) Haft verurteilt [sentenced] und zur Zahlung von 452 Millionen US-Dollar an Rückerstattung [restitution] verurteilt. Ihr Partner und COO Ramesh "Sunny" Balwani wurde separat verurteilt [convicted] und zu fast 13 Jahren Haft verurteilt. Ein Bundesberufungsgericht bestätigte ihre Verurteilung [upheld her conviction] im Jahr 2025. Wie der urteilende Richter es formulierte: Betrug kann sich nicht als Innovation tarnen. Holmes hat seitdem um vorzeitige Entlassung gebeten; der Antrag war mit Stand 2025 noch anhängig [pending].

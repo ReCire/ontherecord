@@ -1,0 +1,5 @@
+---
+title: Australien — Weltweit erstes Social-Media-Verbot für unter 16-Jährige
+tag: Gesetz · in Kraft ab 2025
+---
+Am 10. Dezember 2025 wurde Australien das erste Land, das landesweit ein Social-Media-Verbot für Personen unter 16 Jahren durchsetzte. Der Online Safety Amendment (Social Media Minimum Age) Act 2024 verlangt von Plattformen – Facebook, Instagram, TikTok, Snapchat, X, YouTube, Reddit, Threads, Twitch und Kick –, angemessene Schritte zu unternehmen, um zu verhindern, dass unter 16-Jährige Konten besitzen, wobei bei Zuwiderhandlung Strafen von bis zu ~A$49.5M drohen. Entscheidend ist, dass Kindern und Eltern keine Strafen drohen; die Verpflichtung liegt bei den Unternehmen. Die Aufsichtsbehörde berichtete, dass bis Mitte Dezember 4,7 Millionen Konten von unter 16-Jährigen entfernt wurden. Es ist umstritten [contested] – Kritiker warnen vor Umgehung und davor, Kinder in unregulierte Räume zu drängen, aber es zeigt das erste Mal, dass eine Regierung die rechtliche Last für die Kindersicherheit direkt den Plattformen auferlegt hat.

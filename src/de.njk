@@ -1,0 +1,218 @@
+---
+layout: layout.njk
+lang: de
+permalink: /de/
+---
+{% set entries = resolvedEntries.de %}
+<header>
+  <nav class="lang-toggle" aria-label="Sprache">
+    <a href="/" lang="en" hreflang="en">EN</a><span class="lang-sep" aria-hidden="true">/</span><span class="lang-current" aria-current="page">DE</span>
+  </nav>
+  <div class="kicker">{{ i18n.kicker }}</div>
+  <h1>{{ i18n.title }}</h1>
+  <p class="standfirst">{{ i18n.tagline }}</p>
+  <div class="meta">
+    Jede Behauptung verweist auf eine Akte, einen Behördenbericht oder eine primäre Recherche.<br>
+    Keine anonymen Anschuldigungen. Lies die Quellen. Überprüfe alles.
+  </div>
+  <p class="ledger-updated">{{ i18n.ledgerUpdated }} {{ buildDateDe }}</p>
+  <nav class="quick-nav">
+    <a href="#sources">Über</a>
+    <a href="#contact">{{ i18n.suggestEntry }}</a>
+    <a href="#footer">Autor</a>
+  </nav>
+</header>
+
+<div class="filters" id="filters">
+  <div class="filter-bar">
+    <!-- Row 1: view toggle (js-only) -->
+    <div class="filter-row filter-row-views js-only">
+      <div class="view-toggle" role="group" aria-label="Ansicht">
+        <button type="button" id="view-narrative" class="view-btn" aria-pressed="true">{{ i18n.viewNarrative }}</button>
+        <button type="button" id="view-recent" class="view-btn" aria-pressed="false">{{ i18n.viewRecent }}</button>
+        <button type="button" id="view-timeline" class="view-btn" aria-pressed="false">{{ i18n.viewTimeline }}</button>
+      </div>
+    </div>
+    <!-- Row 2: search input full width (js-only) -->
+    <div class="filter-row filter-row-search js-only">
+      <label for="search-input" class="sr-only">{{ i18n.searchPlaceholder }}</label>
+      <div class="search-wrap">
+        <input type="search" id="search-input" class="search-input"
+          placeholder="{{ i18n.searchPlaceholder }}" autocomplete="off"
+          aria-label="{{ i18n.searchPlaceholder }}" spellcheck="false">
+        <button type="button" id="search-clear" class="search-clear" aria-label="Suche löschen" hidden>✕</button>
+      </div>
+    </div>
+    <!-- Row 3: controls left + status right (always visible) -->
+    <div class="filter-row filter-row-controls">
+      <div class="filter-controls-left">
+        <button class="filter-toggle" id="filter-toggle" aria-expanded="false" aria-controls="filter-body">
+          <span class="filter-toggle-label">{{ i18n.filterToggle }}</span>
+          <span class="filter-toggle-arrow" aria-hidden="true">▾</span>
+        </button>
+        <button type="button" id="expand-all" class="expand-all-btn js-only" aria-label="{{ i18n.collapseAll }}">{{ i18n.collapseAll }}</button>
+      </div>
+      <span class="filter-meta">
+        <span id="result-count" aria-live="polite" aria-atomic="true"></span><span id="active-hint"></span> · <a href="#" id="clear-filters">{{ i18n.clearAll }}</a>
+      </span>
+    </div>
+  </div>
+  <div class="filter-body" id="filter-body" hidden>
+    <div class="filter-group">
+      <span class="filter-label">{{ i18n.filterTopic }}</span>
+      {% for s in site.sections %}
+      <button class="chip" data-filter="section" data-value="{{ s.key }}">{{ i18n.sections[s.key] }}</button>
+      {% endfor %}
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">{{ i18n.filterRegion }}</span>
+      {% for r in site.regions %}
+      <button class="chip" data-filter="region" data-value="{{ r.key }}">{{ i18n.regions[r.key] }}</button>
+      {% endfor %}
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">{{ i18n.filterStatus }}</span>
+      {% for st in site.statuses %}
+      <button class="chip" data-filter="status" data-value="{{ st.key }}">{{ i18n.statuses[st.key] }}</button>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% for s in site.sections %}
+<section id="{{ s.key }}" data-section-block="{{ s.key }}" data-section-label="{{ i18n.sections[s.key] }}">
+  <div class="sec-head" role="button" tabindex="0"
+    aria-expanded="true" aria-controls="sec-content-{{ s.key }}"
+    data-sec-toggle>
+    <span class="sec-num">{{ s.num }}</span>
+    <h2>{{ i18n.sections[s.key] }}</h2>
+    <span class="sec-caret" aria-hidden="true">▾</span>
+  </div>
+  <div class="sec-content" id="sec-content-{{ s.key }}">
+    {% if i18n.sectionIntros[s.key] %}
+    <p class="sec-sub">{{ i18n.sectionIntros[s.key] }}</p>
+    {% endif %}
+    {%- set count = 0 -%}
+    {% for entry in entries %}
+      {%- if entry.section == s.key -%}
+        {%- set count = count + 1 -%}
+        <article class="entry"
+          id="entry-{{ entry.slug }}"
+          data-slug="{{ entry.slug }}"
+          data-section="{{ entry.section }}"
+          data-region="{{ entry.region }}"
+          data-status="{{ entry.status }}"
+          data-year="{{ entry.date | year }}"
+          data-date="{{ entry.date }}"
+          data-added="{{ entry.added }}">
+          {% if not entry.translated %}
+          <div class="translation-note">{{ i18n.translationNote }}</div>
+          {% endif %}
+          <h3>
+            {% if entry.tag %}<span class="tag">{{ entry.tag }}</span>{% endif %}
+            {{ entry.title }}
+          </h3>
+          <div class="body">{{ entry.bodyBlocks | renderBlocks | safe }}</div>
+          {% if entry.sources and entry.sources.length %}
+          <div class="sources">
+            {% for src in entry.sources %}
+            <span class="src"><span class="label{% if src.video %} vid{% endif %}">{% if src.video %}{{ i18n.video }}{% else %}{{ i18n.src }}{% endif %}</span><a href="{{ src.url }}" target="_blank" rel="noopener">{{ src.label }}</a>{% if src.archive_url %} <span class="src-sep">·</span> <a class="archive-link" href="{{ src.archive_url }}" target="_blank" rel="noopener" title="Permanenter Schnappschuss — Wayback Machine">{{ i18n.archived }}</a>{% endif %}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+          {% if entry.last_verified %}<div class="verified">{{ i18n.lastVerified }} {{ entry.last_verified }}</div>{% endif %}
+          <span class="entry-share js-only" data-slug="{{ entry.slug }}" data-title="{{ entry.title }}">
+            <button type="button" class="share-native" hidden>{{ i18n.shareLabel }}</button>
+            <span class="share-download">
+              <a download="ontherecord-{{ entry.slug }}-portrait.png" href="/cards/{{ entry.slug }}-portrait.png">{{ i18n.cardPortrait }}</a>
+              <a download="ontherecord-{{ entry.slug }}-wide.png" href="/cards/{{ entry.slug }}-og.png">{{ i18n.cardWide }}</a>
+            </span>
+          </span>
+        </article>
+      {%- endif -%}
+    {% endfor %}
+    {% if count == 0 %}<p class="sec-empty">{{ i18n.sectionEmpty }}</p>{% endif %}
+    {% if i18n.pullquotes[s.key] %}
+    <p class="pullquote">{{ i18n.pullquotes[s.key] }}</p>
+    {% endif %}
+  </div>
+</section>
+{% endfor %}
+
+<section id="sources">
+  <div class="sec-head">
+    <span class="sec-num">§</span>
+    <h2>{{ i18n.howToUseThis }}</h2>
+  </div>
+  <p class="sec-sub">Ein Verzeichnis ist nur so gut wie seine Quellen.</p>
+  <p class="spirit-note">{{ i18n.spiritNote }}</p>
+  <div class="entry">
+    <p>Jeder Eintrag oben verweist auf eine Gerichtsakte, einen Behördenbericht, ein investigatives Medium oder ein Primärdokument-Archiv. Glaube dieser Seite nichts ungeprüft — folge den Links und lies die Originale. Wo sich eine Behauptung auf eine Klage stützt, ist sie ein Vorwurf, der vor Gericht geprüft wird, keine bewiesene Tatsache; wo sie auf einem Schuldgeständnis, einem Vergleichseingeständnis oder einer NLRB-Entscheidung beruht, ist sie gerichtlich festgestellt. Der Unterschied zählt. Nutze ihn.</p>
+    <p><strong style="font-family:'JetBrains Mono',monospace;font-size:14px;">Zum Weitergraben:</strong></p>
+    <div class="sources">
+      {% for link in site.deepDig %}
+      <span class="src"><span class="label">{{ link.label }}</span><a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.name }}</a></span>
+      {% endfor %}
+    </div>
+    <p class="form-note">{{ i18n.cookieNote }}</p>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="sec-head">
+    <span class="sec-num">+</span>
+    <h2>{{ i18n.suggestEntry }}</h2>
+  </div>
+  <p class="sec-sub">Du kennst einen dokumentierten Fall, der hierher gehört? Schick ihn ein — auf Wunsch anonym. Wenn möglich mit Primärquelle.</p>
+
+  {% if site.web3formsKey %}
+  <form id="suggest-form" action="https://api.web3forms.com/submit" method="POST">
+    <input type="hidden" name="access_key" value="{{ site.web3formsKey }}">
+    <input type="hidden" name="subject" value="On The Record — new entry suggestion">
+    <input type="hidden" name="from_name" value="On The Record site">
+    <!-- Honeypot: hidden from humans, bots fill it, Web3Forms drops it. -->
+    <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+
+    <label for="topic">Thema / wer</label>
+    <input type="text" id="topic" name="topic" placeholder="z. B. Unternehmen X, Politiker Y">
+
+    <label for="message">Was geschah &amp; warum es hierher gehört</label>
+    <textarea id="message" name="message" required placeholder="Beschreibe den Fall…"></textarea>
+
+    <label for="source">Link zur Primärquelle (optional)</label>
+    <input type="url" id="source" name="source" placeholder="https://…">
+
+    <label for="contact_back">Rückmeldung (optional — leer lassen, um anonym zu bleiben)</label>
+    <input type="email" id="contact_back" name="contact_back" placeholder="du@example.com">
+
+    {% if site.turnstileSiteKey %}
+    <div class="cf-turnstile" data-sitekey="{{ site.turnstileSiteKey }}" style="margin-top:16px;"></div>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    {% endif %}
+
+    <button type="submit" id="submit-btn">{{ i18n.contactSubmit }}</button>
+    <div id="form-status"></div>
+  </form>
+  <p class="form-note">
+    Vorschläge gehen per Web3Forms an das Postfach des Betreibers. Kein Tracking, kein Konto nötig.
+    Ein verstecktes Anti-Bot-Feld schützt vor Spam.
+  </p>
+  {% else %}
+  <p class="form-note">
+    Das Vorschlagsformular ist noch nicht aktiv. Zum Aktivieren: kostenlosen Schlüssel bei web3forms.com
+    holen (nur eine E-Mail-Adresse — kein Konto), in <code>src/_data/site.js</code> als
+    <code>web3formsKey</code> eintragen und neu bauen. Bis dahin können Vorschläge über den vom
+    Betreiber bevorzugten Kanal gesendet werden.
+  </p>
+  {% endif %}
+</section>
+
+<footer id="footer">
+  <strong>{{ i18n.title | upper }}</strong> — ein offenes Verzeichnis dokumentierter Verfehlungen von Konzernen &amp; Politik.<br>
+  Zusammengestellt aus öffentlichen Gerichtsakten, Behördenberichten und investigativem Journalismus.
+  <div class="disclaim">
+    Diese Seite dokumentiert Fehlverhalten und verweist auf Belege. Sie ist ein Werkzeug für Rechenschaft
+    durch Information, Organisierung und Recht — kein Aufruf, irgendeinem Menschen zu schaden. {{ i18n.disclaimer }}
+  </div>
+  Überprüfe alles. Nenne deine Quellen. Teile frei.
+</footer>

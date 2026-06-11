@@ -1,0 +1,5 @@
+---
+title: Zohran Mamdani — Für die Arbeiterklasse in der reichsten Stadt regieren
+tag: Im Amt · 2026
+---
+Vereidigt am 1. Januar 2026 als 112. Bürgermeister von New York City – dessen erster muslimischer Bürgermeister und demokratischer Sozialist – baute Mamdani seine Kampagne auf den Lebenshaltungskosten auf: Mieten einfrieren, kostenlose Busse, die Reichen besteuern. Seine Regierung erließ in der ersten Woche 12 Durchführungsverordnungen [executive orders] (Wohnen, versteckte Gebühren ["junk fees"], Abofallen), ein Tempo, für das die vorherige Regierung Monate gebraucht hatte, und ernannte unter anderem die ehemalige FTC-Vorsitzende Lina Khan im Rahmen progressiver Einstellungen. Nicht alles ist gelungen – sein Grundsteuervorschlag wurde vom Stadtrat abgelehnt und er rückte davon ab – und die befürchtete Abwanderung von Vermögen war eher eine Debatte als ein dokumentierter Exodus. Aber es steht als Live-Test dafür, dass ein auf die Arbeiterklasse ausgerichtetes Programm tatsächlich eine Finanzhauptstadt regieren kann. Hier aufgenommen als Beispiel für Macht, die für und nicht gegen einfache Menschen eingesetzt wird.

@@ -1,0 +1,5 @@
+---
+title: Der CFA-Franc & "Moderne Kolonisation"
+tag: Debatte · strukturell
+---
+Vierzehn afrikanische Nationen nutzen noch immer den CFA-Franc, eine 1945 von Frankreich geschaffene und historisch an das französische Finanzministerium gebundene Währung, bei dem die Mitglieder lange Zeit verpflichtet waren, Reserven zu hinterlegen. Akademische Kritiker (im *Third World Quarterly* und anderswo) bezeichnen ihn als "das eklatanteste Beispiel für funktionierenden Neokolonialismus im heutigen Afrika" – ein Instrument, das Abhängigkeit aufrechterhält und Rohstoffe (Uran für französische Kernkraft, Mangan, Phosphate) zu günstigen Bedingungen kanalisiert. Verteidiger, einschließlich einer Analyse der LSE, argumentieren, dass der Reservemechanismus eher symbolisch als wirtschaftlich entscheidend sei und dass jüngste Reformen das Schlimmste daran beheben. Die Debatte über Handel-und-Währung als Soft Empire ist aktuell und ernst – sie wird hier als Debatte präsentiert, bei der beide Seiten verlinkt sind.

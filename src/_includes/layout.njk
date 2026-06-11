@@ -3,16 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ i18n.title }} — {{ i18n.titleSuffix }}</title>
-<meta name="description" content="{{ i18n.tagline }}">
+{#- Per-page overrides (entry pages set these); defaults keep the list pages intact. -#}
+{%- set metaTitle = pageTitle or (i18n.title ~ " — " ~ i18n.titleSuffix) -%}
+{%- set metaDescription = pageDescription or i18n.tagline -%}
+{%- set ogImageAbs = ogImageUrl or (site.url ~ site.ogImage) -%}
+{%- set altEn = hreflangEn or (site.url ~ "/") -%}
+{%- set altDe = hreflangDe or (site.url ~ "/de/") -%}
+{%- set altDefault = hreflangXDefault or (site.url ~ "/") -%}
+<title>{{ metaTitle }}</title>
+<meta name="description" content="{{ metaDescription }}">
 <link rel="canonical" href="{{ site.url }}{{ page.url }}">
 
 <!-- OpenGraph -->
-<meta property="og:type" content="website">
+<meta property="og:type" content="{{ ogType or 'website' }}">
 <meta property="og:url" content="{{ site.url }}{{ page.url }}">
-<meta property="og:title" content="{{ i18n.title }} — {{ i18n.titleSuffix }}">
-<meta property="og:description" content="{{ i18n.tagline }}">
-{% if site.ogImage %}<meta property="og:image" content="{{ site.url }}{{ site.ogImage }}">
+<meta property="og:title" content="{{ metaTitle }}">
+<meta property="og:description" content="{{ metaDescription }}">
+{% if ogImageAbs %}<meta property="og:image" content="{{ ogImageAbs }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">{% endif %}
 <meta property="og:locale" content="{{ i18n.ogLocale }}">
@@ -20,18 +27,19 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{ i18n.title }} — {{ i18n.titleSuffix }}">
-<meta name="twitter:description" content="{{ i18n.tagline }}">
-{% if site.ogImage %}<meta name="twitter:image" content="{{ site.url }}{{ site.ogImage }}">{% endif %}
+<meta name="twitter:title" content="{{ metaTitle }}">
+<meta name="twitter:description" content="{{ metaDescription }}">
+{% if ogImageAbs %}<meta name="twitter:image" content="{{ ogImageAbs }}">{% endif %}
 
 <!-- Indexing -->
 <meta name="robots" content="index, follow">
 
-<!-- hreflang alternates (safe now; de/es resolve once those builds exist) -->
-<link rel="alternate" hreflang="en" href="{{ site.url }}/">
-<link rel="alternate" hreflang="de" href="{{ site.url }}/de/">
-<link rel="alternate" hreflang="es" href="{{ site.url }}/es/">
-<link rel="alternate" hreflang="x-default" href="{{ site.url }}/">
+<!-- hreflang alternates — en and de are alternates of each other; each page
+     canonicalizes to ITSELF (see canonical above). x-default points at en. On
+     entry pages these resolve to the en/de twins of that single entry. -->
+<link rel="alternate" hreflang="en" href="{{ altEn }}">
+<link rel="alternate" hreflang="de" href="{{ altDe }}">
+<link rel="alternate" hreflang="x-default" href="{{ altDefault }}">
 
 <style>
   /* Self-hosted fonts — no third-party requests, no visitor IP leakage. */
@@ -51,7 +59,8 @@
   document.documentElement.classList.remove('no-js');
   document.documentElement.classList.add('js');
 </script>
-<script src="/assets/filter.js?v={{ assetVersion }}" defer></script>
+{# Entry pages are static destinations — no filter/search/view JS. #}
+{% if not entryPage %}<script src="/assets/filter.js?v={{ assetVersion }}" defer></script>{% endif %}
 </head>
 <body class="no-js">
 
@@ -59,9 +68,9 @@
 {{ content | safe }}
 </div>
 
-<script>
-  window.__SEARCH_INDEX__ = {{ searchIndex | safe }};
-</script>
+{% if not entryPage %}<script>
+  window.__SEARCH_INDEX__ = {{ searchIndex[lang] | safe }};
+</script>{% endif %}
 
 </body>
 </html>

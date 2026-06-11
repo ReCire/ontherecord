@@ -1,5 +1,5 @@
 ---
-title: 'Warburg-Bank — Banker im Gefängnis, Geld zurückgefordert'
-tag: Urteil · rechtskräftig
+title: 'Warburg Bank — Bankers in Prison, Money Reclaimed'
+tag: Ruling · legally binding
 ---
-Die Hamburger Privatbank M.M. Warburg gilt als tief in Cum-Ex verstrickt. Zwei Banker wurden wegen schwerer Steuerhinterziehung verurteilt; der BGH verwarf 2025 ihre Revisionen — die Urteile sind rechtskräftig. Der Bundesfinanzhof bestätigte zudem Steuerrückforderungen von 155 Millionen Euro gegen die Bank. Das Verfahren reicht bis in höchste politische Kreise; ein Hamburger Untersuchungsausschuss befasste sich mit erlassenen Steuernachforderungen.
+The Hamburg private bank M.M. Warburg is considered deeply entangled in Cum-Ex. Two bankers were convicted of severe tax evasion; the Federal Court of Justice (BGH) rejected their appeals [Revisionen] in 2025 — the verdicts are legally binding [rechtskräftig]. The Federal Fiscal Court also confirmed tax reclaims of 155 million euros against the bank. The proceedings reach into the highest political circles; a Hamburg committee of inquiry [Untersuchungsausschuss] examined waived back-tax demands.
