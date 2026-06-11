@@ -390,6 +390,7 @@ h2 {
    button is actually shown, so the row reads as one group, not two blocks. */
 .act-send:not([hidden]) + .act-card::before {
   content: "\00b7"; margin-right: 10px; color: var(--faint);
+  display: inline-flex; align-items: center;
 }
 /* Native share button: a quiet text affordance, not a CTA. 44px tap target. */
 .act-send {
@@ -416,6 +417,7 @@ h2 {
 .act-card a + a::before {
   content: "\00b7"; margin-right: 12px;
   color: var(--faint); border-bottom: 0;
+  display: inline-flex; align-items: center;
 }
 /* Copy-link affordance: a real <a> to the entry page (works with no JS); JS
    intercepts it to copy the URL and flash a "copied" confirmation. */
@@ -427,6 +429,7 @@ h2 {
 .entry-actions .act-copy.is-copied { color: var(--red); border-bottom-color: transparent; }
 .act-card + .act-copy::before {
   content: "\00b7"; margin-right: 10px; color: var(--faint);
+  display: inline-flex; align-items: center;
 }
 
 .pullquote {
